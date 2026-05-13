@@ -1,0 +1,52 @@
+# Structured list of upstream data sources touched by Acta's ingestion.
+# Consumed by the ingestion status refresher and by human reviewers.
+
+sources:
+  - id: legislatie-just-ro
+    host: legislatie.just.ro
+    purpose: Romanian legislation corpus (acts, articles, consolidated texts)
+    endpoints:
+      - path: /apiws/FreeWebService.svc/SOAP
+        method: SOAP
+        description: Search + document metadata API
+      - path: /Public/DetaliiDocument/{documentId}
+        method: GET HTML
+        description: Full document page for article-level parsing
+    rate_ceiling_per_minute: 60
+    current_cap_per_minute: 10
+    legal_basis:
+      - Law 8/1996 Art. 9(b)
+      - Law 109/2007
+      - legislatie.just.ro/Public/Termeni
+    last_audited: 2026-05-13
+
+  - id: scj-ro
+    host: scj.ro
+    purpose: ICCJ chamber decisions + RIL/HP centralizers
+    endpoints:
+      - path: /SJ/Pagini/{chamber}/default.aspx
+        method: GET HTML
+        description: Decision listing pages
+      - path: /*.pdf
+        method: GET PDF
+        description: Decision PDFs linked from listings
+    rate_ceiling_per_minute: 5
+    current_cap_per_minute: 5
+    legal_basis:
+      - Law 8/1996 Art. 9(b)
+      - Law 109/2007
+    last_audited: 2026-05-13
+
+  - id: portal-just-ro
+    host: portalquery.just.ro
+    purpose: Court case data (hearings, parties, stages)
+    endpoints:
+      - path: /query.asmx
+        method: SOAP
+        description: Case search + detail API
+    rate_ceiling_per_minute: 10
+    current_cap_per_minute: 10
+    legal_basis:
+      - Law 544/2001 (public information access)
+      - Law 109/2007
+    last_audited: 2026-05-13

@@ -1,0 +1,31 @@
+name: Refresh ingestion status
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # daily 05:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Regenerate INGESTION_STATUS.md
+        env:
+          ACTA_STATUS_URL: https://acta-api.bojin-law.com/public/corpus-status.json
+          ACTA_STATUS_TOKEN: ${{ secrets.ACTA_STATUS_TOKEN }}
+        run: node scripts/refresh-status.mjs
+
+      - name: Commit if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(status): daily refresh'
+          file_pattern: INGESTION_STATUS.md
