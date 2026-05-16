@@ -1304,5 +1304,81 @@
   </div>
 
 </div>
+<script>
+  (function () {
+    const ENDPOINT = "https://acta-api.bojin-law.com/public/waitlist";
+
+    const forms = document.querySelectorAll(".form-row");
+    forms.forEach((form, idx) => {
+      // First form in DOM order is the hero; the second is the final CTA.
+      // The spec mandates exactly two forms.
+      const source = idx === 0 ? "hero" : "final-cta";
+      form.dataset.source = source;
+      form.addEventListener("submit", onSubmit);
+    });
+
+    async function onSubmit(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const input = form.querySelector("input[type=email]");
+      const button = form.querySelector("button");
+      const email = (input.value || "").trim();
+      if (!email) return;
+
+      button.disabled = true;
+      button.textContent = "Se trimite...";
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ email, source: form.dataset.source }),
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        showThankYou(form, !!data.alreadyOnList);
+      } catch (_err) {
+        showError(form, email);
+      }
+    }
+
+    function showThankYou(form, alreadyOnList) {
+      const msg = alreadyOnList
+        ? "Ești deja pe listă. Revenim cu o invitație în maxim 5 zile lucrătoare."
+        : "Mulțumim. Revenim cu o invitație în maxim 5 zile lucrătoare.";
+      const wrapper = document.createElement("div");
+      wrapper.style.cssText =
+        "padding:14px 18px;border:1.5px solid #111;background:#fff;" +
+        "font-family:'EB Garamond',serif;font-size:17px;font-style:italic;color:#111;";
+      wrapper.textContent = msg;
+      form.replaceWith(wrapper);
+    }
+
+    function showError(form, email) {
+      // Build the mailto URL safely with encodeURIComponent.
+      const mailto =
+        "mailto:contact@acta-legal.ro?subject=" +
+        encodeURIComponent("Acces în avans") +
+        "&body=" +
+        encodeURIComponent("Vreau acces în avans. Email: " + email);
+
+      // Construct via DOM API (no innerHTML) so user input never reaches HTML parser.
+      const wrapper = document.createElement("div");
+      wrapper.style.cssText =
+        "padding:14px 18px;border:1.5px solid #6B0F1A;background:#fff;" +
+        "font-family:'EB Garamond',serif;font-size:16px;color:#111;";
+
+      const prefix = document.createTextNode("Nu am putut trimite formularul. ");
+      const link = document.createElement("a");
+      link.href = mailto;
+      link.style.cssText = "color:#6B0F1A;font-weight:600;";
+      link.textContent = "Trimite un email";
+      const suffix = document.createTextNode(" și te adăugăm manual.");
+
+      wrapper.append(prefix, link, suffix);
+      form.replaceWith(wrapper);
+    }
+  })();
+</script>
 </body>
 </html>
