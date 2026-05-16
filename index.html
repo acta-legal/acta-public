@@ -770,6 +770,54 @@
 }
 .timeline .ph::before { content: '·'; color: #6B0F1A; margin-right: 6px; font-weight: 700; }
 .timeline .ph { font-style: italic; }
+
+/* ===== Mobile responsive ===== */
+.anim-fallback {
+  display: none;
+  background: #fff;
+  border: 1px solid #d8d2c4;
+  border-radius: 8px;
+  padding: 28px 24px;
+  margin: 0 auto;
+  max-width: 480px;
+  font-family: 'EB Garamond', serif;
+  color: #1a1a1a;
+  text-align: left;
+}
+.anim-fallback h4 {
+  font-size: 19px; font-weight: 600;
+  margin: 0 0 12px 0; letter-spacing: -0.01em;
+}
+.anim-fallback ol {
+  margin: 0; padding-left: 22px;
+  font-size: 16px; line-height: 1.6;
+}
+.anim-fallback ol li { margin-bottom: 6px; }
+.anim-fallback .note {
+  font-size: 13px; color: #555; font-style: italic;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .b-section { padding-left: 24px !important; padding-right: 24px !important; }
+  .page-b h1 { font-size: 40px; }
+  .page-b .lead { font-size: 18px; }
+  .three-words strong { display: block; min-width: 0; margin-bottom: 4px; }
+  .three-words em { display: block; margin-bottom: 12px; }
+  .diff-grid, .diff-grid.reverse { display: block; }
+  .diff-grid.reverse > :first-child { order: 0; }
+  .audience-strip { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .audience-strip .label-side { flex: 0 0 auto; }
+  .workflow-grid { grid-template-columns: 1fr; gap: 28px; }
+  .chapters { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Word add-in animation: hide on mobile, show fallback */
+  .word-window, .timeline { display: none !important; }
+  .anim-fallback { display: block !important; }
+
+  /* Inputs ≥ 16px font-size to suppress iOS auto-zoom */
+  .form-row input { font-size: 16px !important; }
+}
   </style>
 </head>
 <body>
@@ -803,6 +851,17 @@
 
   <!-- ANIMATED WORD ADD-IN DEMO -->
   <div class="b-section anim-section" style="padding: 60px 0; background: #f0ebe1; text-align: center;">
+
+    <div class="anim-fallback">
+      <h4>Cum arată Acta în Word</h4>
+      <ol>
+        <li>Deschide documentul în Word.</li>
+        <li>Alege un dosar din panoul Acta.</li>
+        <li>Scrie ce vrei să redactezi.</li>
+        <li>Acta scrie pagini întregi, în stilul cabinetului, direct în document.</li>
+      </ol>
+      <p class="note">Vezi demonstrația completă pe un ecran mai mare.</p>
+    </div>
 
     <div class="word-window">
 
