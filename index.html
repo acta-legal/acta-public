@@ -14,11 +14,347 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* CSS goes here — populated in Tasks B2 and B3 */
-    body { margin: 0; font-family: 'EB Garamond', serif; color: #111; background: #fff; }
+.page-b { background: #ffffff; color: #111; font-family: 'EB Garamond', serif;
+  border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; }
+.page-b * { box-sizing: border-box; }
+
+.b-section { padding: 0 80px; }
+.b-section.hero     { padding-top: 48px;  padding-bottom: 80px; }
+.b-section.diff     { padding-top: 80px;  padding-bottom: 80px; }
+.b-section.diff.alt { background: #faf8f4; }
+.b-section.audience { padding-top: 64px; padding-bottom: 72px; background: #f5f0e6; }
+.b-section.workflow { padding-top: 72px; padding-bottom: 72px; }
+.b-section.cta-final{ padding-top: 80px; padding-bottom: 96px; background: #111; color: #f5f0e6; }
+.b-section.footer   { padding: 28px 80px; background: #1a1a1a; color: #aaa; font-size: 14px; }
+
+/* masthead */
+.masthead { border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 56px;
+  display: flex; justify-content: space-between; align-items: baseline; }
+.masthead .title { font-size: 20px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.masthead .issue { font-size: 14px; font-style: italic; color: #555; }
+
+/* hero */
+.b-column { max-width: 680px; }
+.kicker { font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: #6B0F1A; margin-bottom: 20px; font-weight: 700; }
+.page-b h1 { font-size: 56px; line-height: 1.05; font-weight: 500;
+  margin: 0 0 28px 0; letter-spacing: -0.015em; }
+.page-b .lead { font-size: 22px; line-height: 1.5; color: #222;
+  margin: 0 0 36px 0; font-style: italic; }
+.three-words { font-size: 16px; line-height: 1.8; color: #2a2a2a;
+  margin: 0 0 40px 0; padding-left: 20px; border-left: 3px solid #6B0F1A; }
+.three-words strong { display: inline-block; min-width: 220px; font-weight: 700;
+  color: #111; font-style: normal; }
+.three-words em { color: #444; font-style: italic; }
+
+.formrule { border-top: 1px solid #ccc; padding-top: 28px; max-width: 560px; }
+.form-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+  font-weight: 700; margin-bottom: 14px; color: #111; }
+.form-row { display: flex; gap: 0; border: 1.5px solid #111; background: #fff; }
+.form-row input { flex: 1; padding: 14px 18px; font-size: 17px;
+  border: none; background: transparent; font-family: 'EB Garamond', serif; }
+.form-row input:focus { outline: none; }
+.form-row button { padding: 14px 22px; font-size: 14px; font-weight: 700;
+  background: #6B0F1A; color: #fff; border: none; cursor: pointer;
+  font-family: 'EB Garamond', serif; text-transform: uppercase; letter-spacing: 0.1em; }
+.fineprint { font-size: 14px; color: #6a6a6a; margin-top: 12px; font-style: italic; }
+
+/* differentiator sections */
+.diff-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px; align-items: center; }
+.diff-grid.reverse > :first-child { order: 2; }
+.diff-text .roman {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.16em;
+  color: #6B0F1A; text-transform: uppercase; margin-bottom: 18px;
+}
+.diff-text h2 { font-size: 40px; line-height: 1.1; font-weight: 500;
+  margin: 0 0 20px 0; letter-spacing: -0.01em; }
+.diff-text .stand-first { font-size: 19px; line-height: 1.55;
+  color: #2a2a2a; font-style: italic; margin: 0 0 22px 0; }
+.diff-text p { font-size: 17px; line-height: 1.7; color: #1a1a1a; margin: 0 0 16px 0; }
+.footnote-mark { color: #6B0F1A; font-weight: 700; font-size: 0.75em;
+  vertical-align: super; padding-left: 2px; }
+.diff-text .footnote { font-size: 13px; line-height: 1.5; color: #6a6a6a;
+  margin-top: 24px; padding-top: 12px; border-top: 1px solid #d8d2c4;
+  font-style: italic; }
+
+/* demo containers (small mockups) */
+.demo { background: #faf8f4; border: 1px solid #d8d2c4; border-radius: 6px;
+  padding: 24px; font-family: 'EB Garamond', serif; }
+.diff.alt .demo { background: #fff; }
+
+/* demo: chat */
+.demo-chat { font-family: -apple-system, sans-serif; font-size: 14px; }
+.demo-chat .msg { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+.demo-chat .who { flex: 0 0 50px; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #888; padding-top: 4px; font-weight: 600; }
+.demo-chat .what { flex: 1; line-height: 1.5; color: #1a1a1a; }
+.demo-chat .what.acta { background: #fff; border-left: 3px solid #6B0F1A;
+  padding: 10px 14px; border-radius: 4px; }
+.demo-chat .what.acta .cite { color: #6B0F1A; font-weight: 600;
+  border-bottom: 1px dotted #6B0F1A; cursor: pointer; }
+.demo-chat .label-bar { font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.12em; color: #6B0F1A; font-weight: 700;
+  margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #d8d2c4;
+  display: flex; justify-content: space-between; }
+
+/* demo: word document */
+.demo-word { background: #fff; border: 1px solid #c8c0b0; }
+.demo-word .word-header {
+  background: #2b579a; color: #fff; padding: 8px 16px;
+  font-family: -apple-system, sans-serif; font-size: 12px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.demo-word .word-header .doc-name { font-weight: 600; }
+.demo-word .word-header .acta-tag {
+  background: rgba(255,255,255,0.18); padding: 2px 8px; border-radius: 3px;
+  font-size: 11px; letter-spacing: 0.04em;
+}
+.demo-word .word-body {
+  display: flex; min-height: 280px;
+}
+.demo-word .doc-area {
+  flex: 1; padding: 28px 32px; font-family: 'Source Serif 4', 'Times New Roman', serif;
+  font-size: 13px; line-height: 1.55; color: #1a1a1a;
+  border-right: 1px solid #e5dcc8;
+}
+.demo-word .doc-area .doc-title { font-size: 14px; font-weight: 700; text-align: center;
+  margin-bottom: 12px; letter-spacing: 0.04em; }
+.demo-word .doc-area .doc-meta { text-align: right; font-size: 11px; color: #555;
+  margin-bottom: 16px; }
+.demo-word .doc-area p { margin: 0 0 10px 0; }
+.demo-word .doc-area .num { font-weight: 700; }
+.demo-word .doc-area .new-text { background: #fff4e6;
+  border-bottom: 1px dashed #B8542C; padding: 1px 2px;
+  animation: glow 2s ease-in-out infinite; }
+@keyframes glow { 0%,100% { background: #fff4e6; } 50% { background: #ffe8cc; } }
+.demo-word .doc-area sup { color: #6B0F1A; font-weight: 700; }
+.demo-word .acta-panel {
+  flex: 0 0 200px; background: #faf8f4; padding: 16px;
+  font-family: -apple-system, sans-serif;
+}
+.demo-word .acta-panel .panel-head { font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #6B0F1A; font-weight: 700; margin-bottom: 12px; }
+.demo-word .acta-panel .panel-row { font-size: 12px; color: #444;
+  margin-bottom: 8px; padding: 6px 8px; background: #fff;
+  border: 1px solid #e5dcc8; border-radius: 3px; }
+.demo-word .acta-panel .panel-row .k { font-weight: 600; color: #111; }
+.demo-word .acta-panel .pill {
+  display: inline-block; padding: 3px 8px; border-radius: 99px;
+  background: #6B0F1A; color: #fff; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.06em; margin-top: 4px;
+}
+
+/* demo: tenant diagram */
+.demo-tenant {
+  font-family: 'EB Garamond', serif; padding: 32px 24px;
+  text-align: center; background: #faf8f4;
+}
+.tenant-box {
+  border: 2px solid #111; border-radius: 6px; padding: 24px 20px;
+  background: #fff; max-width: 340px; margin: 0 auto;
+  position: relative;
+}
+.tenant-box .tenant-label {
+  position: absolute; top: -11px; left: 18px; background: #faf8f4;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  font-weight: 700; padding: 0 8px; color: #111;
+}
+.tenant-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
+.tenant-pill { font-size: 12px; padding: 6px 12px; background: #f0ebe1;
+  border: 1px solid #d8d2c4; border-radius: 4px; font-family: -apple-system, sans-serif;
+  color: #111; }
+.tenant-flow { font-family: -apple-system, sans-serif; font-size: 12px; color: #555;
+  margin-top: 18px; padding-top: 14px; border-top: 1px dashed #d8d2c4; }
+.tenant-flow .arrow { color: #6B0F1A; font-weight: 700; margin: 0 8px; }
+.tenant-note { font-size: 13px; color: #666; margin-top: 14px; font-style: italic; }
+
+/* audience strip */
+.audience-strip { display: flex; gap: 24px; align-items: center; }
+.audience-strip .label-side { flex: 0 0 240px; }
+.audience-strip .label-side .kicker { margin-bottom: 8px; }
+.audience-strip .label-side h3 { font-size: 22px; font-weight: 600;
+  margin: 0; line-height: 1.25; }
+.audience-strip .body-side { flex: 1; font-size: 17px; line-height: 1.65;
+  color: #1a1a1a; }
+.audience-strip .body-side strong { color: #6B0F1A; font-weight: 600; }
+
+/* workflow strip */
+.section-head {
+  display: flex; align-items: baseline; gap: 24px;
+  border-bottom: 1px solid #d8d2c4; padding-bottom: 12px; margin-bottom: 36px;
+}
+.section-head .roman { font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
+  color: #6B0F1A; text-transform: uppercase; }
+.section-head h2 { font-size: 32px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+.workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.step .step-num { font-size: 64px; line-height: 1; font-weight: 500;
+  color: #6B0F1A; margin-bottom: 12px; opacity: 0.45; }
+.step h3 { font-size: 20px; font-weight: 600; margin: 0 0 10px 0; }
+.step p { font-size: 16px; line-height: 1.6; color: #2a2a2a; margin: 0; }
+
+/* final CTA */
+.cta-final { text-align: center; }
+.cta-final h2 { font-size: 44px; font-weight: 500; margin: 0 0 16px 0;
+  letter-spacing: -0.01em; color: #f5f0e6; }
+.cta-final .lead { font-size: 19px; color: #c8c0b0; font-style: italic;
+  max-width: 520px; margin: 0 auto 36px; }
+.cta-final .form-row { border-color: #f5f0e6; background: transparent;
+  max-width: 540px; margin: 0 auto; }
+.cta-final .form-row input { color: #f5f0e6; }
+.cta-final .form-row input::placeholder { color: #8a8478; }
+.cta-final .form-row button { background: #f5f0e6; color: #111; }
+
+/* footer */
+.footer-row { display: flex; justify-content: space-between; align-items: center; }
+.footer-row .links a { color: #aaa; text-decoration: none; margin-left: 18px; }
+.footer-row .links a:hover { color: #fff; }
   </style>
 </head>
 <body>
-  <!-- Sections appended in subsequent tasks -->
+<div class="page-b">
+
+  <!-- HERO -->
+  <div class="b-section hero">
+    <div class="masthead">
+      <div class="title">Acta</div>
+      <div class="issue">Asistent de drept &middot; Acces în avans</div>
+    </div>
+    <div class="b-column">
+      <div class="kicker">Pentru avocații care folosesc deja un asistent AI</div>
+      <h1>Un asistent care își amintește dosarele tale.</h1>
+      <p class="lead">Memoria fiecărui caz. Stilul cabinetului tău. Documentele rămân la tine.</p>
+      <div class="three-words">
+        <div><strong>Niciun context de încărcat.</strong> <em>A citit deja tot dosarul.</em></div>
+        <div><strong>Scrie în Word, cu antetul tău.</strong> <em>Numerotare, note de subsol, format procedural.</em></div>
+        <div><strong>Datele rămân în Microsoft 365.</strong> <em>În tenant-ul cabinetului, nu la noi.</em></div>
+      </div>
+      <div class="formrule">
+        <div class="form-label">Cere acces în avans</div>
+        <form class="form-row" onsubmit="event.preventDefault()">
+          <input type="email" placeholder="email@cabinetul-meu.ro">
+          <button type="submit">Trimite</button>
+        </form>
+        <p class="fineprint">Locuri limitate. Răspundem în 5 zile lucrătoare.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFF I — MEMORY -->
+  <div class="b-section diff">
+    <div class="b-column">
+      <div class="diff-text">
+        <div class="roman">§ I &middot; Memoria fiecărui dosar</div>
+        <h2>Întreabă orice despre un dosar. Acta îl știe deja.</h2>
+        <p class="stand-first">Asistentul a citit fiecare e-mail, fiecare act, fiecare hotărâre din dosar. Nu mai copiezi nimic la fiecare conversație.</p>
+        <p>Conectezi Microsoft 365 o singură dată. Acta indexează e-mailurile din Outlook și actele din OneDrive, le grupează pe dosare, și ține minte ce s-a întâmplat &mdash; părți, termene, ce s-a depus, ce a decis instanța.</p>
+        <p>Pe parcurs, înțelege limbajul cabinetului: ce înseamnă <em>„dosarul Popescu"</em>, cine e <em>„colega din complet"</em>, ce model de cerere folosești pentru această instanță.</p>
+        <p class="footnote">Indexarea atinge inclusiv hotărârile din portal.just.ro, când dosarul este înregistrat acolo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFF II — FIRM STYLE -->
+  <div class="b-section diff alt">
+    <div class="b-column">
+      <div class="diff-text">
+        <div class="roman">§ II &middot; Stilul cabinetului tău</div>
+        <h2>Scrie în Word. Cu antetul, numerotarea și formatul cabinetului.</h2>
+        <p class="stand-first">Cereri, întâmpinări, contracte și opinii redactate direct în documentul deschis &mdash; nu într-un editor separat, nu prin copy-paste.</p>
+        <p>Acta învață formatul cabinetului din câteva acte: antetul, fontul, numerotarea numerelor și a alineatelor, modul în care formulezi adresarea către instanță, structura notelor de subsol. Apoi, scrie în același stil.</p>
+        <p>Inserează text în documentul curent fără să strice formatarea existentă. Pentru cabinete care produc volume mari de acte standardizate, diferența este vizibilă din prima zi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFF III — TENANT -->
+  <div class="b-section diff">
+    <div class="diff-grid">
+      <div class="diff-text">
+        <div class="roman">§ III &middot; Datele rămân la tine</div>
+        <h2>În tenant-ul cabinetului. Nu pe serverele noastre.</h2>
+        <p class="stand-first">Documentele, e-mailurile și dosarele rămân unde sunt: în Microsoft 365-ul cabinetului. Acta nu copiază nimic în depozite proprii.</p>
+        <p>Indexul de căutare și răspunsurile generate trec prin endpoint-ul european al furnizorului AI. Nu antrenăm modele pe datele cabinetului. Dacă reziliezi accesul, Acta nu mai poate citi nimic &mdash; nu există copii la noi.</p>
+        <p>Pentru cabinete care lucrează cu clienți reglementați sau acte sensibile, această separare contează mai mult decât orice altă caracteristică.</p>
+      </div>
+      <div class="demo demo-tenant">
+        <div class="tenant-box">
+          <div class="tenant-label">Microsoft 365 &middot; tenant-ul tău</div>
+          <div class="tenant-row">
+            <div class="tenant-pill">Outlook</div>
+            <div class="tenant-pill">OneDrive</div>
+            <div class="tenant-pill">SharePoint</div>
+          </div>
+          <div class="tenant-row">
+            <div class="tenant-pill">Word + Acta</div>
+          </div>
+          <div class="tenant-flow">
+            cerere <span class="arrow">→</span> EU AI endpoint <span class="arrow">→</span> răspuns
+          </div>
+        </div>
+        <div class="tenant-note">Nimic nu se copiază în afara tenant-ului.<br>Acta vede, dar nu deține.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIENCE STRIP -->
+  <div class="b-section audience">
+    <div class="audience-strip">
+      <div class="label-side">
+        <div class="kicker">§ IV &middot; Pentru cine</div>
+        <h3>Cabinete pe<br>Microsoft 365.</h3>
+      </div>
+      <div class="body-side">
+        Acta este construit pentru <strong>avocați</strong> &mdash; cabinete individuale, firme mici și mijlocii care lucrează în litigii, drept comercial și drept civil. Nu pentru notari, nu pentru in-house, nu pentru parlegali fără Microsoft 365. Dacă cabinetul tău e pe Google Workspace, încă nu suntem pentru tine.
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="b-section workflow">
+    <div class="section-head">
+      <div class="roman">§ V</div>
+      <h2>Cum începe</h2>
+    </div>
+    <div class="workflow-grid">
+      <div class="step">
+        <div class="step-num">i.</div>
+        <h3>Te invităm</h3>
+        <p>Locurile sunt limitate. Răspundem în cinci zile lucrătoare cu o ofertă și un termen.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">ii.</div>
+        <h3>Conectăm cabinetul</h3>
+        <p>Instalezi extensia în Word. Acta se conectează la Microsoft 365 și începe să citească dosarele.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">iii.</div>
+        <h3>Începi să lucrezi</h3>
+        <p>În câteva zile, Acta scrie în stilul cabinetului și răspunde despre dosare fără să încarci nimic.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="b-section cta-final">
+    <h2>Cere acces în avans</h2>
+    <p class="lead">Locuri limitate pentru cabinete care vor să fie printre primele care lucrează cu un asistent juridic român.</p>
+    <form class="form-row" onsubmit="event.preventDefault()">
+      <input type="email" placeholder="email@cabinetul-meu.ro">
+      <button type="submit">Trimite</button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="b-section footer">
+    <div class="footer-row">
+      <div>Acta &middot; Construit în România, pentru avocații români.</div>
+      <div class="links">
+        <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>
+        <a href="/INGESTION_POLICY.html">Politica de ingestie</a>
+      </div>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>
