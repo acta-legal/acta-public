@@ -1,6 +1,6 @@
 # Ingestion Status
 
-_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-05-19 08:30:34Z._
+_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-05-20 08:28:28Z._
 
 ## Corpus totals
 
@@ -15,7 +15,7 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-05-19 08:30:34Z._
 
 | Metric | Value |
 |---|---|
-| Pending (queue) | 38,947 |
+| Pending (queue) | 51,078 |
 | Ingested | 52 |
 | Failed | 4 |
 | Skipped (non-legislation content) | 13 |
