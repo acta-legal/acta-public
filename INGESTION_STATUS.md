@@ -1,6 +1,6 @@
 # Ingestion Status
 
-_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-06-14 08:42:54Z._
+_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-06-15 10:56:54Z._
 
 ## Corpus totals
 
@@ -20,7 +20,7 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-06-14 08:42:54Z._
 | Failed | 135 |
 | Skipped (non-legislation content) | 7,731 |
 | Last activity | 2026-06-14 05:52:52Z |
-| 7-day avg items ingested/day | 6,707 |
+| 7-day avg items ingested/day | 6,076 |
 
 ## Rate policy
 
