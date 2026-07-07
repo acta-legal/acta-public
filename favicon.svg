@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Acta favicon — KEYHOLE cut, theme-aware (dark browsers get the paper version). -->
+  <style>
+    path { fill: #17233B; }
+    @media (prefers-color-scheme: dark) { path { fill: #F4F6FA; } }
+  </style>
+  <path fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/>
+</svg>
