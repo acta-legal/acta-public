@@ -1,6 +1,6 @@
 # Ingestion Status
 
-_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-07-07 08:26:08Z._
+_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-07-08 07:30:57Z._
 
 ## Corpus totals
 
@@ -16,10 +16,10 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-07-07 08:26:08Z._
 | Metric | Value |
 |---|---|
 | Pending (queue) | 0 |
-| Ingested | 149,945 |
+| Ingested | 149,947 |
 | Failed | 199 |
 | Skipped (non-legislation content) | 7,748 |
-| Last activity | 2026-07-02 10:45:19Z |
+| Last activity | 2026-07-08 07:06:15Z |
 | 7-day avg items ingested/day | 0 |
 
 ## Rate policy
@@ -32,7 +32,7 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-07-07 08:26:08Z._
 
 | Source | Last successful request |
 |---|---|
-| `legislatie.just.ro` — legislation | 2026-07-02 10:45:19Z |
+| `legislatie.just.ro` — legislation | 2026-07-08 07:06:15Z |
 
 ## Known issues
 
