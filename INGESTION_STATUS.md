@@ -1,6 +1,6 @@
 # Ingestion Status
 
-_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-07-09 08:35:58Z._
+_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-07-10 08:26:23Z._
 
 ## Corpus totals
 
