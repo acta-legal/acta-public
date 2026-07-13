@@ -104,6 +104,26 @@
   letter-spacing: 0.1em; color: #6B0F1A; border: 1px solid #6B0F1A; border-radius: 3px;
   display: inline-block; padding: 4px 10px; }
 
+/* ===== HERO PORTRAIT ===== */
+#stage-hero { padding: 24px; }
+
+/* tag pulse on the Stadiu line: gentle oxblood glow, twice per loop */
+@keyframes kf-hero-pulse {
+  0%, 18%, 30%, 68%, 80%, 100% { color: #6B0F1A; opacity: 1; }
+  24%, 74% { opacity: 0.45; }
+}
+.hero-pulse .tag { animation: kf-hero-pulse 8s infinite; }
+
+/* incoming email files itself: hidden, slides in at 45%, stays */
+.hero-incoming { display: flex; gap: 10px; align-items: baseline; padding: 7px 0 0;
+  font-size: 14px; font-style: italic; color: #555; }
+@keyframes kf-hero-incoming {
+  0%, 42% { opacity: 0; transform: translateY(8px); }
+  48%, 96% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; }
+}
+.hero-incoming { animation: kf-hero-incoming 8s infinite; }
+
 /* coda — tenant diagram (reused from prior page, token-only) */
 .demo { background: #faf8f4; border: 1px solid #d8d2c4; border-radius: 6px;
   padding: 24px; font-family: 'EB Garamond', serif; }
@@ -192,7 +212,19 @@
           <p class="fineprint">Locuri limitate. Răspundem în 5 zile lucrătoare.</p>
         </div>
       </div>
-      <div class="stage" id="stage-hero"><!-- Task 2 --></div>
+      <div class="stage" id="stage-hero">
+        <div class="dosar-sheet hero-sheet">
+          <div class="dosar-title">Vega S.R.L. — Petrol Distribuție</div>
+          <div class="dosar-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
+          <div class="dosar-line"><span class="k">Părți</span><span class="v">Vega S.R.L. (reclamantă) · Petrol Distribuție S.A. (pârâtă)</span><span class="tag">act · OneDrive</span></div>
+          <div class="dosar-line"><span class="k">Obiect</span><span class="v">pretenții — 156.000 EUR</span><span class="tag">contract · <em>03.02.2023</em></span></div>
+          <div class="dosar-line hero-pulse"><span class="k">Stadiu</span><span class="v">fond — răspuns la întâmpinare depus</span><span class="tag">portal.just.ro · <em>azi 06:00</em></span></div>
+          <div class="dosar-line"><span class="k">Termene</span><span class="v">22.05.2026 · 10.09.2026</span><span class="tag">portal.just.ro · <em>azi 06:00</em></span></div>
+          <div class="dosar-line hero-newline"><span class="k">Acte</span><span class="v">41 acte · 56 e-mailuri</span><span class="tag">e-mail · <em>intrat singur</em></span></div>
+          <div class="dosar-line"><span class="k">De făcut</span><span class="v">note scrise până la 17.05.2026</span><span class="tag">generat din termen</span></div>
+          <div class="hero-incoming"><span class="v">Re: dosar 1234/45/2024 — poziția pârâtei</span><span class="tag">e-mail · <em>acum</em></span></div>
+        </div>
+      </div>
     </div>
   </div>
 
