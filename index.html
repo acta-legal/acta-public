@@ -69,6 +69,10 @@
 /* A "stage" is the framed theater a chapter plays in */
 .stage { background: #f0ebe1; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px;
   padding: 40px; min-height: 320px; }
+.stage:not(.playing) * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {
+  .stage *, .stage { animation: none !important; }
+}
 .stage-inner { max-width: 560px; margin: 0 auto; }
 
 /* The dosar sheet — the protagonist object, rendered like a fine printed document */
@@ -951,6 +955,21 @@
   </div>
 
 </div>
+<script>
+  (function () {
+    var stages = document.querySelectorAll(".stage");
+    if (!("IntersectionObserver" in window)) {
+      stages.forEach(function (s) { s.classList.add("playing"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle("playing", e.isIntersecting);
+      });
+    }, { threshold: 0.35 });
+    stages.forEach(function (s) { io.observe(s); });
+  })();
+</script>
 <script>
   (function () {
     const ENDPOINT = "https://api.acta-legal.ro/public/waitlist";
