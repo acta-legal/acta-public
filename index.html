@@ -596,8 +596,17 @@
   /* single page on mobile: hide pages 2–5, disable scroller travel */
   .doc-scroller .page:nth-child(n+2) { display: none; }
   .doc-scroller { animation: none; }
-  .dosar-line { flex-wrap: wrap; }
-  .dosar-line .tag { flex-basis: 100%; padding-left: 102px; }
+  /* dosar sheet: stack label / value / tag vertically, compact type */
+  .dosar-sheet { padding: 18px 16px; }
+  .dosar-title { font-size: 17px; }
+  .dosar-sub { font-size: 12px; margin-bottom: 12px; padding-bottom: 8px; }
+  .dosar-line { display: block; padding: 8px 0; font-size: 14px; }
+  .dosar-line .k { display: block; margin-bottom: 1px; font-size: 12px; }
+  .dosar-line .v { display: block; }
+  .dosar-line .tag { display: block; padding-left: 0; margin-top: 2px; }
+  .c1-slot .dash { left: 0; top: 27px; }
+  .hero-incoming { display: block; font-size: 13px; }
+  .hero-incoming .tag { display: block; margin-top: 2px; }
   .workflow-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-row { display: block; }
 }
