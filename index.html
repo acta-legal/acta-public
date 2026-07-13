@@ -249,6 +249,73 @@
 }
 .c1-sheet .stage-stamp { animation: kf-c1-stamp 14s infinite; }
 
+/* ===== CAPITOLUL II ===== */
+.c2-wrap { display: flex; flex-direction: column; }
+.c2-ticker { font-family: 'Inter', sans-serif; font-size: 11px; color: #555;
+  text-align: right; height: 16px; position: relative; margin-bottom: 10px; }
+.c2-day { position: absolute; right: 0; }
+.c2-tasks { margin: 10px 0 10px 92px; display: flex; flex-direction: column; gap: 8px; }
+.c2-task { display: flex; align-items: center; gap: 10px; background: #faf8f4;
+  border: 1px solid #eee8dc; border-radius: 4px; padding: 8px 12px;
+  font-family: 'Inter', sans-serif; font-size: 12px; color: #1a1a1a; }
+.c2-check { width: 14px; height: 14px; border: 1.5px solid #6B0F1A; border-radius: 3px;
+  position: relative; flex: 0 0 14px; }
+.c2-tick { position: absolute; inset: 0; text-align: center; line-height: 13px;
+  font-size: 10px; color: #6B0F1A; opacity: 1; }
+.c2-avatar { margin-left: auto; width: 22px; height: 22px; border-radius: 50%;
+  background: #f0ebe1; border: 1px solid #d8d2c4; font-size: 9px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; color: #555; }
+.c2-caption { text-align: center; font-style: italic; font-size: 14px; color: #555;
+  margin-top: 14px; font-family: 'EB Garamond', serif; }
+/* t1's label is dimmed at rest (checked-off task); keyframe restores it early in the loop */
+.c2-task.t1 .c2-tv { opacity: 0.5; }
+
+/* Calendar days flip by — each fades in over the last (d1 → d2 → d3), d3 holds to the reset */
+@keyframes kf-c2-d1 { 0%, 14% { opacity: 1; } 18%, 99% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes kf-c2-d2 { 0%, 16% { opacity: 0; } 20%, 32% { opacity: 1; } 36%, 100% { opacity: 0; } }
+@keyframes kf-c2-d3 { 0%, 34% { opacity: 0; } 38%, 99% { opacity: 1; } 100% { opacity: 0; } }
+.c2-day.d1 { animation: kf-c2-d1 12s infinite; }
+.c2-day.d2 { animation: kf-c2-d2 12s infinite; }
+.c2-day.d3 { animation: kf-c2-d3 12s infinite; }
+
+/* Termen line slides in (translateY(-6px)) once the portal check lands, then holds */
+@keyframes kf-c2-termen {
+  0%, 38%  { opacity: 0; transform: translateY(-6px); }
+  44%, 99% { opacity: 1; transform: translateY(0); }
+  100%     { opacity: 0; transform: translateY(-6px); }
+}
+.c2-termen { animation: kf-c2-termen 12s infinite; }
+
+/* Task cards unfold beneath the termen; each avatar fades in a beat after its card */
+@keyframes kf-c2-t1 {
+  0%, 52%  { opacity: 0; transform: translateY(-6px); }
+  58%, 99% { opacity: 1; transform: translateY(0); }
+  100%     { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes kf-c2-t2 {
+  0%, 60%  { opacity: 0; transform: translateY(-6px); }
+  66%, 99% { opacity: 1; transform: translateY(0); }
+  100%     { opacity: 0; transform: translateY(-6px); }
+}
+.c2-task.t1 { animation: kf-c2-t1 12s infinite; }
+.c2-task.t2 { animation: kf-c2-t2 12s infinite; }
+@keyframes kf-c2-av1 { 0%, 56% { opacity: 0; } 62%, 99% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes kf-c2-av2 { 0%, 64% { opacity: 0; } 70%, 99% { opacity: 1; } 100% { opacity: 0; } }
+.c2-task.t1 .c2-avatar { animation: kf-c2-av1 12s infinite; }
+.c2-task.t2 .c2-avatar { animation: kf-c2-av2 12s infinite; }
+
+/* t1 gets checked — tick appears and its label dims to mark the task done */
+@keyframes kf-c2-tick { 0%, 78% { opacity: 0; } 80%, 99% { opacity: 1; } 100% { opacity: 0; } }
+.c2-task.t1 .c2-tick { animation: kf-c2-tick 12s infinite; }
+@keyframes kf-c2-tv1 { 0%, 80% { opacity: 1; } 84%, 99% { opacity: 0.5; } 100% { opacity: 1; } }
+.c2-task.t1 .c2-tv { animation: kf-c2-tv1 12s infinite; }
+
+/* "De făcut" line and closing caption fade in last, holding to the reset */
+@keyframes kf-c2-todo { 0%, 84% { opacity: 0; } 90%, 99% { opacity: 1; } 100% { opacity: 0; } }
+.c2-todo { animation: kf-c2-todo 12s infinite; }
+@keyframes kf-c2-caption { 0%, 86% { opacity: 0; } 92%, 99% { opacity: 1; } 100% { opacity: 0; } }
+.c2-caption { animation: kf-c2-caption 12s infinite; }
+
 /* coda — tenant diagram (reused from prior page, token-only) */
 .demo { background: #faf8f4; border: 1px solid #d8d2c4; border-radius: 6px;
   padding: 24px; font-family: 'EB Garamond', serif; }
@@ -404,7 +471,24 @@
         <p>Acta verifică portal.just.ro în fiecare dimineață. Un termen nou nu rămâne o dată pe o pagină de portal: devine sarcini cu scadențe, împărțite pe oameni.</p>
         <p>Dosarul devine lista de lucru a cabinetului — fără ca cineva să o scrie.</p>
       </div>
-      <div class="stage" id="stage-cap2"><!-- Task 4 --></div>
+      <div class="stage" id="stage-cap2">
+        <div class="stage-inner">
+          <div class="c2-wrap">
+            <div class="c2-ticker"><span class="c2-day d1">luni 12.05</span><span class="c2-day d2">marți 13.05</span><span class="c2-day d3">miercuri 14.05</span></div>
+            <div class="dosar-sheet c2-sheet">
+              <div class="dosar-title">Vega S.R.L. — Petrol Distribuție</div>
+              <div class="dosar-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
+              <div class="dosar-line c2-termen"><span class="k">Termen nou</span><span class="v">10.09.2026, ora 09:00 — fond</span><span class="tag">portal.just.ro · <em>06:00</em></span></div>
+              <div class="c2-tasks">
+                <div class="c2-task t1"><span class="c2-check"><span class="c2-tick">✓</span></span><span class="c2-tv">Pregătește note scrise — scadență 05.09.2026</span><span class="c2-avatar">M.S.</span></div>
+                <div class="c2-task t2"><span class="c2-check"></span><span class="c2-tv">Depune împuternicirea — scadență 01.09.2026</span><span class="c2-avatar">A.P.</span></div>
+              </div>
+              <div class="dosar-line c2-todo"><span class="k">De făcut</span><span class="v">2 sarcini · prima scadență 01.09.2026</span><span class="tag">actualizat singur</span></div>
+            </div>
+            <div class="c2-caption">dosarul devine lista ta de lucru</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
