@@ -317,6 +317,196 @@
 @keyframes kf-c2-caption { 0%, 86% { opacity: 0; } 92%, 99% { opacity: 1; } 100% { opacity: 0; } }
 .c2-caption { animation: kf-c2-caption 12s infinite; }
 
+/* ===== CAPITOLUL III ===== */
+/* Editorial Word window — minimal cream chrome around the ported doc + Acta pane */
+.c3-window { --pane-w: 320px; max-width: 1020px; margin: 0 auto;
+  border: 1px solid #d8d2c4; border-radius: 8px; overflow: hidden;
+  box-shadow: 0 18px 60px rgba(20,20,20,0.12); background: #fff; }
+.c3-header { display: flex; justify-content: space-between; padding: 10px 16px;
+  background: #faf8f4; border-bottom: 1px solid #d8d2c4;
+  font-family: 'EB Garamond', serif; font-size: 13px; color: #555; }
+.c3-header .c3-docname { font-weight: 600; color: #111; }
+.c3-header .c3-appname { color: #2b579a; }
+.c3-footer { display: flex; gap: 16px; padding: 6px 16px; background: #faf8f4;
+  border-top: 1px solid #d8d2c4; font-family: 'Inter', sans-serif; font-size: 10px; color: #555; }
+.c3-pg { animation: kf-c3-pg 12s infinite; }
+@keyframes kf-c3-pg { 0%, 62% { opacity: 0.5; } 64%, 100% { opacity: 1; } }
+
+/* Body: document canvas + task pane */
+.c3-window .w-body { display: flex; height: 600px; background: #f0ebe1; }
+
+.doc-area { flex: 1; overflow: hidden; background: #f0ebe1;
+  display: flex; justify-content: center; padding: 14px 0; position: relative; }
+.doc-scroller { width: 100%; display: flex; flex-direction: column; align-items: center;
+  gap: 14px; animation: kf-c3-scroll 12s infinite; }
+@keyframes kf-c3-scroll {
+  0%, 30% { transform: translateY(0); }
+  36%     { transform: translateY(-30px); }
+  44%     { transform: translateY(-260px); }
+  52%     { transform: translateY(-540px); }
+  60%     { transform: translateY(-820px); }
+  68%     { transform: translateY(-1100px); }
+  96%     { transform: translateY(-1100px); }
+  100%    { transform: translateY(0); }
+}
+
+.page { background: #fff; width: 440px; min-height: 622px; padding: 48px 56px 56px;
+  font-family: 'Source Serif 4', 'Times New Roman', serif; font-size: 9.5px;
+  line-height: 1.5; color: #1a1a1a;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+  position: relative; flex-shrink: 0; }
+.page::after { content: attr(data-page); position: absolute; bottom: 16px; left: 0; right: 0;
+  text-align: center; font-size: 8px; color: #999; font-family: 'Inter', sans-serif; }
+.page-title { text-align: center; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; margin-bottom: 4px; }
+.page-meta { text-align: right; font-size: 8.5px; color: #555; margin-bottom: 12px; }
+.page-greeting { margin-bottom: 12px; }
+.page p { margin: 0 0 8px 0; }
+.page .num { font-weight: 700; }
+.page sup { color: #6B0F1A; font-weight: 700; font-size: 0.7em; }
+.page .sect { font-size: 10.5px; font-weight: 700; margin: 14px 0 8px 0; letter-spacing: 0.04em; }
+.page .sect.roman { color: #1a1a1a; }
+.page .ind { padding-left: 18px; }
+.page .footer-block { margin-top: 18px; }
+.page .footer-block .small { font-size: 8.5px; color: #555; }
+.page.empty { display: flex; align-items: center; justify-content: center;
+  color: #c8c0b0; font-style: italic; font-size: 11px;
+  font-family: 'EB Garamond', serif; background: #fff; }
+
+/* verified-citation footnote beat (page 3) */
+.c3-fnmark { white-space: nowrap; }
+.c3-fncheck { color: #6B0F1A; font-size: 8px; font-weight: 700; margin-left: 1px;
+  animation: kf-c3-fncheck 12s infinite; }
+@keyframes kf-c3-fncheck { 0%, 46% { opacity: 0; } 50%, 99% { opacity: 1; } 100% { opacity: 0; } }
+
+/* chunk fade-ins — base visible (finished frame); hidden early, staggered every 7% */
+.c3-chunk { opacity: 1; }
+.c3-c1 { animation: kf-c3-c1 12s infinite; }
+.c3-c2 { animation: kf-c3-c2 12s infinite; }
+.c3-c3 { animation: kf-c3-c3 12s infinite; }
+.c3-c4 { animation: kf-c3-c4 12s infinite; }
+.c3-c5 { animation: kf-c3-c5 12s infinite; }
+@keyframes kf-c3-c1 { 0%, 26% { opacity: 0; background: transparent; }
+  28%, 33% { opacity: 1; background: #fff4e6; } 37%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
+@keyframes kf-c3-c2 { 0%, 33% { opacity: 0; background: transparent; }
+  35%, 40% { opacity: 1; background: #fff4e6; } 44%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
+@keyframes kf-c3-c3 { 0%, 40% { opacity: 0; background: transparent; }
+  42%, 47% { opacity: 1; background: #fff4e6; } 51%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
+@keyframes kf-c3-c4 { 0%, 47% { opacity: 0; background: transparent; }
+  49%, 54% { opacity: 1; background: #fff4e6; } 58%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
+@keyframes kf-c3-c5 { 0%, 54% { opacity: 0; background: transparent; }
+  56%, 61% { opacity: 1; background: #fff4e6; } 65%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
+
+/* empty-doc overlay — transient chrome, rests hidden */
+.empty-overlay { position: absolute; top: 20px; left: 0; right: 0;
+  display: flex; justify-content: center; opacity: 0;
+  animation: kf-c3-empty 12s infinite; pointer-events: none; }
+@keyframes kf-c3-empty { 0%, 26% { opacity: 1; } 30%, 99% { opacity: 0; } 100% { opacity: 1; } }
+.empty-overlay .page { display: flex; align-items: center; justify-content: center;
+  color: #c8c0b0; font-style: italic; font-size: 12px; font-family: 'EB Garamond', serif; }
+
+/* ===== ACTA TASK PANE (re-costumed) ===== */
+.acta-pane { flex: 0 0 var(--pane-w); background: #faf8f4; border-left: 1px solid #d8d2c4;
+  display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.acta-pane-header { padding: 10px 14px; border-bottom: 1px solid #d8d2c4; background: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Inter', sans-serif; font-size: 12px; color: #1a1a1a; font-weight: 600; }
+.acta-pane-header .a-brand { display: flex; align-items: center; gap: 8px; }
+.acta-pane-header .a-brand .a-dot { width: 18px; height: 18px; border-radius: 4px;
+  background: #6B0F1A; color: #fff; font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; }
+.acta-pane-header .x { color: #999; font-size: 14px; line-height: 1; }
+.acta-pane-body { flex: 1; padding: 16px; position: relative; font-family: 'Inter', sans-serif; }
+
+/* three states: form → stream → done. Done is the resting/finished frame */
+.c3-state { position: absolute; inset: 16px; }
+.c3-form, .c3-stream { opacity: 0; }
+.c3-done { opacity: 1; }
+.c3-form   { animation: kf-c3-form 12s infinite; }
+.c3-stream { animation: kf-c3-stream 12s infinite; }
+.c3-done   { animation: kf-c3-done 12s infinite; }
+@keyframes kf-c3-form   { 0%, 24% { opacity: 1; } 26%, 99% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes kf-c3-stream { 0%, 24% { opacity: 0; } 26%, 72% { opacity: 1; } 74%, 100% { opacity: 0; } }
+@keyframes kf-c3-done   { 0%, 72% { opacity: 0; } 74%, 96% { opacity: 1; } 98%, 100% { opacity: 0; } }
+
+.label-sm { font-size: 11px; font-weight: 600; color: #4d4d59; margin-bottom: 6px; }
+.case-trigger { height: 36px; border: 1px solid #d8d2c4; background: #fff; border-radius: 4px;
+  padding: 0 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: #1a1a1a; font-weight: 500; }
+.case-trigger .chev { margin-left: auto; color: #999; font-size: 10px; }
+
+/* form */
+.case-info { background: #fff; border: 1px solid #d8d2c4; border-radius: 4px;
+  padding: 10px 12px; margin-bottom: 14px; }
+.case-info .case-name { font-size: 12px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
+.case-info .case-summary { font-size: 11px; color: #666673; line-height: 1.4; margin-bottom: 6px; }
+.case-info .case-sources { font-size: 11px; color: #6B0F1A; font-weight: 500; }
+.field { margin-bottom: 12px; }
+.field-label { font-size: 11px; font-weight: 500; color: #4d4d59; margin-bottom: 4px; }
+.input-box, .textarea-box { background: #fff; border: 1px solid #d8d2c4; border-radius: 4px;
+  padding: 8px 10px; font-size: 12px; color: #1a1a1a; font-family: 'Inter', sans-serif; }
+.input-box { height: 32px; display: flex; align-items: center; }
+.textarea-box { min-height: 56px; line-height: 1.45; }
+.placeholder { color: #999; }
+.caret { display: inline-block; width: 1px; height: 14px; background: #1a1a1a;
+  margin-left: 1px; vertical-align: middle; animation: kf-c3-caret 0.8s steps(2) infinite; }
+@keyframes kf-c3-caret { 50% { opacity: 0; } }
+.tw { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; }
+.tw-title { width: 0; animation: kf-c3-twtitle 12s infinite; }
+@keyframes kf-c3-twtitle { 0%, 2% { width: 0; } 8%, 99% { width: 22ch; } 100% { width: 0; } }
+.tw-instr { width: 0; vertical-align: top; animation: kf-c3-twinstr 12s infinite; }
+@keyframes kf-c3-twinstr { 0%, 4% { width: 0; } 20%, 99% { width: 100%; } 100% { width: 0; } }
+.btn-primary { height: 32px; background: #6B0F1A; color: #fff; border-radius: 4px; padding: 0 14px;
+  font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center;
+  width: 100%; margin-top: 4px; }
+.btn-secondary { height: 32px; background: #fff; color: #6B0F1A; border: 1px solid #6B0F1A;
+  border-radius: 4px; padding: 0 14px; font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; width: 100%; }
+
+/* stream */
+.stream-header { display: flex; align-items: center; gap: 8px; padding-bottom: 10px;
+  margin-bottom: 10px; border-bottom: 1px solid #d8d2c4; }
+.stream-header .spin { width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid #d8d2c4; border-top-color: #6B0F1A; animation: kf-c3-spin 1s linear infinite; }
+.stream-header .label { font-size: 12px; font-weight: 500; color: #1a1a1a; }
+.stream-header .badge { margin-left: auto; background: #f0ebe1; color: #6B0F1A;
+  font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 3px; }
+@keyframes kf-c3-spin { to { transform: rotate(360deg); } }
+.event-list { display: flex; flex-direction: column; gap: 6px; }
+.event { display: flex; gap: 8px; align-items: flex-start; padding: 6px 8px;
+  background: #fff; border: 1px solid #eee8dc; border-radius: 3px;
+  font-size: 11px; line-height: 1.35; color: #1a1a1a; opacity: 0; transform: translateY(4px); }
+.event .ico { flex: 0 0 12px; margin-top: 1px; font-family: monospace; font-size: 10px; color: #999; }
+.event.done .ico { color: #6B0F1A; }
+.event .text { flex: 1; }
+.event .text .quoted { color: #6B0F1A; font-style: italic; }
+.event .text strong { color: #1a1a1a; font-weight: 600; }
+.c3-verified { color: #6B0F1A; font-weight: 700; }
+.c3-e1 { animation: kf-c3-e1 12s infinite; }
+.c3-e2 { animation: kf-c3-e2 12s infinite; }
+.c3-e3 { animation: kf-c3-e3 12s infinite; }
+.c3-e4 { animation: kf-c3-e4 12s infinite; }
+.c3-e5 { animation: kf-c3-e5 12s infinite; }
+.c3-e6 { animation: kf-c3-e6 12s infinite; }
+.c3-e7 { animation: kf-c3-e7 12s infinite; }
+@keyframes kf-c3-e1 { 0%,27% {opacity:0;transform:translateY(4px);} 28%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+@keyframes kf-c3-e2 { 0%,32% {opacity:0;transform:translateY(4px);} 33%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+@keyframes kf-c3-e3 { 0%,37% {opacity:0;transform:translateY(4px);} 38%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+@keyframes kf-c3-e4 { 0%,42% {opacity:0;transform:translateY(4px);} 43%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+@keyframes kf-c3-e5 { 0%,47% {opacity:0;transform:translateY(4px);} 48%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+@keyframes kf-c3-e6 { 0%,52% {opacity:0;transform:translateY(4px);} 53%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+@keyframes kf-c3-e7 { 0%,57% {opacity:0;transform:translateY(4px);} 58%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
+
+/* done */
+.done-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500;
+  color: #6B0F1A; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid #d8d2c4; }
+.done-head .check { width: 16px; height: 16px; border-radius: 50%; background: #6B0F1A; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.done-stats { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.done-stats .stat { font-size: 11px; color: #4d4d59; display: flex; justify-content: space-between; }
+.done-stats .stat .k { color: #999; }
+.done-buttons { display: flex; flex-direction: column; gap: 8px;
+  position: absolute; bottom: 0; left: 0; right: 0; }
+
 /* coda — tenant diagram (reused from prior page, token-only) */
 .demo { background: #faf8f4; border: 1px solid #d8d2c4; border-radius: 6px;
   padding: 24px; font-family: 'EB Garamond', serif; }
@@ -501,7 +691,158 @@
       <p>Cereri, întâmpinări, răspunsuri — scrise direct în documentul deschis, cu antetul, numerotarea și formatul cabinetului. Nu într-un editor separat, nu prin copy-paste.</p>
       <p>Fiecare citare — lege sau jurisprudență — vine din corpusul legislativ românesc și e verificată înainte să ajungă în notele de subsol.</p>
     </div>
-    <div class="stage" id="stage-cap3"><!-- Task 5 --></div>
+    <div class="stage" id="stage-cap3">
+      <div class="c3-window">
+        <div class="c3-header">
+          <span class="c3-docname">Răspuns Vega.docx</span>
+          <span class="c3-appname">Microsoft Word · panoul Acta</span>
+        </div>
+        <div class="w-body">
+
+          <!-- DOCUMENT CANVAS -->
+          <div class="doc-area">
+            <div class="empty-overlay">
+              <div class="page empty">document gol — așteaptă instrucțiuni</div>
+            </div>
+            <div class="doc-scroller">
+
+              <div class="page" data-page="Pagina 1 din 5">
+                <div class="c3-chunk c3-c1">
+                  <div class="page-title">RĂSPUNS LA ÎNTÂMPINARE</div>
+                  <div class="page-meta">Dosar nr. 1234/45/2024<br>Judecătoria Sector 3</div>
+                  <div class="page-greeting">Domnule Președinte,<br>Stimată instanță,</div>
+                  <p>Subscrisa, <strong>S.C. VEGA S.R.L.</strong>, cu sediul real în București, Sector 3, Str. Polonă nr. 47, înmatriculată la Oficiul Național al Registrului Comerțului sub nr. J40/2345/2019, CUI RO40123456, prin reprezentant legal, în calitate de reclamantă în dosarul nr. 1234/45/2024 aflat pe rolul Judecătoriei Sector 3, formulează prezentul</p>
+                  <p style="text-align:center;font-weight:700;margin:10px 0;">RĂSPUNS LA ÎNTÂMPINARE</p>
+                  <p>depus de pârâta S.C. PETROL DISTRIBUȚIE S.A. la data de 18.03.2026, prin care solicităm respingerea apărărilor invocate și admiterea cererii principale, pentru motivele expuse în continuare.</p>
+                </div>
+              </div>
+
+              <div class="page" data-page="Pagina 2 din 5">
+                <div class="c3-chunk c3-c2">
+                  <div class="sect roman">I. CU PRIVIRE LA EXCEPȚIA NECOMPETENȚEI TERITORIALE</div>
+                  <p><span class="num">1.</span> Prin întâmpinarea depusă, pârâta a invocat excepția necompetenței teritoriale a Judecătoriei Sector 3, susținând că sediul subscrisei ar fi fost mutat la Cluj-Napoca prin hotărârea adunării generale a asociaților din 11.01.2026.</p>
+                  <p><span class="num">2.</span> Această susținere este vădit neîntemeiată, pentru următoarele considerente:</p>
+                  <p class="ind"><strong>a)</strong> Sediul social al subscrisei, astfel cum este înregistrat la Oficiul Național al Registrului Comerțului, este și rămâne în București, Sector 3, conform certificatului constatator depus în probațiune (Anexa nr. 1).</p>
+                  <p class="ind"><strong>b)</strong> Hotărârea adunării asociaților invocată de pârâtă nu a fost înregistrată la ONRC și, prin urmare, nu produce efecte față de terți, conform art. 7 alin. (1) din Legea nr. 26/1990 privind registrul comerțului.<sup>1</sup></p>
+                </div>
+              </div>
+
+              <div class="page" data-page="Pagina 3 din 5">
+                <div class="c3-chunk c3-c3">
+                  <p><span class="num">3.</span> Potrivit art. 107 alin. (1) C.proc.civ., cererea de chemare în judecată se introduce la instanța de la domiciliul sau sediul pârâtului. Pârâta are sediul declarat la ONRC în București, Sector 3 — fapt necontestat la momentul introducerii cererii.</p>
+                  <p><span class="num">4.</span> În acest sens, Înalta Curte de Casație și Justiție a stabilit, prin Decizia nr. 23/2018 pronunțată în recurs în interesul legii, că <em>„sediul opozabil terților este cel înregistrat la ONRC, indiferent de hotărârile interne ale societății neînregistrate în registrul comerțului"</em>.<span class="c3-fnmark"><sup>2</sup><span class="c3-fncheck">✓</span></span></p>
+                  <p><span class="num">5.</span> Pentru aceste motive, solicităm respingerea excepției necompetenței teritoriale ca neîntemeiată.</p>
+                  <div class="sect roman">II. CU PRIVIRE LA EXCEPȚIA PRESCRIPȚIEI</div>
+                  <p><span class="num">6.</span> Pârâta a invocat și excepția prescripției dreptului material la acțiune, susținând că termenul de 3 ani prevăzut de art. 2517 Cod civil a fost depășit. Această apărare este la fel de neîntemeiată.</p>
+                </div>
+              </div>
+
+              <div class="page" data-page="Pagina 4 din 5">
+                <div class="c3-chunk c3-c4">
+                  <p><span class="num">7.</span> Termenul de prescripție începe să curgă de la data scadenței obligației, iar nu de la data emiterii facturii. În speță, scadența a fost stabilită contractual la 15.04.2023, iar cererea a fost introdusă la 12.04.2026 — așadar înăuntrul termenului legal.</p>
+                  <div class="sect roman">III. CU PRIVIRE LA FONDUL CAUZEI</div>
+                  <p><span class="num">8.</span> Pe fondul cauzei, susținem că serviciile facturate au fost integral prestate, conform contractului încheiat între părți la data de 03.02.2023.</p>
+                  <p><span class="num">9.</span> Pârâta a primit livrările în cele 14 tranșe documentate prin avizele de însoțire, semnate și ștampilate de reprezentantul său legal. Toate avizele se află în probațiune (Anexele 2–15).</p>
+                  <p><span class="num">10.</span> Refuzul plății facturii nr. 0457/15.03.2023 în sumă de <strong>156.000 EUR</strong> este vădit nejustificat și constituie o încălcare gravă a obligațiilor contractuale.</p>
+                </div>
+              </div>
+
+              <div class="page" data-page="Pagina 5 din 5">
+                <div class="c3-chunk c3-c5">
+                  <p><span class="num">11.</span> Mai mult, pârâta nu a invocat în întâmpinare niciun motiv concret de neprestare a serviciilor, ci doar afirmații generice fără suport probator, care nu pot răsturna prezumția decurgând din semnarea avizelor de însoțire.</p>
+                  <div class="sect roman">IV. CU PRIVIRE LA DAUNELE-INTERESE</div>
+                  <p><span class="num">12.</span> Solicităm obligarea pârâtei la plata daunelor-interese moratorii, calculate la rata legală prevăzută de O.G. nr. 13/2011, începând cu data scadenței și până la plata efectivă.</p>
+                  <div class="sect roman">V. CONCLUZII ȘI SOLICITĂRI</div>
+                  <p><span class="num">13.</span> Față de cele expuse, solicităm:</p>
+                  <p class="ind">— respingerea excepțiilor invocate de pârâtă;</p>
+                  <p class="ind">— admiterea cererii principale;</p>
+                  <p class="ind">— obligarea pârâtei la plata sumei de 156.000 EUR și a daunelor-interese moratorii;</p>
+                  <p class="ind">— obligarea pârâtei la plata cheltuielilor de judecată.</p>
+                  <div class="footer-block">
+                    <p style="margin-top:10px;">Cu deosebită considerație,</p>
+                    <p><strong>S.C. VEGA S.R.L.</strong><br>Prin reprezentant legal</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ACTA TASK PANE -->
+          <div class="acta-pane">
+            <div class="acta-pane-header">
+              <div class="a-brand"><div class="a-dot">A</div><div>Acta</div></div>
+              <div class="x">×</div>
+            </div>
+            <div class="acta-pane-body">
+
+              <div class="c3-state c3-form">
+                <div class="label-sm">Dosar</div>
+                <div class="case-trigger" style="margin-bottom:14px;">
+                  <span>Vega S.R.L. — Petrol Distribuție</span>
+                  <span class="chev">▾</span>
+                </div>
+                <div class="case-info">
+                  <div class="case-name">Vega S.R.L. — Petrol Distribuție</div>
+                  <div class="case-summary">Litigiu comercial. Vega contestă o factură de 156.000 EUR. Termen 22.05.2026.</div>
+                  <div class="case-sources">23 surse disponibile</div>
+                </div>
+                <div class="field">
+                  <div class="field-label">Titlu document</div>
+                  <div class="input-box">
+                    <span class="tw tw-title">Răspuns la întâmpinare Vega</span><span class="caret"></span>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="field-label">Instrucțiuni</div>
+                  <div class="textarea-box">
+                    <span class="tw tw-instr">Răspunde la excepția de necompetență. Argumentează că sediul real e în București.</span><span class="caret"></span>
+                  </div>
+                </div>
+                <div class="btn-primary">Redactează</div>
+              </div>
+
+              <div class="c3-state c3-stream">
+                <div class="stream-header">
+                  <div class="spin"></div>
+                  <div class="label">Se redactează...</div>
+                  <div class="badge">5 pagini</div>
+                </div>
+                <div class="event-list">
+                  <div class="event done c3-e1"><span class="ico">✓</span><span class="text">Cerere analizată</span></div>
+                  <div class="event done c3-e2"><span class="ico">✓</span><span class="text">Caut: <span class="quoted">„necompetență teritorială"</span> — 12 rezultate</span></div>
+                  <div class="event done c3-e3"><span class="ico">✓</span><span class="text">Consultă <strong>C.proc.civ. art. 107</strong></span></div>
+                  <div class="event done c3-e4"><span class="ico">✓</span><span class="text">Consultă dosar Vega — 8 acte, 23 e-mailuri</span></div>
+                  <div class="event done c3-e5"><span class="ico">✓</span><span class="text">Consultă <strong>ICCJ Dec. 23/2018</strong> (RIL) — citare verificată <span class="c3-verified">✓</span></span></div>
+                  <div class="event done c3-e6"><span class="ico">✓</span><span class="text">Stil aplicat: <strong>firm-bojin</strong></span></div>
+                  <div class="event c3-e7"><span class="ico">⟳</span><span class="text">Redactare în Word — pagina 4 / 5</span></div>
+                </div>
+              </div>
+
+              <div class="c3-state c3-done">
+                <div class="done-head"><span class="check">✓</span><span>Document redactat</span></div>
+                <div class="done-stats">
+                  <div class="stat"><span class="k">Lungime</span><span>5 pagini · 1.247 cuvinte</span></div>
+                  <div class="stat"><span class="k">Surse consultate</span><span>12</span></div>
+                  <div class="stat"><span class="k">Citări inserate</span><span>2 note de subsol</span></div>
+                  <div class="stat"><span class="k">Șablon</span><span>firm-bojin</span></div>
+                </div>
+                <div class="field">
+                  <div class="field-label">Instrucțiuni suplimentare</div>
+                  <div class="textarea-box"><span class="placeholder">Descrie ce vrei să modifici...</span></div>
+                </div>
+                <div class="done-buttons">
+                  <div class="btn-secondary">Modifică</div>
+                  <div class="btn-primary">Salvează în OneDrive</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="c3-footer"><span class="c3-pg">Pagina 5 din 5</span><span>1.247 cuvinte</span><span>Română</span></div>
+      </div>
+    </div>
   </div>
 
   <!-- CODA -->
