@@ -568,7 +568,35 @@
 
 @media (max-width: 900px) {
   .b-section { padding-left: 24px !important; padding-right: 24px !important; }
-  /* Mobile stacking + variants land in Task 6. */
+  .page-b h1 { font-size: 38px; }
+  .page-b .lead { font-size: 18px; }
+  .form-row input { font-size: 16px !important; }
+  /* hero: stack text above portrait */
+  .hero-grid { display: block; }
+  #stage-hero { margin-top: 32px; }
+  /* chapters: text above stage */
+  .chapter-grid { display: block; }
+  .chapter-grid .stage { margin-top: 24px; }
+  .stage { padding: 20px; }
+  /* Cap I: 3 slots — hide s3, s4, s5 wholesale; keep s1, s2, s6 (the gap beat survives) */
+  .c1-slot.s3, .c1-slot.s4, .c1-slot.s5 { display: none; }
+  .c1-pile { height: 60px; }
+  .c1-file.f4, .c1-file.f5, .c1-file.f6 { display: none; }
+  /* Cap II: keep 1 termen + both tasks (already minimal); tighten indent */
+  .c2-tasks { margin-left: 0; }
+  /* Cap III: stack pane above one page */
+  .c3-window .w-body { flex-direction: column; height: auto; }
+  .acta-pane { flex: none; border-left: none; border-top: 1px solid #d8d2c4;
+    order: -1; min-height: 240px; }
+  .doc-area { min-height: 320px; padding: 10px 0; }
+  .page { width: 300px; min-height: 424px; padding: 28px 30px; }
+  /* single page on mobile: hide pages 2–5, disable scroller travel */
+  .doc-scroller .page:nth-child(n+2) { display: none; }
+  .doc-scroller { animation: none; }
+  .dosar-line { flex-wrap: wrap; }
+  .dosar-line .tag { flex-basis: 100%; padding-left: 102px; }
+  .workflow-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-row { display: block; }
 }
   </style>
 </head>
