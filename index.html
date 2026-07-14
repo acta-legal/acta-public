@@ -611,6 +611,15 @@
   .footer-row { display: block; }
 }
   </style>
+  <!-- Umami: self-hosted, cookieless analytics. No consent banner required.
+       The tracker is vendored (js/a.js) rather than loaded from the analytics
+       host, so no third-party origin can execute script on a page that collects
+       email addresses. data-host-url points it at our collector.
+       On Umami upgrade, re-vendor:
+       curl -sS https://analytics.acta-legal.ro/script.js -o js/a.js -->
+  <script defer src="/js/a.js"
+          data-website-id="198f8cd9-6c70-42f2-9277-fb39db06a86d"
+          data-host-url="https://analytics.acta-legal.ro"></script>
 </head>
 <body>
 <div class="page-b">
