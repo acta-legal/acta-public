@@ -988,6 +988,65 @@
   })();
 </script>
 <script>
+  // Signup-funnel analytics. Every event goes through actaTrack, which is a
+  // no-op when Umami is unavailable (ad-blocked, offline, still loading, or the
+  // visitor opted out via /exclude/), so tracking can never break the page or
+  // the signup form.
+  window.actaTrack = function (name, data) {
+    if (window.umami && typeof window.umami.track === "function") {
+      window.umami.track(name, data);
+    }
+  };
+
+  (function () {
+    // Scroll depth. The page has no section anchors, so depth is a percentage
+    // of document height. Each milestone fires at most once per pageview.
+    var milestones = [25, 50, 75, 100];
+    var fired = {};
+
+    function onScroll() {
+      var doc = document.documentElement;
+      var scrollable = doc.scrollHeight - window.innerHeight;
+      // A page shorter than the viewport is fully seen by definition.
+      var pct = scrollable <= 0 ? 100 : (window.scrollY / scrollable) * 100;
+      for (var i = 0; i < milestones.length; i++) {
+        var m = milestones[i];
+        if (!fired[m] && pct >= m) {
+          fired[m] = true;
+          window.actaTrack("scroll-" + m);
+        }
+      }
+      if (fired[100]) {
+        window.removeEventListener("scroll", onScroll);
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // "Reached the signup form": the final-CTA form entering the viewport.
+    // Reuses the IntersectionObserver pattern already used by .stage above.
+    var forms = document.querySelectorAll(".form-row");
+    var finalForm = forms[1]; // DOM order: [0] = hero, [1] = final CTA.
+    if (finalForm && "IntersectionObserver" in window) {
+      var seen = false;
+      var io = new IntersectionObserver(
+        function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting && !seen) {
+              seen = true;
+              window.actaTrack("form-seen");
+              io.disconnect();
+            }
+          }
+        },
+        { threshold: 0.5 }
+      );
+      io.observe(finalForm);
+    }
+  })();
+</script>
+<script>
   (function () {
     const ENDPOINT = "https://api.acta-legal.ro/public/waitlist";
 
@@ -1019,6 +1078,12 @@
         });
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
+        // Success path only — a failed POST throws to catch and is correctly
+        // never counted as a conversion.
+        window.actaTrack("signup-submitted", {
+          source: form.dataset.source,
+          alreadyOnList: !!data.alreadyOnList,
+        });
         showThankYou(form, !!data.alreadyOnList);
       } catch (_err) {
         showError(form, email);
