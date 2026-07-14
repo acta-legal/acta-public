@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Acta — Excludere din statistici</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    body {
+      margin: 0;
+      padding: 48px 24px;
+      font-family: 'EB Garamond', Georgia, serif;
+      color: #111;
+      background: #fff;
+    }
+    .box { max-width: 560px; margin: 0 auto; border: 1.5px solid #111; padding: 24px 28px; }
+    h1 { font-size: 24px; margin: 0 0 12px; }
+    p { font-size: 17px; line-height: 1.5; margin: 0 0 10px; }
+    .ok { color: #14532d; font-weight: 600; }
+    .err { color: #6B0F1A; font-weight: 600; }
+    a { color: #2952BF; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Excludere din statistici</h1>
+    <p id="status">Se aplică...</p>
+    <p>Această setare rămâne activă în acest browser. Repetă pasul pe fiecare
+    dispozitiv (laptop, telefon). O fereastră incognito nu păstrează setarea.</p>
+    <p><a href="/">Înapoi la pagina principală</a></p>
+  </div>
+  <script>
+    (function () {
+      var status = document.getElementById("status");
+      try {
+        localStorage.setItem("umami.disabled", "1");
+        status.className = "ok";
+        status.textContent = "Gata. Nu mai ești numărat în statisticile Acta.";
+      } catch (err) {
+        status.className = "err";
+        status.textContent =
+          "Nu am putut salva setarea (localStorage indisponibil în acest browser).";
+      }
+    })();
+  </script>
+</body>
+</html>
