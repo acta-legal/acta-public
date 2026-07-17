@@ -15,601 +15,386 @@
   <meta property="og:locale" content="ro_RO">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-.page-b { background: #ffffff; color: #111; font-family: 'EB Garamond', serif;
-  border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; }
-.page-b * { box-sizing: border-box; }
+  :root {
+    --ink: #16130f;
+    --ink-soft: #4a453d;
+    --paper: #f7f4ec;
+    --paper-deep: #efe9db;
+    --line: #d8d2c4;
+    --ox: #6B0F1A;
+    --ox-soft: rgba(107,15,26,0.07);
+    --ui-ink: #1a1a1a;
+    --ui-mut: #6b6b76;
+    --ui-line: #e3e0d8;
+    --word-blue: #2b579a;
+    --serif: 'EB Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --doc-serif: 'Source Serif 4', 'Times New Roman', serif;
+  }
+  html { scroll-behavior: auto; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  * { box-sizing: border-box; }
 
-.b-section { padding: 0 80px; }
-.b-section.hero    { padding-top: 48px; padding-bottom: 88px; }
-.b-section.chapter { padding-top: 80px; padding-bottom: 80px; }
-.b-section.coda    { padding-top: 80px; padding-bottom: 80px; background: #faf8f4; }
-.b-section.quiet   { padding-top: 72px; padding-bottom: 80px; background: #f5f0e6; }
-.b-section.cta-final { padding-top: 80px; padding-bottom: 96px; background: #111; color: #f5f0e6; }
-.b-section.footer  { padding: 28px 80px; background: #1a1a1a; color: #aaa; font-size: 14px; }
+  .shell { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
 
-/* masthead */
-.masthead { border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 56px;
-  display: flex; justify-content: space-between; align-items: baseline; }
-.masthead .title { font-size: 20px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-.masthead .issue { font-size: 14px; font-style: italic; color: #555; }
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; justify-content: space-between; align-items: baseline;
+    padding: 26px 0 14px; border-bottom: 2px solid var(--ink); }
+  .masthead .brand { font-size: 20px; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .masthead .issue { font-size: 15px; font-style: italic; color: var(--ink-soft); }
 
-/* hero */
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-.kicker { font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em;
-  color: #6B0F1A; margin-bottom: 20px; font-weight: 700; }
-.page-b h1 { font-size: 54px; line-height: 1.06; font-weight: 500;
-  margin: 0 0 24px 0; letter-spacing: -0.015em; }
-.page-b .lead { font-size: 22px; line-height: 1.5; color: #222;
-  margin: 0 0 36px 0; font-style: italic; }
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 72px 0 130px; }
+  .hero-inner { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 54%); gap: 40px; align-items: start; }
+  .kicker { font-family: var(--sans); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--ox); font-weight: 700; margin-bottom: 22px; }
+  h1 { font-size: clamp(40px, 4.6vw, 58px); line-height: 1.04; font-weight: 500;
+    letter-spacing: -0.015em; margin: 0 0 22px; text-wrap: balance; }
+  .lead { font-size: 22px; line-height: 1.5; font-style: italic; color: #26221c; margin: 0 0 38px; }
 
-.formrule { border-top: 1px solid #ccc; padding-top: 28px; max-width: 560px; }
-.form-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
-  font-weight: 700; margin-bottom: 14px; color: #111; }
-.form-row { display: flex; gap: 0; border: 1.5px solid #111; background: #fff; }
-.form-row input { flex: 1; padding: 14px 18px; font-size: 17px;
-  border: none; background: transparent; font-family: 'EB Garamond', serif; }
-.form-row input:focus { outline: none; }
-.form-row button { padding: 14px 22px; font-size: 14px; font-weight: 700;
-  background: #6B0F1A; color: #fff; border: none; cursor: pointer;
-  font-family: 'EB Garamond', serif; text-transform: uppercase; letter-spacing: 0.1em; }
-.fineprint { font-size: 14px; color: #6a6a6a; margin-top: 12px; font-style: italic; }
+  .hero-cta { border-top: 1px solid var(--line); padding-top: 26px; max-width: 480px;
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .cta-quiet { font-family: var(--sans); font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.11em; font-weight: 700; color: var(--ox); text-decoration: none;
+    border: 1.5px solid var(--ox); padding: 12px 20px; transition: background 0.15s, color 0.15s; }
+  .cta-quiet:hover, .cta-quiet:focus-visible { background: var(--ox); color: #fff; }
+  .cta-aside { font-size: 16px; font-style: italic; color: #726c60; }
 
-/* chapters */
-.chapter-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
-.chapter-grid.reverse > :first-child { order: 2; }
-.chapter-text .stand-first { font-size: 19px; line-height: 1.55;
-  color: #2a2a2a; font-style: italic; margin: 0 0 22px 0; }
-.chapter-text p { font-size: 17px; line-height: 1.7; color: #1a1a1a; margin: 0 0 16px 0; }
-.chapter-text em { font-style: italic; color: #444; }
-.chapter-solo { max-width: 680px; margin-bottom: 40px; }
+  .form-row { display: flex; border: 1.5px solid var(--ink); background: #fff; }
+  .form-row input { flex: 1; min-width: 0; padding: 13px 16px; font-size: 17px; border: none;
+    background: transparent; font-family: var(--serif); color: var(--ink); }
+  .form-row input:focus { outline: 2px solid var(--ox); outline-offset: -2px; }
+  .form-row button { padding: 13px 20px; font-size: 13px; font-weight: 700; background: var(--ox);
+    color: #fff; border: none; cursor: pointer; font-family: var(--sans);
+    text-transform: uppercase; letter-spacing: 0.09em; }
 
-/* Shared stage grammar (used by Tasks 2–5) */
-/* A "stage" is the framed theater a chapter plays in */
-.stage { background: #f0ebe1; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px;
-  padding: 40px; min-height: 320px; }
-.stage:not(.playing) * { animation-play-state: paused !important; }
-@media (prefers-reduced-motion: reduce) {
-  .stage *, .stage { animation: none !important; }
-}
-.stage-inner { max-width: 560px; margin: 0 auto; }
+  /* the paper world behind the live card */
+  .hero-stage { position: relative; min-height: 480px; }
+  .paper-sheet { position: absolute; background: #fdfcf8; border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-radius: 2px; }
+  .paper-sheet.p1 { width: 78%; height: 82%; top: 6%; left: 10%; transform: rotate(-2.4deg); }
+  .paper-sheet.p2 { width: 78%; height: 82%; top: 3%; left: 16%; transform: rotate(1.6deg); }
+  .paper-sheet .scribble { margin: 26px 22px; }
+  .paper-sheet .scribble div { height: 7px; background: var(--paper-deep); border-radius: 2px; margin-bottom: 10px; }
+  .paper-sheet .scribble div:nth-child(2) { width: 82%; }
+  .paper-sheet .scribble div:nth-child(3) { width: 64%; }
+  .paper-sheet .scribble div:nth-child(4) { width: 90%; }
+  .paper-sheet .scribble div:nth-child(5) { width: 46%; }
 
-/* The dosar sheet — the protagonist object, rendered like a fine printed document */
-.dosar-sheet { background: #fff; border: 1px solid #d8d2c4; border-radius: 6px;
-  padding: 28px 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  font-family: 'EB Garamond', serif; color: #1a1a1a; }
-.dosar-title { font-size: 19px; font-weight: 600; margin-bottom: 2px; }
-.dosar-sub { font-size: 13px; color: #555; font-style: italic; margin-bottom: 18px;
-  padding-bottom: 12px; border-bottom: 1px solid #d8d2c4; }
+  /* THE live card — crisp UI breaking the paper frame */
+  .live-card { position: relative; z-index: 3; background: #fff; border-radius: 10px;
+    border: 1px solid var(--ui-line);
+    box-shadow: 0 24px 70px rgba(22,19,15,0.20), 0 4px 14px rgba(22,19,15,0.08);
+    font-family: var(--sans); color: var(--ui-ink);
+    margin: 34px -30px 0 30px; overflow: hidden; }
+  .live-card .lc-head { display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; padding: 16px 20px 12px; border-bottom: 1px solid var(--ui-line); }
+  .lc-title { font-size: 15px; font-weight: 600; }
+  .lc-sub { font-size: 12px; color: var(--ui-mut); margin-top: 2px; }
+  .lc-time { font-size: 11px; color: var(--ui-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-/* One line of the file: label, value, origin tag */
-.dosar-line { display: flex; align-items: baseline; gap: 10px; padding: 7px 0;
-  border-bottom: 1px dotted #eee8dc; font-size: 15px; }
-.dosar-line .k { flex: 0 0 92px; font-variant: small-caps; letter-spacing: 0.04em;
-  color: #555; font-size: 13px; }
-.dosar-line .v { flex: 1; }
-.dosar-line .v.missing { color: #6B0F1A; font-style: italic; }
+  .dline { display: flex; align-items: baseline; gap: 12px; padding: 10px 20px;
+    border-bottom: 1px solid #f1efe9; font-size: 13.5px; cursor: default;
+    transition: background 0.15s; }
+  .dline:hover { background: var(--ox-soft); }
+  .dline .k { flex: 0 0 84px; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--ui-mut); font-weight: 600; padding-top: 2px; }
+  .dline .v { flex: 1; line-height: 1.45; }
+  .dline .src { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--ox); white-space: nowrap; opacity: 0.45; transition: opacity 0.15s; font-weight: 600; }
+  .dline:hover .src { opacity: 1; }
+  .dline .src em { text-transform: none; letter-spacing: 0; font-style: italic; }
+  .hero-hint { padding: 10px 20px; font-size: 14px; color: #726c60; font-family: var(--serif);
+    font-style: italic; background: #fbfaf7; }
 
-/* Origin tag — THE visual signature of the page. Small-caps oxblood + italic timestamp */
-.tag { font-family: 'Inter', sans-serif; font-size: 10px; text-transform: uppercase;
-  letter-spacing: 0.08em; color: #6B0F1A; white-space: nowrap; }
-.tag em { font-style: italic; text-transform: none; letter-spacing: 0; }
+  /* incoming mail that files itself */
+  .mail { position: absolute; z-index: 4; right: -8px; bottom: -34px; width: 320px;
+    background: #fff; border: 1px solid var(--ui-line); border-left: 3px solid var(--ox);
+    border-radius: 8px; box-shadow: 0 16px 44px rgba(22,19,15,0.22);
+    font-family: var(--sans); padding: 12px 14px;
+    opacity: 0; transform: translateY(26px);
+    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2,0.8,0.2,1); }
+  .mail.show { opacity: 1; transform: translateY(0); }
+  .mail.filed { opacity: 0; transform: translate(-140px, -170px) scale(0.35); }
+  .mail .m-from { font-size: 11px; color: var(--ui-mut); margin-bottom: 3px; }
+  .mail .m-subj { font-size: 12.5px; font-weight: 600; color: var(--ui-ink); }
+  .mail .m-tag { margin-top: 7px; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--ox); font-weight: 600; }
+  .count-flash { transition: background 0.3s; }
+  .count-flash.tick { background: var(--ox-soft); }
 
-/* Chapter header */
-.chapter-head { display: flex; align-items: baseline; gap: 24px;
-  border-bottom: 1px solid #d8d2c4; padding-bottom: 12px; margin-bottom: 36px; }
-.chapter-head .roman { font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
-  color: #6B0F1A; text-transform: uppercase; }
-.chapter-head h2 { font-size: 34px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+  /* ---------- the continuous scroll demo (desktop) ---------- */
+  .demo { position: relative; }
+  .demo-grid { display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 62%); gap: 56px; }
+  .chapters { padding-bottom: 30vh; }
+  .chapter { min-height: 150vh; display: flex; flex-direction: column; justify-content: center;
+    opacity: 0.28; transition: opacity 0.4s; padding-right: 8px; }
+  .chapter.active { opacity: 1; }
+  .ch-label { font-family: var(--sans); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--ox); font-weight: 700; margin-bottom: 14px; }
+  .chapter h2 { font-size: 34px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 18px; text-wrap: balance; }
+  .chapter .stand-first { font-size: 19px; line-height: 1.55; font-style: italic; color: #26221c; margin: 0 0 16px; }
+  .chapter p { font-size: 17px; line-height: 1.7; margin: 0 0 13px; color: #1f1b15; }
 
-/* Caption stamp shown at a stage's rest beat */
-.stage-stamp { font-family: 'Inter', sans-serif; font-size: 11px; text-transform: uppercase;
-  letter-spacing: 0.1em; color: #6B0F1A; border: 1px solid #6B0F1A; border-radius: 3px;
-  display: inline-block; padding: 4px 10px; }
+  .stage-col { position: relative; }
+  .stage-sticky { position: sticky; top: 9vh; height: 82vh; display: flex; align-items: center; }
+  .stage-frame { position: relative; width: 100%; }
 
-/* ===== HERO PORTRAIT ===== */
-#stage-hero { padding: 24px; }
+  /* timeline rail — the visible sign that scroll = time */
+  .rail { position: absolute; left: -26px; top: 4%; bottom: 4%; width: 2px; background: var(--line); border-radius: 2px; }
+  .rail .fill { position: absolute; top: 0; left: 0; width: 100%; background: var(--ox);
+    height: calc(var(--p, 0) * 100%); border-radius: 2px; }
 
-/* tag pulse on the Stadiu line: gentle oxblood glow, twice per loop */
-@keyframes kf-hero-pulse {
-  0%, 18%, 30%, 68%, 80%, 100% { color: #6B0F1A; opacity: 1; }
-  24%, 74% { opacity: 0.45; }
-}
-.hero-pulse .tag { animation: kf-hero-pulse 8s infinite; }
+  /* scenes hand off in place: the outgoing one eases away, the incoming one
+     arrives on a short delay with a gentle scale — no hard swap after the
+     card has been pinned on screen for two chapters */
+  .scene { transition: opacity 1s ease 0.35s, transform 1s ease 0.35s; }
+  .scene.off { opacity: 0; pointer-events: none; position: absolute; inset: 0;
+    transform: scale(0.965) translateY(12px); transition-delay: 0s, 0s; }
 
-/* incoming email files itself: hidden, slides in at 45%, stays */
-.hero-incoming { display: flex; gap: 10px; align-items: baseline; padding: 7px 0 0;
-  font-size: 14px; font-style: italic; color: #555; }
-@keyframes kf-hero-incoming {
-  0%, 42% { opacity: 0; transform: translateY(8px); }
-  48%, 96% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; }
-}
-.hero-incoming { animation: kf-hero-incoming 8s infinite; }
+  /* --- scene 1: the dosar assembling --- */
+  .file-strip { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; min-height: 66px; }
+  .file-pile { position: relative; flex: 1; height: 64px; }
+  .chip { position: absolute; background: #fff; border: 1px solid var(--ui-line); border-radius: 5px;
+    padding: 5px 10px; font-family: var(--sans); font-size: 11px; color: var(--ui-mut);
+    box-shadow: 0 2px 6px rgba(22,19,15,0.08); white-space: nowrap;
+    opacity: 0; transform: translateY(-12px);
+    transition: opacity 0.4s, transform 0.45s cubic-bezier(0.2,0.8,0.2,1); }
+  .chip.on { opacity: 1; transform: translateY(0) rotate(var(--r, 0deg)); }
+  .chip.c1 { top: 0; left: 0; --r: -2deg; }
+  .chip.c2 { top: 20px; left: 26%; --r: 1.5deg; }
+  .chip.c3 { top: 2px; left: 52%; --r: -1deg; }
+  .chip.c4 { top: 36px; left: 8%; --r: 2deg; }
+  .chip.c5 { top: 40px; left: 46%; --r: -2.5deg; }
+  .chip.c6 { top: 18px; left: 70%; --r: 0.5deg; }
+  .numfield { font-family: var(--sans); font-size: 13px; background: #fff;
+    border: 1.5px solid var(--ink); border-radius: 4px; padding: 9px 12px; min-width: 158px; z-index: 2; }
+  .numfield .typed { display: inline-block; overflow: hidden; white-space: nowrap;
+    vertical-align: bottom; width: 0; transition: width 0.7s steps(12, end); }
+  .numfield.on .typed { width: 12ch; }
+  .counter { font-family: var(--sans); font-size: 11px; color: var(--ox); font-weight: 600;
+    opacity: 0; transition: opacity 0.4s; }
+  .counter.on { opacity: 1; }
 
-/* ===== CAPITOLUL I ===== */
-.c1-wrap { display: flex; flex-direction: column; gap: 18px; }
-.c1-inputs { display: flex; align-items: center; gap: 14px; font-family: 'Inter', sans-serif; }
-.c1-pile { position: relative; flex: 1; height: 74px; }
-.c1-file { position: absolute; background: #fff; border: 1px solid #d8d2c4; border-radius: 4px;
-  padding: 5px 10px; font-size: 11px; color: #555; box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-  white-space: nowrap; opacity: 0; }
-/* scatter — fixed offsets + small rotations, kept inside the pile area */
-.c1-file.f1 { top: 0;    left: 2%;  }
-.c1-file.f2 { top: 16px; left: 30%; }
-.c1-file.f3 { top: 4px;  left: 58%; }
-.c1-file.f4 { top: 38px; left: 6%;  }
-.c1-file.f5 { top: 42px; left: 44%; }
-.c1-file.f6 { top: 20px; left: 66%; }
-.c1-numfield { border: 1.5px solid #111; background: #fff; padding: 8px 12px;
-  font-size: 13px; min-width: 150px; position: relative; z-index: 2; }
-.c1-typed { display: inline-block; overflow: hidden; white-space: nowrap;
-  vertical-align: bottom; width: 12ch; }
-.c1-caret { display: inline-block; width: 1px; height: 14px; background: #111;
-  margin-left: 1px; vertical-align: middle; opacity: 0; }
-.c1-counter { font-size: 11px; color: #6B0F1A; }
-.c1-stampwrap { text-align: center; margin-top: 14px; }
-.dash { color: #c8c0b0; }
-.c1-slot { position: relative; }
-.c1-slot .dash { position: absolute; left: 102px; top: 7px; opacity: 0; }
+  .sheet { background: #fff; border: 1px solid var(--ui-line); border-radius: 10px;
+    box-shadow: 0 24px 70px rgba(22,19,15,0.18), 0 4px 14px rgba(22,19,15,0.07);
+    font-family: var(--sans); color: var(--ui-ink); overflow: hidden; }
+  .sheet-head { padding: 15px 20px 11px; border-bottom: 1px solid var(--ui-line);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .sheet-head .t { font-size: 15px; font-weight: 600; }
+  .sheet-head .s { font-size: 12px; color: var(--ui-mut); margin-top: 2px; }
+  .ticker { font-size: 11px; color: var(--ui-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ticker span { display: none; }
+  .ticker span.on { display: inline; }
 
-/* Files tumble in (fade + translateY(-10px)->0), staggered; then drain as they are read.
-   Rotation baked into each keyframe so it survives the transform animation. */
-@keyframes kf-c1-f1 {
-  0%, 14%  { opacity: 0; transform: translateY(-10px) rotate(-2deg); }
-  17%, 40% { opacity: 1; transform: translateY(0)     rotate(-2deg); }
-  44%, 100% { opacity: 0; transform: translateY(0)    rotate(-2deg); }
-}
-@keyframes kf-c1-f2 {
-  0%, 16%  { opacity: 0; transform: translateY(-10px) rotate(1.5deg); }
-  19%, 44% { opacity: 1; transform: translateY(0)     rotate(1.5deg); }
-  48%, 100% { opacity: 0; transform: translateY(0)    rotate(1.5deg); }
-}
-@keyframes kf-c1-f3 {
-  0%, 18%  { opacity: 0; transform: translateY(-10px) rotate(-1deg); }
-  21%, 48% { opacity: 1; transform: translateY(0)     rotate(-1deg); }
-  52%, 100% { opacity: 0; transform: translateY(0)    rotate(-1deg); }
-}
-@keyframes kf-c1-f4 {
-  0%, 20%  { opacity: 0; transform: translateY(-10px) rotate(2.5deg); }
-  23%, 52% { opacity: 1; transform: translateY(0)     rotate(2.5deg); }
-  56%, 100% { opacity: 0; transform: translateY(0)    rotate(2.5deg); }
-}
-@keyframes kf-c1-f5 {
-  0%, 22%  { opacity: 0; transform: translateY(-10px) rotate(-2.5deg); }
-  25%, 56% { opacity: 1; transform: translateY(0)     rotate(-2.5deg); }
-  60%, 100% { opacity: 0; transform: translateY(0)    rotate(-2.5deg); }
-}
-@keyframes kf-c1-f6 {
-  0%, 24%  { opacity: 0; transform: translateY(-10px) rotate(0.5deg); }
-  27%, 60% { opacity: 1; transform: translateY(0)     rotate(0.5deg); }
-  64%, 100% { opacity: 0; transform: translateY(0)    rotate(0.5deg); }
-}
-.c1-file.f1 { animation: kf-c1-f1 14s infinite; }
-.c1-file.f2 { animation: kf-c1-f2 14s infinite; }
-.c1-file.f3 { animation: kf-c1-f3 14s infinite; }
-.c1-file.f4 { animation: kf-c1-f4 14s infinite; }
-.c1-file.f5 { animation: kf-c1-f5 14s infinite; }
-.c1-file.f6 { animation: kf-c1-f6 14s infinite; }
+  .row { display: flex; align-items: baseline; gap: 12px; padding: 9px 20px;
+    border-bottom: 1px solid #f1efe9; font-size: 13.5px; }
+  .row .k { flex: 0 0 88px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ui-mut); font-weight: 600; }
+  .row .v { flex: 1; line-height: 1.45; }
+  .row .src { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ox);
+    white-space: nowrap; font-weight: 600; }
+  .row .src em { text-transform: none; letter-spacing: 0; font-style: italic; }
+  .row .filled { display: none; gap: 12px; flex: 1; align-items: baseline; }
+  @keyframes rowin { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+  .row.on .filled { display: inline-flex; animation: rowin 0.45s ease both; }
+  .row .dash { color: #c9c2b2; flex: 1; }
+  .row.on .dash { display: none; }
+  .row.late { display: none; }
+  .row.late.on { display: flex; }
+  .row .v.missing { color: var(--ox); font-style: italic; }
+  .row.hl { transition: background 0.5s; }
+  .row.hl.on { background: var(--ox-soft); }
 
-/* Case number types itself (width 0 -> 12ch), caret blinks while typing */
-@keyframes kf-c1-typed {
-  0%, 20%  { width: 0; }
-  28%, 99% { width: 12ch; }
-  100%     { width: 0; }
-}
-.c1-typed { animation: kf-c1-typed 14s steps(12, end) infinite; }
-@keyframes kf-c1-caret {
-  0%, 17% { opacity: 0; }
-  18% { opacity: 1; } 20% { opacity: 0; }
-  22% { opacity: 1; } 24% { opacity: 0; }
-  26% { opacity: 1; } 28% { opacity: 0; }
-  30%, 100% { opacity: 0; }
-}
-.c1-caret { animation: kf-c1-caret 14s infinite; }
+  .tasks { padding: 6px 20px 6px 108px; display: none; flex-direction: column; gap: 7px; }
+  .tasks.on { display: flex; }
+  .task { display: flex; align-items: center; gap: 10px; background: #fbfaf7;
+    border: 1px solid var(--ui-line); border-radius: 6px; padding: 8px 12px;
+    font-size: 12px; opacity: 0; transform: translateY(-6px); transition: opacity 0.4s, transform 0.4s; }
+  .task.on { opacity: 1; transform: translateY(0); }
+  .task .box { width: 14px; height: 14px; border: 1.5px solid var(--ox); border-radius: 3px; flex: 0 0 14px; }
+  .task .who { margin-left: auto; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--paper-deep); border: 1px solid var(--line); font-size: 9px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; color: var(--ink-soft); }
 
-/* Read-counter appears once slots start filling, hides at the reset */
-@keyframes kf-c1-counter {
-  0%, 32%  { opacity: 0; }
-  34%, 90% { opacity: 1; }
-  96%, 100% { opacity: 0; }
-}
-.c1-counter { animation: kf-c1-counter 14s infinite; }
+  .stamp-strip { padding: 12px 20px; background: #fbfaf7; font-size: 11px;
+    font-family: var(--sans); color: var(--ui-mut); display: flex; justify-content: space-between; }
+  .stamp { text-transform: uppercase; letter-spacing: 0.09em; color: var(--ox); font-weight: 700;
+    opacity: 0; transition: opacity 0.5s; }
+  .stamp.on { opacity: 1; }
 
-/* Slots fill: dash fades out, value + tag slide in from the left */
-@keyframes kf-c1-s1 { 0%, 30% { opacity: 0; transform: translateX(-8px); } 34%, 99% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
-@keyframes kf-c1-s2 { 0%, 36% { opacity: 0; transform: translateX(-8px); } 40%, 99% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
-@keyframes kf-c1-s3 { 0%, 42% { opacity: 0; transform: translateX(-8px); } 46%, 99% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
-@keyframes kf-c1-s4 { 0%, 48% { opacity: 0; transform: translateX(-8px); } 52%, 99% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
-@keyframes kf-c1-s5 { 0%, 54% { opacity: 0; transform: translateX(-8px); } 58%, 99% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
-@keyframes kf-c1-s6 { 0%, 72% { opacity: 0; transform: translateX(-8px); } 78%, 99% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; } }
-.c1-slot.s1 .v, .c1-slot.s1 .tag { animation: kf-c1-s1 14s infinite; }
-.c1-slot.s2 .v, .c1-slot.s2 .tag { animation: kf-c1-s2 14s infinite; }
-.c1-slot.s3 .v, .c1-slot.s3 .tag { animation: kf-c1-s3 14s infinite; }
-.c1-slot.s4 .v, .c1-slot.s4 .tag { animation: kf-c1-s4 14s infinite; }
-.c1-slot.s5 .v, .c1-slot.s5 .tag { animation: kf-c1-s5 14s infinite; }
-.c1-slot.s6 .v, .c1-slot.s6 .tag { animation: kf-c1-s6 14s infinite; }
+  /* --- scene 2: Word writes --- */
+  .word { border-radius: 10px; overflow: hidden; border: 1px solid var(--ui-line);
+    box-shadow: 0 24px 70px rgba(22,19,15,0.20), 0 4px 14px rgba(22,19,15,0.08);
+    background: #fff; font-family: var(--sans); }
+  .word-head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px;
+    background: #f6f5f2; border-bottom: 1px solid var(--ui-line); font-size: 12px; color: var(--ui-mut); }
+  .word-head .doc { font-weight: 600; color: var(--ui-ink); }
+  .word-head .app { color: var(--word-blue); font-weight: 600; }
+  .word-body { display: flex; height: 56vh; min-height: 380px; background: #edeae2; }
+  .doc-col { flex: 1; display: flex; justify-content: center; padding: 16px 10px; overflow: hidden; }
+  .docpage { background: #fff; width: min(400px, 100%); padding: 34px 40px;
+    font-family: var(--doc-serif); font-size: 10.5px; line-height: 1.55;
+    color: #1a1a1a; box-shadow: 0 1px 4px rgba(0,0,0,0.10); overflow: hidden; }
+  .docpage .dp-title { text-align: center; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; margin-bottom: 4px; }
+  .docpage .dp-meta { text-align: right; font-size: 9px; color: #555; margin-bottom: 12px; }
+  .docpage p { margin: 0 0 8px; }
+  .docpage .sect { font-weight: 700; margin: 12px 0 7px; font-size: 11px; }
+  .docpage sup { color: var(--ox); font-weight: 700; }
+  .wchunk { opacity: 0; transform: translateY(5px); transition: opacity 0.5s, transform 0.5s; }
+  .wchunk.on { opacity: 1; transform: translateY(0); }
+  .fn-check { color: var(--ox); font-weight: 700; font-size: 9px;
+    opacity: 0; transition: opacity 0.4s; }
+  .fn-check.on { opacity: 1; }
 
-/* Dash placeholders — inverse of their slot: shown while empty, gone once filled */
-@keyframes kf-c1-dash1 { 0%, 30% { opacity: 1; } 34%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c1-dash2 { 0%, 36% { opacity: 1; } 40%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c1-dash3 { 0%, 42% { opacity: 1; } 46%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c1-dash4 { 0%, 48% { opacity: 1; } 52%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c1-dash5 { 0%, 54% { opacity: 1; } 58%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c1-dash6 { 0%, 72% { opacity: 1; } 78%, 99% { opacity: 0; } 100% { opacity: 1; } }
-.c1-slot.s1 .dash { animation: kf-c1-dash1 14s infinite; }
-.c1-slot.s2 .dash { animation: kf-c1-dash2 14s infinite; }
-.c1-slot.s3 .dash { animation: kf-c1-dash3 14s infinite; }
-.c1-slot.s4 .dash { animation: kf-c1-dash4 14s infinite; }
-.c1-slot.s5 .dash { animation: kf-c1-dash5 14s infinite; }
-.c1-slot.s6 .dash { animation: kf-c1-dash6 14s infinite; }
+  .pane { flex: 0 0 290px; border-left: 1px solid var(--ui-line); background: #fbfaf7;
+    display: flex; flex-direction: column; }
+  .pane-head { padding: 10px 14px; background: #fff; border-bottom: 1px solid var(--ui-line);
+    display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
+  .pane-head .adot { width: 18px; height: 18px; border-radius: 4px; background: var(--ox);
+    display: flex; align-items: center; justify-content: center; }
+  .pane-body { position: relative; flex: 1; padding: 14px; }
+  .pstate { position: absolute; inset: 14px; transition: opacity 0.4s; }
+  .pstate.off { opacity: 0; pointer-events: none; }
+  .plabel { font-size: 11px; font-weight: 600; color: var(--ui-mut); margin-bottom: 5px; }
+  .pbox { background: #fff; border: 1px solid var(--ui-line); border-radius: 5px;
+    padding: 8px 10px; font-size: 12px; margin-bottom: 12px; }
+  .pbox .muted { color: var(--ui-mut); font-size: 11px; line-height: 1.4; margin-top: 3px; }
+  .pbox .srcs { color: var(--ox); font-weight: 600; font-size: 11px; margin-top: 5px; }
+  .pbtn { height: 32px; background: var(--ox); color: #fff; border-radius: 5px;
+    font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .events { display: flex; flex-direction: column; gap: 6px; }
+  .ev { display: flex; gap: 8px; align-items: flex-start; padding: 6px 9px; background: #fff;
+    border: 1px solid var(--ui-line); border-radius: 4px; font-size: 11px; line-height: 1.35;
+    opacity: 0; transform: translateY(4px); transition: opacity 0.35s, transform 0.35s; }
+  .ev.on { opacity: 1; transform: translateY(0); }
+  .ev .ok { color: var(--ox); font-weight: 700; flex: 0 0 12px; font-size: 10px; }
+  .ev strong { font-weight: 600; }
+  .ev .q { color: var(--ox); font-style: italic; }
+  .done-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
+    color: var(--ox); padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--ui-line); }
+  .done-head .ck { width: 16px; height: 16px; border-radius: 50%; background: var(--ox); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+  .dstat { font-size: 11px; color: var(--ui-mut); display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .dstat span:last-child { color: var(--ui-ink); }
 
-/* Stamp fades in last, holds to the reset */
-@keyframes kf-c1-stamp {
-  0%, 90%  { opacity: 0; transform: translateY(6px); }
-  96%, 99% { opacity: 1; transform: translateY(0); }
-  100%     { opacity: 0; }
-}
-.c1-sheet .stage-stamp { animation: kf-c1-stamp 14s infinite; }
+  /* mobile static figures — hidden on desktop */
+  .m-fig { display: none; }
 
-/* ===== CAPITOLUL II ===== */
-.c2-wrap { display: flex; flex-direction: column; }
-.c2-ticker { font-family: 'Inter', sans-serif; font-size: 11px; color: #555;
-  text-align: right; height: 16px; position: relative; margin-bottom: 10px; }
-.c2-day { position: absolute; right: 0; }
-.c2-day.d1, .c2-day.d2 { opacity: 0; }
-.c2-tasks { margin: 10px 0 10px 92px; display: flex; flex-direction: column; gap: 8px; }
-.c2-task { display: flex; align-items: center; gap: 10px; background: #faf8f4;
-  border: 1px solid #eee8dc; border-radius: 4px; padding: 8px 12px;
-  font-family: 'Inter', sans-serif; font-size: 12px; color: #1a1a1a; }
-.c2-check { width: 14px; height: 14px; border: 1.5px solid #6B0F1A; border-radius: 3px;
-  position: relative; flex: 0 0 14px; }
-.c2-tick { position: absolute; inset: 0; text-align: center; line-height: 13px;
-  font-size: 10px; color: #6B0F1A; opacity: 1; }
-.c2-avatar { margin-left: auto; width: 22px; height: 22px; border-radius: 50%;
-  background: #f0ebe1; border: 1px solid #d8d2c4; font-size: 9px; font-weight: 600;
-  display: flex; align-items: center; justify-content: center; color: #555; }
-.c2-caption { text-align: center; font-style: italic; font-size: 14px; color: #555;
-  margin-top: 14px; font-family: 'EB Garamond', serif; }
-/* t1's label is dimmed at rest (checked-off task); keyframe restores it early in the loop */
-.c2-task.t1 .c2-tv { opacity: 0.5; }
+  /* ---------- coda ---------- */
+  .coda { padding: 110px 0 90px; }
+  .coda-grid { display: grid; grid-template-columns: minmax(0, 52%) minmax(0, 48%); gap: 48px; align-items: center; }
+  .coda h2, .after h3.steps-title { font-size: 34px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 18px; }
+  .coda .stand-first { font-size: 19px; line-height: 1.55; font-style: italic; color: #26221c; margin: 0 0 16px; }
+  .coda p { font-size: 17px; line-height: 1.7; margin: 0 0 13px; }
+  .tenant-card { background: #fff; border: 1px solid var(--ui-line); border-radius: 10px;
+    box-shadow: 0 18px 50px rgba(22,19,15,0.14); padding: 28px 24px; font-family: var(--sans);
+    text-align: center; margin-right: -20px; }
+  .tenant-frame { border: 2px solid var(--ink); border-radius: 8px; padding: 22px 18px; position: relative; max-width: 330px; margin: 0 auto; }
+  .tenant-frame .tl { position: absolute; top: -10px; left: 16px; background: #fff; padding: 0 8px;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.11em; font-weight: 700; }
+  .pillrow { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .pill { font-size: 12px; padding: 6px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; }
+  .flow { font-size: 12px; color: var(--ui-mut); margin-top: 16px; padding-top: 13px; border-top: 1px dashed var(--line); }
+  .flow b { color: var(--ox); font-weight: 700; margin: 0 8px; }
+  .tenant-note { font-size: 14px; color: #726c60; margin-top: 14px; font-style: italic; font-family: var(--serif); }
 
-/* Calendar days flip by — each fades in over the last (d1 → d2 → d3), d3 holds to the reset */
-@keyframes kf-c2-d1 { 0%, 14% { opacity: 1; } 18%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c2-d2 { 0%, 16% { opacity: 0; } 20%, 32% { opacity: 1; } 36%, 100% { opacity: 0; } }
-@keyframes kf-c2-d3 { 0%, 34% { opacity: 0; } 38%, 99% { opacity: 1; } 100% { opacity: 0; } }
-.c2-day.d1 { animation: kf-c2-d1 12s infinite; }
-.c2-day.d2 { animation: kf-c2-d2 12s infinite; }
-.c2-day.d3 { animation: kf-c2-d3 12s infinite; }
+  /* ---------- how it starts ---------- */
+  .after { padding: 30px 0 90px; }
+  .after .quiet-more { font-size: 19px; line-height: 1.55; font-style: italic; max-width: 720px; margin: 0 0 18px; }
+  .after .aud { font-size: 17px; line-height: 1.7; max-width: 720px; margin: 0 0 52px; }
+  .after .aud strong { color: var(--ox); font-weight: 600; }
+  .steps-head { border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 36px; }
+  .steps-head h3 { font-size: 26px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+  .step h3 { font-size: 20px; font-weight: 600; margin: 10px 0 8px; }
+  .step p { font-size: 16px; line-height: 1.6; margin: 0; color: #1f1b15; }
+  .step .n { font-size: 56px; line-height: 1; font-weight: 500; color: var(--ox); opacity: 0.4; }
 
-/* Termen line slides in (translateY(-6px)) once the portal check lands, then holds */
-@keyframes kf-c2-termen {
-  0%, 38%  { opacity: 0; transform: translateY(-6px); }
-  44%, 99% { opacity: 1; transform: translateY(0); }
-  100%     { opacity: 0; transform: translateY(-6px); }
-}
-.c2-termen { animation: kf-c2-termen 12s infinite; }
+  /* ---------- final CTA ---------- */
+  .cta { background: var(--ink); color: #f5f0e6; text-align: center; padding: 88px 24px 100px; }
+  .cta-mark { display: block; margin: 0 auto 22px; }
+  .cta h2 { font-size: 42px; font-weight: 500; margin: 0 0 14px; letter-spacing: -0.01em; }
+  .cta .lead { font-size: 19px; color: #b9b1a0; font-style: italic; max-width: 520px; margin: 0 auto 34px; }
+  .cta .form-row { border-color: #f5f0e6; background: transparent; max-width: 520px; margin: 0 auto; }
+  .cta .form-row input { color: #f5f0e6; }
+  .cta .form-row input::placeholder { color: #877f6e; }
+  .cta .form-row button { background: #f5f0e6; color: var(--ink); }
+  .cta-fine { font-size: 14px; color: #877f6e; font-style: italic; margin-top: 14px; }
 
-/* Task cards unfold beneath the termen; each avatar fades in a beat after its card */
-@keyframes kf-c2-t1 {
-  0%, 52%  { opacity: 0; transform: translateY(-6px); }
-  58%, 99% { opacity: 1; transform: translateY(0); }
-  100%     { opacity: 0; transform: translateY(-6px); }
-}
-@keyframes kf-c2-t2 {
-  0%, 60%  { opacity: 0; transform: translateY(-6px); }
-  66%, 99% { opacity: 1; transform: translateY(0); }
-  100%     { opacity: 0; transform: translateY(-6px); }
-}
-.c2-task.t1 { animation: kf-c2-t1 12s infinite; }
-.c2-task.t2 { animation: kf-c2-t2 12s infinite; }
-@keyframes kf-c2-av1 { 0%, 56% { opacity: 0; } 62%, 99% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes kf-c2-av2 { 0%, 64% { opacity: 0; } 70%, 99% { opacity: 1; } 100% { opacity: 0; } }
-.c2-task.t1 .c2-avatar { animation: kf-c2-av1 12s infinite; }
-.c2-task.t2 .c2-avatar { animation: kf-c2-av2 12s infinite; }
+  .footer { background: #121110; color: #9b958a; font-family: var(--sans); font-size: 13px;
+    padding: 24px 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .footer a { color: #9b958a; text-decoration: none; margin-left: 16px; }
+  .footer a:hover { color: #fff; }
+  .footer a:first-child { margin-left: 0; }
 
-/* t1 gets checked — tick appears and its label dims to mark the task done */
-@keyframes kf-c2-tick { 0%, 78% { opacity: 0; } 80%, 99% { opacity: 1; } 100% { opacity: 0; } }
-.c2-task.t1 .c2-tick { animation: kf-c2-tick 12s infinite; }
-@keyframes kf-c2-tv1 { 0%, 80% { opacity: 1; } 84%, 99% { opacity: 0.5; } 100% { opacity: 1; } }
-.c2-task.t1 .c2-tv { animation: kf-c2-tv1 12s infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
 
-/* "De făcut" line and closing caption fade in last, holding to the reset */
-@keyframes kf-c2-todo { 0%, 84% { opacity: 0; } 90%, 99% { opacity: 1; } 100% { opacity: 0; } }
-.c2-todo { animation: kf-c2-todo 12s infinite; }
-@keyframes kf-c2-caption { 0%, 86% { opacity: 0; } 92%, 99% { opacity: 1; } 100% { opacity: 0; } }
-.c2-caption { animation: kf-c2-caption 12s infinite; }
+  /* ---------- mobile: the story told in finished frames ---------- */
+  @media (max-width: 920px) {
+    .shell { padding: 0 20px; }
+    .masthead { padding-top: 18px; }
+    .masthead .issue { display: none; }
+    .hero { padding: 40px 0 72px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 0; }
+    .lead { font-size: 19px; margin-bottom: 30px; }
+    .hero-cta { padding-top: 22px; }
+    .cta-aside { font-size: 15px; }
+    .hero-stage { min-height: 0; margin-top: 34px; }
+    .paper-sheet { display: none; }
+    .live-card { margin: 0; }
+    .dline { padding: 9px 14px; gap: 10px; }
+    .dline .k { flex-basis: 72px; }
+    .dline .src { display: none; }
+    .dline:hover { background: transparent; }
+    .hero-hint { display: none; }
+    .mail { position: static; width: auto; margin-top: 12px; }
+    .mail.filed { transform: translateY(-24px) scale(0.6); }
 
-/* ===== CAPITOLUL III ===== */
-/* Editorial Word window — minimal cream chrome around the ported doc + Acta pane */
-.c3-window { --pane-w: 320px; max-width: 1020px; margin: 0 auto;
-  border: 1px solid #d8d2c4; border-radius: 8px; overflow: hidden;
-  box-shadow: 0 18px 60px rgba(20,20,20,0.12); background: #fff; }
-.c3-header { display: flex; justify-content: space-between; padding: 10px 16px;
-  background: #faf8f4; border-bottom: 1px solid #d8d2c4;
-  font-family: 'EB Garamond', serif; font-size: 13px; color: #555; }
-.c3-header .c3-docname { font-weight: 600; color: #111; }
-.c3-header .c3-appname { color: #2b579a; }
-.c3-footer { display: flex; gap: 16px; padding: 6px 16px; background: #faf8f4;
-  border-top: 1px solid #d8d2c4; font-family: 'Inter', sans-serif; font-size: 10px; color: #555; }
-.c3-pg { animation: kf-c3-pg 12s infinite; }
-@keyframes kf-c3-pg { 0%, 62% { opacity: 0.5; } 64%, 100% { opacity: 1; } }
+    /* no scroll-driven demo on touch: hide the stage, show finished frames */
+    .stage-col { display: none; }
+    .demo-grid { display: block; }
+    .chapters { padding-bottom: 0; }
+    .chapter { min-height: 0; opacity: 1; justify-content: flex-start; padding: 44px 0 8px; }
+    .chapter h2 { font-size: 28px; }
+    .chapter .stand-first { font-size: 17px; }
+    .chapter p { font-size: 16px; }
 
-/* Body: document canvas + task pane */
-.c3-window .w-body { display: flex; height: 600px; background: #f0ebe1; }
+    .m-fig { display: block; margin-top: 20px; }
+    .m-fig .sheet { box-shadow: 0 10px 32px rgba(22,19,15,0.14); }
+    .m-fig .row { padding: 9px 14px; }
+    .m-fig .row .k { flex-basis: 76px; }
+    .m-fig .row .src { display: none; }
+    .m-fig .row .filled { display: inline-flex; animation: none; }
+    .m-fig .tasks { padding: 6px 14px; display: flex; }
+    .m-fig .task { opacity: 1; transform: none; }
+    .m-fig .stamp { opacity: 1; }
+    .m-fig .word-body { height: auto; min-height: 0; flex-direction: column; }
+    .m-fig .doc-col { padding: 12px; }
+    .m-fig .docpage { padding: 22px 24px; }
+    .m-fig .wchunk { opacity: 1; transform: none; }
+    .m-fig .fn-check { opacity: 1; }
+    .m-fig .pane { flex: none; border-left: none; border-top: 1px solid var(--ui-line); }
+    .m-fig .pane-body { padding: 14px; }
+    .m-fig .pstate { position: static; }
 
-.doc-area { flex: 1; overflow: hidden; background: #f0ebe1;
-  display: flex; justify-content: center; padding: 14px 0; position: relative; }
-.doc-scroller { width: 100%; display: flex; flex-direction: column; align-items: center;
-  gap: 14px; animation: kf-c3-scroll 12s infinite; }
-@keyframes kf-c3-scroll {
-  0%, 30% { transform: translateY(0); }
-  36%     { transform: translateY(-30px); }
-  44%     { transform: translateY(-260px); }
-  52%     { transform: translateY(-540px); }
-  60%     { transform: translateY(-820px); }
-  68%     { transform: translateY(-1100px); }
-  96%     { transform: translateY(-1100px); }
-  100%    { transform: translateY(0); }
-}
-
-.page { background: #fff; width: 440px; min-height: 622px; padding: 48px 56px 56px;
-  font-family: 'Source Serif 4', 'Times New Roman', serif; font-size: 9.5px;
-  line-height: 1.5; color: #1a1a1a;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-  position: relative; flex-shrink: 0; }
-.page::after { content: attr(data-page); position: absolute; bottom: 16px; left: 0; right: 0;
-  text-align: center; font-size: 8px; color: #999; font-family: 'Inter', sans-serif; }
-.page-title { text-align: center; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.08em; margin-bottom: 4px; }
-.page-meta { text-align: right; font-size: 8.5px; color: #555; margin-bottom: 12px; }
-.page-greeting { margin-bottom: 12px; }
-.page p { margin: 0 0 8px 0; }
-.page .num { font-weight: 700; }
-.page sup { color: #6B0F1A; font-weight: 700; font-size: 0.7em; }
-.page .sect { font-size: 10.5px; font-weight: 700; margin: 14px 0 8px 0; letter-spacing: 0.04em; }
-.page .sect.roman { color: #1a1a1a; }
-.page .ind { padding-left: 18px; }
-.page .footer-block { margin-top: 18px; }
-.page.empty { display: flex; align-items: center; justify-content: center;
-  color: #999; font-style: italic; font-size: 11px;
-  font-family: 'EB Garamond', serif; background: #fff; }
-
-/* verified-citation footnote beat (page 3) */
-.c3-fnmark { white-space: nowrap; }
-.c3-fncheck { color: #6B0F1A; font-size: 8px; font-weight: 700; margin-left: 1px;
-  animation: kf-c3-fncheck 12s infinite; }
-@keyframes kf-c3-fncheck { 0%, 46% { opacity: 0; } 50%, 99% { opacity: 1; } 100% { opacity: 0; } }
-
-/* chunk fade-ins — base visible (finished frame); hidden early, staggered every 7% */
-.c3-chunk { opacity: 1; }
-.c3-c1 { animation: kf-c3-c1 12s infinite; }
-.c3-c2 { animation: kf-c3-c2 12s infinite; }
-.c3-c3 { animation: kf-c3-c3 12s infinite; }
-.c3-c4 { animation: kf-c3-c4 12s infinite; }
-.c3-c5 { animation: kf-c3-c5 12s infinite; }
-@keyframes kf-c3-c1 { 0%, 26% { opacity: 0; background: transparent; }
-  28%, 33% { opacity: 1; background: #fff4e6; } 37%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
-@keyframes kf-c3-c2 { 0%, 33% { opacity: 0; background: transparent; }
-  35%, 40% { opacity: 1; background: #fff4e6; } 44%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
-@keyframes kf-c3-c3 { 0%, 40% { opacity: 0; background: transparent; }
-  42%, 47% { opacity: 1; background: #fff4e6; } 51%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
-@keyframes kf-c3-c4 { 0%, 47% { opacity: 0; background: transparent; }
-  49%, 54% { opacity: 1; background: #fff4e6; } 58%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
-@keyframes kf-c3-c5 { 0%, 54% { opacity: 0; background: transparent; }
-  56%, 61% { opacity: 1; background: #fff4e6; } 65%, 96% { opacity: 1; background: transparent; } 100% { opacity: 0; } }
-
-/* empty-doc overlay — transient chrome, rests hidden */
-.empty-overlay { position: absolute; top: 20px; left: 0; right: 0;
-  display: flex; justify-content: center; opacity: 0;
-  animation: kf-c3-empty 12s infinite; pointer-events: none; }
-@keyframes kf-c3-empty { 0%, 26% { opacity: 1; } 30%, 99% { opacity: 0; } 100% { opacity: 1; } }
-.empty-overlay .page { display: flex; align-items: center; justify-content: center;
-  color: #999; font-style: italic; font-size: 12px; font-family: 'EB Garamond', serif; }
-
-/* ===== ACTA TASK PANE (re-costumed) ===== */
-.acta-pane { flex: 0 0 var(--pane-w); background: #faf8f4; border-left: 1px solid #d8d2c4;
-  display: flex; flex-direction: column; position: relative; overflow: hidden; }
-.acta-pane-header { padding: 10px 14px; border-bottom: 1px solid #d8d2c4; background: #fff;
-  display: flex; align-items: center; justify-content: space-between;
-  font-family: 'Inter', sans-serif; font-size: 12px; color: #1a1a1a; font-weight: 600; }
-.acta-pane-header .a-brand { display: flex; align-items: center; gap: 8px; }
-.acta-pane-header .a-brand .a-dot { width: 18px; height: 18px; border-radius: 4px;
-  background: #6B0F1A; color: #fff; font-size: 11px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center; }
-.acta-pane-header .x { color: #999; font-size: 14px; line-height: 1; }
-.acta-pane-body { flex: 1; padding: 16px; position: relative; font-family: 'Inter', sans-serif; }
-
-/* three states: form → stream → done. Done is the resting/finished frame */
-.c3-state { position: absolute; inset: 16px; }
-.c3-form, .c3-stream { opacity: 0; }
-.c3-done { opacity: 1; }
-.c3-form   { animation: kf-c3-form 12s infinite; }
-.c3-stream { animation: kf-c3-stream 12s infinite; }
-.c3-done   { animation: kf-c3-done 12s infinite; }
-@keyframes kf-c3-form   { 0%, 24% { opacity: 1; } 26%, 99% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes kf-c3-stream { 0%, 24% { opacity: 0; } 26%, 72% { opacity: 1; } 74%, 100% { opacity: 0; } }
-@keyframes kf-c3-done   { 0%, 72% { opacity: 0; } 74%, 96% { opacity: 1; } 98%, 100% { opacity: 0; } }
-
-.label-sm { font-size: 11px; font-weight: 600; color: #4d4d59; margin-bottom: 6px; }
-.case-trigger { height: 36px; border: 1px solid #d8d2c4; background: #fff; border-radius: 4px;
-  padding: 0 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: #1a1a1a; font-weight: 500; }
-.case-trigger .chev { margin-left: auto; color: #999; font-size: 10px; }
-
-/* form */
-.case-info { background: #fff; border: 1px solid #d8d2c4; border-radius: 4px;
-  padding: 10px 12px; margin-bottom: 14px; }
-.case-info .case-name { font-size: 12px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
-.case-info .case-summary { font-size: 11px; color: #666673; line-height: 1.4; margin-bottom: 6px; }
-.case-info .case-sources { font-size: 11px; color: #6B0F1A; font-weight: 500; }
-.field { margin-bottom: 12px; }
-.field-label { font-size: 11px; font-weight: 500; color: #4d4d59; margin-bottom: 4px; }
-.input-box, .textarea-box { background: #fff; border: 1px solid #d8d2c4; border-radius: 4px;
-  padding: 8px 10px; font-size: 12px; color: #1a1a1a; font-family: 'Inter', sans-serif; }
-.input-box { height: 32px; display: flex; align-items: center; }
-.textarea-box { min-height: 56px; line-height: 1.45; }
-.placeholder { color: #999; }
-.caret { display: inline-block; width: 1px; height: 14px; background: #1a1a1a;
-  margin-left: 1px; vertical-align: middle; animation: kf-c3-caret 0.8s steps(2) infinite; }
-@keyframes kf-c3-caret { 50% { opacity: 0; } }
-.tw { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; }
-.tw-title { width: 0; animation: kf-c3-twtitle 12s infinite; }
-@keyframes kf-c3-twtitle { 0%, 2% { width: 0; } 8%, 99% { width: 22ch; } 100% { width: 0; } }
-.tw-instr { width: 0; vertical-align: top; animation: kf-c3-twinstr 12s infinite; }
-@keyframes kf-c3-twinstr { 0%, 4% { width: 0; } 20%, 99% { width: 100%; } 100% { width: 0; } }
-.btn-primary { height: 32px; background: #6B0F1A; color: #fff; border-radius: 4px; padding: 0 14px;
-  font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center;
-  width: 100%; margin-top: 4px; }
-.btn-secondary { height: 32px; background: #fff; color: #6B0F1A; border: 1px solid #6B0F1A;
-  border-radius: 4px; padding: 0 14px; font-size: 12px; font-weight: 600;
-  display: flex; align-items: center; justify-content: center; width: 100%; }
-
-/* stream */
-.stream-header { display: flex; align-items: center; gap: 8px; padding-bottom: 10px;
-  margin-bottom: 10px; border-bottom: 1px solid #d8d2c4; }
-.stream-header .spin { width: 14px; height: 14px; border-radius: 50%;
-  border: 2px solid #d8d2c4; border-top-color: #6B0F1A; animation: kf-c3-spin 1s linear infinite; }
-.stream-header .label { font-size: 12px; font-weight: 500; color: #1a1a1a; }
-.stream-header .badge { margin-left: auto; background: #f0ebe1; color: #6B0F1A;
-  font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 3px; }
-@keyframes kf-c3-spin { to { transform: rotate(360deg); } }
-.event-list { display: flex; flex-direction: column; gap: 6px; }
-.event { display: flex; gap: 8px; align-items: flex-start; padding: 6px 8px;
-  background: #fff; border: 1px solid #eee8dc; border-radius: 3px;
-  font-size: 11px; line-height: 1.35; color: #1a1a1a; opacity: 0; transform: translateY(4px); }
-.event .ico { flex: 0 0 12px; margin-top: 1px; font-family: monospace; font-size: 10px; color: #999; }
-.event.done .ico { color: #6B0F1A; }
-.event .text { flex: 1; }
-.event .text .quoted { color: #6B0F1A; font-style: italic; }
-.event .text strong { color: #1a1a1a; font-weight: 600; }
-.c3-verified { color: #6B0F1A; font-weight: 700; }
-.c3-e1 { animation: kf-c3-e1 12s infinite; }
-.c3-e2 { animation: kf-c3-e2 12s infinite; }
-.c3-e3 { animation: kf-c3-e3 12s infinite; }
-.c3-e4 { animation: kf-c3-e4 12s infinite; }
-.c3-e5 { animation: kf-c3-e5 12s infinite; }
-.c3-e6 { animation: kf-c3-e6 12s infinite; }
-.c3-e7 { animation: kf-c3-e7 12s infinite; }
-@keyframes kf-c3-e1 { 0%,27% {opacity:0;transform:translateY(4px);} 28%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-@keyframes kf-c3-e2 { 0%,32% {opacity:0;transform:translateY(4px);} 33%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-@keyframes kf-c3-e3 { 0%,37% {opacity:0;transform:translateY(4px);} 38%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-@keyframes kf-c3-e4 { 0%,42% {opacity:0;transform:translateY(4px);} 43%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-@keyframes kf-c3-e5 { 0%,47% {opacity:0;transform:translateY(4px);} 48%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-@keyframes kf-c3-e6 { 0%,52% {opacity:0;transform:translateY(4px);} 53%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-@keyframes kf-c3-e7 { 0%,57% {opacity:0;transform:translateY(4px);} 58%,70% {opacity:1;transform:translateY(0);} 72%,100%{opacity:0;} }
-
-/* done */
-.done-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500;
-  color: #6B0F1A; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid #d8d2c4; }
-.done-head .check { width: 16px; height: 16px; border-radius: 50%; background: #6B0F1A; color: #fff;
-  display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
-.done-stats { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.done-stats .stat { font-size: 11px; color: #4d4d59; display: flex; justify-content: space-between; }
-.done-stats .stat .k { color: #999; }
-.done-buttons { display: flex; flex-direction: column; gap: 8px;
-  position: absolute; bottom: 0; left: 0; right: 0; }
-
-/* coda — tenant diagram (reused from prior page, token-only) */
-.demo { background: #faf8f4; border: 1px solid #d8d2c4; border-radius: 6px;
-  padding: 24px; font-family: 'EB Garamond', serif; }
-.coda .demo-tenant { background: #fff; }
-.demo-tenant {
-  font-family: 'EB Garamond', serif; padding: 32px 24px;
-  text-align: center; background: #faf8f4;
-}
-.tenant-box {
-  border: 2px solid #111; border-radius: 6px; padding: 24px 20px;
-  background: #fff; max-width: 340px; margin: 0 auto;
-  position: relative;
-}
-.tenant-box .tenant-label {
-  position: absolute; top: -11px; left: 18px; background: #fff;
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
-  font-weight: 700; padding: 0 8px; color: #111;
-}
-.tenant-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
-.tenant-pill { font-size: 12px; padding: 6px 12px; background: #f0ebe1;
-  border: 1px solid #d8d2c4; border-radius: 4px; font-family: 'Inter', sans-serif;
-  color: #111; }
-.tenant-flow { font-family: 'Inter', sans-serif; font-size: 12px; color: #555;
-  margin-top: 18px; padding-top: 14px; border-top: 1px dashed #d8d2c4; }
-.tenant-flow .arrow { color: #6B0F1A; font-weight: 700; margin: 0 8px; }
-.tenant-note { font-size: 13px; color: #666; margin-top: 14px; font-style: italic; }
-
-/* quiet prose strip */
-.quiet-more { font-size: 19px; line-height: 1.55; color: #2a2a2a; font-style: italic;
-  max-width: 760px; margin: 0 0 20px 0; }
-.quiet-audience { font-size: 17px; line-height: 1.7; color: #1a1a1a;
-  max-width: 760px; margin: 0 0 44px 0; }
-.quiet-audience strong { color: #6B0F1A; font-weight: 600; }
-
-.steps-head { border-bottom: 1px solid #d8d2c4; padding-bottom: 12px; margin-bottom: 36px; }
-.steps-head h3 { font-size: 26px; font-weight: 500; margin: 0; letter-spacing: -0.01em; color: #111; }
-.workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.step .step-num { font-size: 64px; line-height: 1; font-weight: 500;
-  color: #6B0F1A; margin-bottom: 12px; opacity: 0.45; }
-.step h3 { font-size: 20px; font-weight: 600; margin: 0 0 10px 0; }
-.step p { font-size: 16px; line-height: 1.6; color: #2a2a2a; margin: 0; }
-
-/* final CTA */
-.cta-final { text-align: center; }
-.cta-final h2 { font-size: 44px; font-weight: 500; margin: 0 0 16px 0;
-  letter-spacing: -0.01em; color: #f5f0e6; }
-.cta-final .lead { font-size: 19px; color: #c8c0b0; font-style: italic;
-  max-width: 520px; margin: 0 auto 36px; }
-.cta-final .form-row { border-color: #f5f0e6; background: transparent;
-  max-width: 540px; margin: 0 auto; }
-.cta-final .form-row input { color: #f5f0e6; }
-.cta-final .form-row input::placeholder { color: #8a8478; }
-.cta-final .form-row button { background: #f5f0e6; color: #111; }
-
-/* footer */
-.footer-row { display: flex; justify-content: space-between; align-items: center; }
-.footer-row .links a { color: #aaa; text-decoration: none; margin-left: 18px; }
-.footer-row .links a:hover { color: #fff; }
-
-@media (max-width: 900px) {
-  .b-section { padding-left: 24px !important; padding-right: 24px !important; }
-  .page-b h1 { font-size: 38px; }
-  .page-b .lead { font-size: 18px; }
-  .form-row input { font-size: 16px !important; }
-  /* hero: stack text above portrait */
-  .hero-grid { display: block; }
-  #stage-hero { margin-top: 32px; }
-  /* chapters: text above stage */
-  .chapter-grid { display: block; }
-  .chapter-grid .stage { margin-top: 24px; }
-  .stage { padding: 20px; }
-  /* Cap I: 3 slots — hide s3, s4, s5 wholesale; keep s1, s2, s6 (the gap beat survives) */
-  .c1-slot.s3, .c1-slot.s4, .c1-slot.s5 { display: none; }
-  .c1-pile { height: 60px; }
-  .c1-file.f4, .c1-file.f5, .c1-file.f6 { display: none; }
-  /* Cap II: keep 1 termen + both tasks (already minimal); tighten indent */
-  .c2-tasks { margin-left: 0; }
-  /* Cap III: stack pane above one page */
-  .c3-window .w-body { flex-direction: column; height: auto; }
-  .acta-pane { flex: none; border-left: none; border-top: 1px solid #d8d2c4;
-    order: -1; min-height: 400px; }
-  .doc-area { min-height: 320px; padding: 10px 0; }
-  .page { width: 300px; min-height: 424px; padding: 28px 30px; }
-  /* single page on mobile: hide pages 2–5, disable scroller travel */
-  .doc-scroller .page:nth-child(n+2) { display: none; }
-  .doc-scroller { animation: none; }
-  /* dosar sheet: stack label / value / tag vertically, compact type */
-  .dosar-sheet { padding: 18px 16px; }
-  .dosar-title { font-size: 17px; }
-  .dosar-sub { font-size: 12px; margin-bottom: 12px; padding-bottom: 8px; }
-  .dosar-line { display: block; padding: 8px 0; font-size: 14px; }
-  .dosar-line .k { display: block; margin-bottom: 1px; font-size: 12px; }
-  .dosar-line .v { display: block; }
-  .dosar-line .tag { display: block; padding-left: 0; margin-top: 2px; }
-  .c1-slot .dash { left: 0; top: 27px; }
-  .hero-incoming { display: block; font-size: 13px; }
-  .hero-incoming .tag { display: block; margin-top: 2px; }
-  .workflow-grid { grid-template-columns: 1fr; gap: 28px; }
-  .footer-row { display: block; }
-}
+    .coda { padding: 64px 0 48px; }
+    .coda-grid { grid-template-columns: 1fr; gap: 28px; }
+    .tenant-card { margin-right: 0; }
+    .after { padding: 10px 0 64px; }
+    .steps { grid-template-columns: 1fr; gap: 26px; }
+    .cta { padding: 64px 20px 72px; }
+    .cta h2 { font-size: 32px; }
+    .footer { padding: 22px 20px; }
+    .form-row input { font-size: 16px; }
+  }
   </style>
   <!-- Umami: self-hosted, cookieless analytics. No consent banner required.
        The tracker is vendored (js/a.js) rather than loaded from the analytics
@@ -622,370 +407,443 @@
           data-host-url="https://analytics.acta-legal.ro"></script>
 </head>
 <body>
-<div class="page-b">
+
+<div class="shell">
+  <div class="masthead">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 19.5 a 4.6 4.6 0 1 0 0 9.2 a 4.6 4.6 0 1 0 0 -9.2 Z M29.6 31.5 L34.4 31.5 L34.4 44 L32 47.8 L29.6 44 Z"/></svg>
+      Acta
+    </div>
+    <div class="issue">Asistent de drept</div>
+  </div>
 
   <!-- HERO -->
-  <div class="b-section hero">
-    <div class="masthead">
-      <div class="title"><svg width="19" height="19" viewBox="0 0 64 64" style="vertical-align:-3px;margin-right:7px" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 19.5 a 4.6 4.6 0 1 0 0 9.2 a 4.6 4.6 0 1 0 0 -9.2 Z M29.6 31.5 L34.4 31.5 L34.4 44 L32 47.8 L29.6 44 Z"/></svg>Acta</div>
-      <div class="issue">Asistent de drept &middot; Acces în avans</div>
-    </div>
-    <div class="hero-grid">
-      <div class="hero-text">
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
         <div class="kicker">Pentru cabinete pe Microsoft 365</div>
         <h1>Dosarul care se ține singur la&nbsp;zi.</h1>
         <p class="lead">Îi dai actele și numărul de dosar. Restul vine singur.</p>
-        <div class="formrule">
-          <div class="form-label">Cere acces în avans</div>
-          <form class="form-row" onsubmit="event.preventDefault()">
-            <input type="email" placeholder="email@cabinetul-meu.ro">
-            <button type="submit">Trimite</button>
-          </form>
-          <p class="fineprint">Locuri limitate. Răspundem în 5 zile lucrătoare.</p>
+        <div class="hero-cta">
+          <a class="cta-quiet" href="#cere-acces">Cere acces în avans</a>
+          <span class="cta-aside">sau derulează — dosarul lucrează deja.</span>
         </div>
       </div>
-      <div class="stage" id="stage-hero">
-        <div class="dosar-sheet hero-sheet">
-          <div class="dosar-title">Vega S.R.L. — Petrol Distribuție</div>
-          <div class="dosar-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-          <div class="dosar-line"><span class="k">Părți</span><span class="v">Vega S.R.L. (reclamantă) · Petrol Distribuție S.A. (pârâtă)</span><span class="tag">act · OneDrive</span></div>
-          <div class="dosar-line"><span class="k">Obiect</span><span class="v">pretenții — 156.000 EUR</span><span class="tag">contract · <em>03.02.2023</em></span></div>
-          <div class="dosar-line hero-pulse"><span class="k">Stadiu</span><span class="v">fond — răspuns la întâmpinare depus</span><span class="tag">portal.just.ro · <em>azi 06:00</em></span></div>
-          <div class="dosar-line"><span class="k">Termene</span><span class="v">22.05.2026 · 10.09.2026</span><span class="tag">portal.just.ro · <em>azi 06:00</em></span></div>
-          <div class="dosar-line"><span class="k">Acte</span><span class="v">41 acte · 56 e-mailuri</span><span class="tag">e-mail · <em>intrat singur</em></span></div>
-          <div class="dosar-line"><span class="k">De făcut</span><span class="v">note scrise până la 17.05.2026</span><span class="tag">generat din termen</span></div>
-          <div class="hero-incoming"><span class="v">Re: dosar 1234/45/2024 — poziția pârâtei</span><span class="tag">e-mail · <em>acum</em></span></div>
+
+      <div class="hero-stage">
+        <div class="paper-sheet p1"><div class="scribble"><div></div><div></div><div></div><div></div><div></div></div></div>
+        <div class="paper-sheet p2"><div class="scribble"><div></div><div></div><div></div><div></div><div></div></div></div>
+
+        <div class="live-card">
+          <div class="lc-head">
+            <div>
+              <div class="lc-title">Vega S.R.L. — Petrol Distribuție</div>
+              <div class="lc-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
+            </div>
+            <div class="lc-time">actualizat azi · 06:00</div>
+          </div>
+          <div class="dline"><span class="k">Părți</span><span class="v">Vega S.R.L. (reclamantă) · Petrol Distribuție S.A. (pârâtă)</span><span class="src">act · OneDrive</span></div>
+          <div class="dline"><span class="k">Obiect</span><span class="v">pretenții — 156.000 EUR</span><span class="src">contract · <em>03.02.2023</em></span></div>
+          <div class="dline"><span class="k">Stadiu</span><span class="v">fond — răspuns la întâmpinare depus</span><span class="src">portal.just.ro · <em>azi 06:00</em></span></div>
+          <div class="dline"><span class="k">Termene</span><span class="v">22.05.2026 · 10.09.2026</span><span class="src">portal.just.ro · <em>azi 06:00</em></span></div>
+          <div class="dline count-flash" id="acteRow"><span class="k">Acte</span><span class="v"><span id="acteCount">41</span> acte · <span id="mailCount">56</span> e-mailuri</span><span class="src">e-mail · <em>intrat singur</em></span></div>
+          <div class="dline"><span class="k">De făcut</span><span class="v">note scrise până la 17.05.2026</span><span class="src">generat din termen</span></div>
+          <div class="hero-hint">Fiecare rând își știe sursa — treci peste el și o vezi.</div>
+        </div>
+
+        <div class="mail" id="mail">
+          <div class="m-from">grefa@judecatoria-sector3.ro</div>
+          <div class="m-subj">Re: dosar 1234/45/2024 — poziția pârâtei</div>
+          <div class="m-tag">e-mail nou · se îndosariază singur</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CAPITOLUL I -->
-  <div class="b-section chapter">
-    <div class="chapter-head"><div class="roman">Capitolul I</div><h2>Se construiește singur</h2></div>
-    <div class="chapter-grid">
-      <div class="chapter-text">
-        <p class="stand-first">Lipești tot ce ți-a trimis clientul. Peste o oră–două, dosarul e citit.</p>
-        <p>Două lucruri îi dai: actele și numărul de dosar. Acta citește fiecare act, fiecare e-mail, fiecare hotărâre — și așază totul la locul lui: părți, obiect, stadiu, termene.</p>
-        <p>Fiecare informație vine cu sursa ei. Vezi de unde știe.</p>
-        <p>Și îți spune ce lipsește din dosar — înainte să afli de la instanță.</p>
-      </div>
-      <div class="stage" id="stage-cap1">
-        <div class="stage-inner">
-          <div class="c1-wrap">
-            <div class="c1-inputs">
-              <div class="c1-pile">
-                <div class="c1-file f1">contract scan 2.pdf</div>
-                <div class="c1-file f2">FW: FW: raspuns.msg</div>
-                <div class="c1-file f3">IMG_0347.jpeg</div>
-                <div class="c1-file f4">intampinare_final_FINAL(2).docx</div>
-                <div class="c1-file f5">aviz 14.pdf</div>
-                <div class="c1-file f6">hotarare AGA.pdf</div>
+  <!-- CONTINUOUS DEMO -->
+  <div class="demo" id="demo">
+    <div class="demo-grid">
+
+      <div class="chapters">
+        <div class="chapter" data-ch="1">
+          <div class="ch-label">Capitolul I</div>
+          <h2>Se construiește singur</h2>
+          <p class="stand-first">Lipești tot ce ți-a trimis clientul. Peste o oră–două, dosarul e citit.</p>
+          <p>Două lucruri îi dai: actele și numărul de dosar. Acta citește fiecare act, fiecare e-mail, fiecare hotărâre — și așază totul la locul lui: părți, obiect, stadiu, termene.</p>
+          <p>Fiecare informație vine cu sursa ei. Vezi de unde știe.</p>
+          <p>Și îți spune ce lipsește din dosar — înainte să afli de la instanță.</p>
+
+          <div class="m-fig">
+            <div class="sheet">
+              <div class="sheet-head">
+                <div>
+                  <div class="t">Vega S.R.L. — Petrol Distribuție</div>
+                  <div class="s">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
+                </div>
               </div>
-              <div class="c1-numfield"><span class="c1-typed">1234/45/2024</span><span class="c1-caret"></span></div>
-              <div class="c1-counter">citite 34/41</div>
-            </div>
-            <div class="dosar-sheet c1-sheet">
-              <div class="dosar-title">Vega S.R.L. — Petrol Distribuție</div>
-              <div class="dosar-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-              <div class="dosar-line c1-slot s1"><span class="k">Părți</span><span class="dash">—</span><span class="v">Vega S.R.L. · Petrol Distribuție S.A.</span><span class="tag">act · OneDrive</span></div>
-              <div class="dosar-line c1-slot s2"><span class="k">Obiect</span><span class="dash">—</span><span class="v">pretenții — 156.000 EUR</span><span class="tag">contract · <em>03.02.2023</em></span></div>
-              <div class="dosar-line c1-slot s3"><span class="k">Instanță</span><span class="dash">—</span><span class="v">Judecătoria Sector 3</span><span class="tag">portal.just.ro</span></div>
-              <div class="dosar-line c1-slot s4"><span class="k">Stadiu</span><span class="dash">—</span><span class="v">fond — întâmpinare depusă</span><span class="tag">portal.just.ro</span></div>
-              <div class="dosar-line c1-slot s5"><span class="k">Termene</span><span class="dash">—</span><span class="v">22.05.2026</span><span class="tag">e-mail · <em>19.06</em></span></div>
-              <div class="dosar-line c1-slot s6"><span class="k">Ce lipsește</span><span class="dash">—</span><span class="v missing">Împuternicire: lipsește</span><span class="tag">verificat automat</span></div>
-              <div class="c1-stampwrap"><span class="stage-stamp">gata în ~1 oră · fără nicio intervenție</span></div>
+              <div class="row on"><span class="k">Părți</span><span class="filled"><span class="v">Vega S.R.L. · Petrol Distribuție S.A.</span></span></div>
+              <div class="row on"><span class="k">Obiect</span><span class="filled"><span class="v">pretenții — 156.000 EUR</span></span></div>
+              <div class="row on"><span class="k">Stadiu</span><span class="filled"><span class="v">fond — întâmpinare depusă</span></span></div>
+              <div class="row on"><span class="k">Termene</span><span class="filled"><span class="v">22.05.2026</span></span></div>
+              <div class="row on"><span class="k">Ce lipsește</span><span class="filled"><span class="v missing">Împuternicire: lipsește</span></span></div>
+              <div class="stamp-strip"><span class="stamp">gata în ~1 oră · fără nicio intervenție</span></div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- CAPITOLUL II -->
-  <div class="b-section chapter">
-    <div class="chapter-head"><div class="roman">Capitolul II</div><h2>Îți spune ce e de făcut</h2></div>
-    <div class="chapter-grid reverse">
-      <div class="chapter-text">
-        <p class="stand-first">Instanța anunță un termen. Dosarul îl transformă în sarcini.</p>
-        <p>Acta verifică portal.just.ro în fiecare dimineață. Un termen nou nu rămâne o dată pe o pagină de portal: devine sarcini cu scadențe, împărțite pe oameni.</p>
-        <p>Dosarul devine lista de lucru a cabinetului — fără ca cineva să o scrie.</p>
-      </div>
-      <div class="stage" id="stage-cap2">
-        <div class="stage-inner">
-          <div class="c2-wrap">
-            <div class="c2-ticker"><span class="c2-day d1">luni 12.05</span><span class="c2-day d2">marți 13.05</span><span class="c2-day d3">miercuri 14.05</span></div>
-            <div class="dosar-sheet c2-sheet">
-              <div class="dosar-title">Vega S.R.L. — Petrol Distribuție</div>
-              <div class="dosar-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-              <div class="dosar-line c2-termen"><span class="k">Termen nou</span><span class="v">10.09.2026, ora 09:00 — fond</span><span class="tag">portal.just.ro · <em>06:00</em></span></div>
-              <div class="c2-tasks">
-                <div class="c2-task t1"><span class="c2-check"><span class="c2-tick">✓</span></span><span class="c2-tv">Pregătește note scrise — scadență 05.09.2026</span><span class="c2-avatar">M.S.</span></div>
-                <div class="c2-task t2"><span class="c2-check"></span><span class="c2-tv">Depune împuternicirea — scadență 01.09.2026</span><span class="c2-avatar">A.P.</span></div>
+        <div class="chapter" data-ch="2">
+          <div class="ch-label">Capitolul II</div>
+          <h2>Îți spune ce e de făcut</h2>
+          <p class="stand-first">Instanța anunță un termen. Dosarul îl transformă în sarcini.</p>
+          <p>Acta verifică portal.just.ro în fiecare dimineață. Un termen nou nu rămâne o dată pe o pagină de portal: devine sarcini cu scadențe, împărțite pe oameni.</p>
+          <p>Dosarul devine lista de lucru a cabinetului — fără ca cineva să o scrie.</p>
+
+          <div class="m-fig">
+            <div class="sheet">
+              <div class="sheet-head">
+                <div>
+                  <div class="t">Vega S.R.L. — Petrol Distribuție</div>
+                  <div class="s">miercuri 14.05 · portal verificat la 06:00</div>
+                </div>
               </div>
-              <div class="dosar-line c2-todo"><span class="k">De făcut</span><span class="v">2 sarcini · prima scadență 01.09.2026</span><span class="tag">actualizat singur</span></div>
+              <div class="row hl on"><span class="k">Termen nou</span><span class="filled"><span class="v">10.09.2026, ora 09:00 — fond</span></span></div>
+              <div class="tasks on">
+                <div class="task on"><span class="box"></span><span>Pregătește note scrise — scadență 05.09.2026</span><span class="who">M.S.</span></div>
+                <div class="task on"><span class="box"></span><span>Depune împuternicirea — scadență 01.09.2026</span><span class="who">A.P.</span></div>
+              </div>
+              <div class="row on"><span class="k">De făcut</span><span class="filled"><span class="v">2 sarcini · prima scadență 01.09.2026</span></span></div>
+              <div class="stamp-strip"><span class="stamp">dosarul devine lista ta de lucru</span></div>
             </div>
-            <div class="c2-caption">dosarul devine lista ta de lucru</div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- CAPITOLUL III -->
-  <div class="b-section chapter">
-    <div class="chapter-head"><div class="roman">Capitolul III</div><h2>Scrie cu tine</h2></div>
-    <div class="chapter-text chapter-solo">
-      <p class="stand-first">Redactează în Word, în stilul cabinetului, cu citări verificate.</p>
-      <p>Cereri, întâmpinări, răspunsuri — scrise direct în documentul deschis, cu antetul, numerotarea și formatul cabinetului. Nu într-un editor separat, nu prin copy-paste.</p>
-      <p>Fiecare citare — lege sau jurisprudență — vine din corpusul legislativ românesc și e verificată înainte să ajungă în notele de subsol.</p>
-    </div>
-    <div class="stage" id="stage-cap3">
-      <div class="c3-window">
-        <div class="c3-header">
-          <span class="c3-docname">Răspuns Vega.docx</span>
-          <span class="c3-appname">Microsoft Word · panoul Acta</span>
-        </div>
-        <div class="w-body">
+        <div class="chapter" data-ch="3">
+          <div class="ch-label">Capitolul III</div>
+          <h2>Scrie cu tine</h2>
+          <p class="stand-first">Redactează în Word, în stilul cabinetului, cu citări verificate.</p>
+          <p>Cereri, întâmpinări, răspunsuri — scrise direct în documentul deschis, cu antetul, numerotarea și formatul cabinetului. Nu într-un editor separat, nu prin copy-paste.</p>
+          <p>Fiecare citare — lege sau jurisprudență — vine din corpusul legislativ românesc și e verificată înainte să ajungă în notele de subsol.</p>
 
-          <!-- DOCUMENT CANVAS -->
-          <div class="doc-area">
-            <div class="empty-overlay">
-              <div class="page empty">document gol — așteaptă instrucțiuni</div>
-            </div>
-            <div class="doc-scroller">
-
-              <div class="page" data-page="Pagina 1 din 5">
-                <div class="c3-chunk c3-c1">
-                  <div class="page-title">RĂSPUNS LA ÎNTÂMPINARE</div>
-                  <div class="page-meta">Dosar nr. 1234/45/2024<br>Judecătoria Sector 3</div>
-                  <div class="page-greeting">Domnule Președinte,<br>Stimată instanță,</div>
-                  <p>Subscrisa, <strong>S.C. VEGA S.R.L.</strong>, cu sediul real în București, Sector 3, Str. Polonă nr. 47, înmatriculată la Oficiul Național al Registrului Comerțului sub nr. J40/2345/2019, CUI RO40123456, prin reprezentant legal, în calitate de reclamantă în dosarul nr. 1234/45/2024 aflat pe rolul Judecătoriei Sector 3, formulează prezentul</p>
-                  <p style="text-align:center;font-weight:700;margin:10px 0;">RĂSPUNS LA ÎNTÂMPINARE</p>
-                  <p>depus de pârâta S.C. PETROL DISTRIBUȚIE S.A. la data de 18.03.2026, prin care solicităm respingerea apărărilor invocate și admiterea cererii principale, pentru motivele expuse în continuare.</p>
-                </div>
+          <div class="m-fig">
+            <div class="word">
+              <div class="word-head">
+                <span class="doc">Răspuns Vega.docx</span>
+                <span class="app">Word · Acta</span>
               </div>
-
-              <div class="page" data-page="Pagina 2 din 5">
-                <div class="c3-chunk c3-c2">
-                  <div class="sect roman">I. CU PRIVIRE LA EXCEPȚIA NECOMPETENȚEI TERITORIALE</div>
-                  <p><span class="num">1.</span> Prin întâmpinarea depusă, pârâta a invocat excepția necompetenței teritoriale a Judecătoriei Sector 3, susținând că sediul subscrisei ar fi fost mutat la Cluj-Napoca prin hotărârea adunării generale a asociaților din 11.01.2026.</p>
-                  <p><span class="num">2.</span> Această susținere este vădit neîntemeiată, pentru următoarele considerente:</p>
-                  <p class="ind"><strong>a)</strong> Sediul social al subscrisei, astfel cum este înregistrat la Oficiul Național al Registrului Comerțului, este și rămâne în București, Sector 3, conform certificatului constatator depus în probațiune (Anexa nr. 1).</p>
-                  <p class="ind"><strong>b)</strong> Hotărârea adunării asociaților invocată de pârâtă nu a fost înregistrată la ONRC și, prin urmare, nu produce efecte față de terți, conform art. 7 alin. (1) din Legea nr. 26/1990 privind registrul comerțului.<sup>1</sup></p>
+              <div class="word-body">
+                <div class="doc-col">
+                  <div class="docpage">
+                    <div class="wchunk">
+                      <div class="dp-title">RĂSPUNS LA ÎNTÂMPINARE</div>
+                      <div class="dp-meta">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
+                      <p><strong>1.</strong> Sediul social al subscrisei, astfel cum este înregistrat la ONRC, este și rămâne în București, Sector 3, conform certificatului constatator depus în probațiune.</p>
+                      <p><strong>2.</strong> În acest sens, ÎCCJ a stabilit prin Decizia nr. 23/2018 (RIL) că <em>„sediul opozabil terților este cel înregistrat la ONRC"</em>.<sup>2</sup><span class="fn-check"> ✓ verificată</span></p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div class="page" data-page="Pagina 3 din 5">
-                <div class="c3-chunk c3-c3">
-                  <p><span class="num">3.</span> Potrivit art. 107 alin. (1) C.proc.civ., cererea de chemare în judecată se introduce la instanța de la domiciliul sau sediul pârâtului. Pârâta are sediul declarat la ONRC în București, Sector 3 — fapt necontestat la momentul introducerii cererii.</p>
-                  <p><span class="num">4.</span> În acest sens, Înalta Curte de Casație și Justiție a stabilit, prin Decizia nr. 23/2018 pronunțată în recurs în interesul legii, că <em>„sediul opozabil terților este cel înregistrat la ONRC, indiferent de hotărârile interne ale societății neînregistrate în registrul comerțului"</em>.<span class="c3-fnmark"><sup>2</sup><span class="c3-fncheck">✓</span></span></p>
-                  <p><span class="num">5.</span> Pentru aceste motive, solicităm respingerea excepției necompetenței teritoriale ca neîntemeiată.</p>
-                  <div class="sect roman">II. CU PRIVIRE LA EXCEPȚIA PRESCRIPȚIEI</div>
-                  <p><span class="num">6.</span> Pârâta a invocat și excepția prescripției dreptului material la acțiune, susținând că termenul de 3 ani prevăzut de art. 2517 Cod civil a fost depășit. Această apărare este la fel de neîntemeiată.</p>
-                </div>
-              </div>
-
-              <div class="page" data-page="Pagina 4 din 5">
-                <div class="c3-chunk c3-c4">
-                  <p><span class="num">7.</span> Termenul de prescripție începe să curgă de la data scadenței obligației, iar nu de la data emiterii facturii. În speță, scadența a fost stabilită contractual la 15.04.2023, iar cererea a fost introdusă la 12.04.2026 — așadar înăuntrul termenului legal.</p>
-                  <div class="sect roman">III. CU PRIVIRE LA FONDUL CAUZEI</div>
-                  <p><span class="num">8.</span> Pe fondul cauzei, susținem că serviciile facturate au fost integral prestate, conform contractului încheiat între părți la data de 03.02.2023.</p>
-                  <p><span class="num">9.</span> Pârâta a primit livrările în cele 14 tranșe documentate prin avizele de însoțire, semnate și ștampilate de reprezentantul său legal. Toate avizele se află în probațiune (Anexele 2–15).</p>
-                  <p><span class="num">10.</span> Refuzul plății facturii nr. 0457/15.03.2023 în sumă de <strong>156.000 EUR</strong> este vădit nejustificat și constituie o încălcare gravă a obligațiilor contractuale.</p>
-                </div>
-              </div>
-
-              <div class="page" data-page="Pagina 5 din 5">
-                <div class="c3-chunk c3-c5">
-                  <p><span class="num">11.</span> Mai mult, pârâta nu a invocat în întâmpinare niciun motiv concret de neprestare a serviciilor, ci doar afirmații generice fără suport probator, care nu pot răsturna prezumția decurgând din semnarea avizelor de însoțire.</p>
-                  <div class="sect roman">IV. CU PRIVIRE LA DAUNELE-INTERESE</div>
-                  <p><span class="num">12.</span> Solicităm obligarea pârâtei la plata daunelor-interese moratorii, calculate la rata legală prevăzută de O.G. nr. 13/2011, începând cu data scadenței și până la plata efectivă.</p>
-                  <div class="sect roman">V. CONCLUZII ȘI SOLICITĂRI</div>
-                  <p><span class="num">13.</span> Față de cele expuse, solicităm:</p>
-                  <p class="ind">— respingerea excepțiilor invocate de pârâtă;</p>
-                  <p class="ind">— admiterea cererii principale;</p>
-                  <p class="ind">— obligarea pârâtei la plata sumei de 156.000 EUR și a daunelor-interese moratorii;</p>
-                  <p class="ind">— obligarea pârâtei la plata cheltuielilor de judecată.</p>
-                  <div class="footer-block">
-                    <p style="margin-top:10px;">Cu deosebită considerație,</p>
-                    <p><strong>S.C. VEGA S.R.L.</strong><br>Prin reprezentant legal</p>
+                <div class="pane">
+                  <div class="pane-head"><span class="adot"><svg width="13" height="13" viewBox="0 0 64 64" aria-hidden="true"><path fill="#ffffff" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/></svg></span>Acta</div>
+                  <div class="pane-body">
+                    <div class="pstate">
+                      <div class="done-head"><span class="ck">✓</span>Document redactat</div>
+                      <div class="dstat"><span>Lungime</span><span>5 pagini · 1.247 cuvinte</span></div>
+                      <div class="dstat"><span>Surse consultate</span><span>12</span></div>
+                      <div class="dstat"><span>Citări inserate</span><span>2 note de subsol</span></div>
+                      <div class="dstat"><span>Șablon</span><span>stilul cabinetului</span></div>
+                    </div>
                   </div>
                 </div>
               </div>
-
-            </div>
-          </div>
-
-          <!-- ACTA TASK PANE -->
-          <div class="acta-pane">
-            <div class="acta-pane-header">
-              <div class="a-brand"><div class="a-dot">A</div><div>Acta</div></div>
-              <div class="x">×</div>
-            </div>
-            <div class="acta-pane-body">
-
-              <div class="c3-state c3-form">
-                <div class="label-sm">Dosar</div>
-                <div class="case-trigger" style="margin-bottom:14px;">
-                  <span>Vega S.R.L. — Petrol Distribuție</span>
-                  <span class="chev">▾</span>
-                </div>
-                <div class="case-info">
-                  <div class="case-name">Vega S.R.L. — Petrol Distribuție</div>
-                  <div class="case-summary">Litigiu comercial. Vega contestă o factură de 156.000 EUR. Termen 22.05.2026.</div>
-                  <div class="case-sources">23 surse disponibile</div>
-                </div>
-                <div class="field">
-                  <div class="field-label">Titlu document</div>
-                  <div class="input-box">
-                    <span class="tw tw-title">Răspuns la întâmpinare Vega</span><span class="caret"></span>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="field-label">Instrucțiuni</div>
-                  <div class="textarea-box">
-                    <span class="tw tw-instr">Răspunde la excepția de necompetență. Argumentează că sediul real e în București.</span><span class="caret"></span>
-                  </div>
-                </div>
-                <div class="btn-primary">Redactează</div>
-              </div>
-
-              <div class="c3-state c3-stream">
-                <div class="stream-header">
-                  <div class="spin"></div>
-                  <div class="label">Se redactează...</div>
-                  <div class="badge">5 pagini</div>
-                </div>
-                <div class="event-list">
-                  <div class="event done c3-e1"><span class="ico">✓</span><span class="text">Cerere analizată</span></div>
-                  <div class="event done c3-e2"><span class="ico">✓</span><span class="text">Caut: <span class="quoted">„necompetență teritorială"</span> — 12 rezultate</span></div>
-                  <div class="event done c3-e3"><span class="ico">✓</span><span class="text">Consultă <strong>C.proc.civ. art. 107</strong></span></div>
-                  <div class="event done c3-e4"><span class="ico">✓</span><span class="text">Consultă dosar Vega — 8 acte, 23 e-mailuri</span></div>
-                  <div class="event done c3-e5"><span class="ico">✓</span><span class="text">Consultă <strong>ICCJ Dec. 23/2018</strong> (RIL) — citare verificată <span class="c3-verified">✓</span></span></div>
-                  <div class="event done c3-e6"><span class="ico">✓</span><span class="text">Aplic <strong>stilul cabinetului</strong></span></div>
-                  <div class="event c3-e7"><span class="ico">⟳</span><span class="text">Redactare în Word — pagina 4 / 5</span></div>
-                </div>
-              </div>
-
-              <div class="c3-state c3-done">
-                <div class="done-head"><span class="check">✓</span><span>Document redactat</span></div>
-                <div class="done-stats">
-                  <div class="stat"><span class="k">Lungime</span><span>5 pagini · 1.247 cuvinte</span></div>
-                  <div class="stat"><span class="k">Surse consultate</span><span>12</span></div>
-                  <div class="stat"><span class="k">Citări inserate</span><span>2 note de subsol</span></div>
-                  <div class="stat"><span class="k">Șablon</span><span>stilul cabinetului</span></div>
-                </div>
-                <div class="field">
-                  <div class="field-label">Instrucțiuni suplimentare</div>
-                  <div class="textarea-box"><span class="placeholder">Descrie ce vrei să modifici...</span></div>
-                </div>
-                <div class="done-buttons">
-                  <div class="btn-secondary">Modifică</div>
-                  <div class="btn-primary">Salvează în OneDrive</div>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
-        <div class="c3-footer"><span class="c3-pg">Pagina 5 din 5</span><span>1.247 cuvinte</span><span>Română</span></div>
       </div>
+
+      <div class="stage-col">
+        <div class="stage-sticky">
+          <div class="stage-frame" id="stageFrame">
+            <div class="rail"><div class="fill"></div></div>
+
+            <!-- SCENE 1: dosar -->
+            <div class="scene" id="sceneDosar">
+              <div class="file-strip">
+                <div class="file-pile">
+                  <div class="chip c1" data-at="1">contract scan 2.pdf</div>
+                  <div class="chip c2" data-at="1">FW: FW: raspuns.msg</div>
+                  <div class="chip c3" data-at="1">IMG_0347.jpeg</div>
+                  <div class="chip c4" data-at="2">intampinare_final_FINAL(2).docx</div>
+                  <div class="chip c5" data-at="2">aviz 14.pdf</div>
+                  <div class="chip c6" data-at="2">hotarare AGA.pdf</div>
+                </div>
+                <div class="numfield" data-at="2"><span class="typed">1234/45/2024</span></div>
+                <div class="counter" data-at="3">citite 34/41</div>
+              </div>
+
+              <div class="sheet">
+                <div class="sheet-head">
+                  <div>
+                    <div class="t">Vega S.R.L. — Petrol Distribuție</div>
+                    <div class="s">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
+                  </div>
+                  <div class="ticker">
+                    <span data-at="0" data-until="7">azi</span><span data-at="8" data-until="8">marți 13.05</span><span data-at="9">miercuri 14.05 · 06:00</span>
+                  </div>
+                </div>
+
+                <div class="row" data-at="3"><span class="k">Părți</span><span class="dash">—</span><span class="filled"><span class="v">Vega S.R.L. · Petrol Distribuție S.A.</span><span class="src">act · OneDrive</span></span></div>
+                <div class="row" data-at="3"><span class="k">Obiect</span><span class="dash">—</span><span class="filled"><span class="v">pretenții — 156.000 EUR</span><span class="src">contract · <em>03.02.2023</em></span></span></div>
+                <div class="row" data-at="4"><span class="k">Instanță</span><span class="dash">—</span><span class="filled"><span class="v">Judecătoria Sector 3</span><span class="src">portal.just.ro</span></span></div>
+                <div class="row" data-at="4"><span class="k">Stadiu</span><span class="dash">—</span><span class="filled"><span class="v">fond — întâmpinare depusă</span><span class="src">portal.just.ro</span></span></div>
+                <div class="row" data-at="5"><span class="k">Termene</span><span class="dash">—</span><span class="filled"><span class="v">22.05.2026</span><span class="src">e-mail · <em>19.06</em></span></span></div>
+                <div class="row" data-at="6"><span class="k">Ce lipsește</span><span class="dash">—</span><span class="filled"><span class="v missing">Împuternicire: lipsește</span><span class="src">verificat automat</span></span></div>
+
+                <div class="row hl late" data-at="8"><span class="k">Termen nou</span><span class="dash">—</span><span class="filled"><span class="v">10.09.2026, ora 09:00 — fond</span><span class="src">portal.just.ro · <em>06:00</em></span></span></div>
+
+                <div class="tasks" data-at="9">
+                  <div class="task" data-at="9"><span class="box"></span><span>Pregătește note scrise — scadență 05.09.2026</span><span class="who">M.S.</span></div>
+                  <div class="task" data-at="10"><span class="box"></span><span>Depune împuternicirea — scadență 01.09.2026</span><span class="who">A.P.</span></div>
+                </div>
+                <div class="row late" data-at="10"><span class="k">De făcut</span><span class="dash">—</span><span class="filled"><span class="v">2 sarcini · prima scadență 01.09.2026</span><span class="src">actualizat singur</span></span></div>
+
+                <div class="stamp-strip">
+                  <span class="stamp" data-at="7" data-until="7">gata în ~1 oră · fără nicio intervenție</span>
+                  <span class="stamp" data-at="10">dosarul devine lista ta de lucru</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 2: Word -->
+            <div class="scene off" id="sceneWord">
+              <div class="word">
+                <div class="word-head">
+                  <span class="doc">Răspuns Vega.docx</span>
+                  <span class="app">Microsoft Word · panoul Acta</span>
+                </div>
+                <div class="word-body">
+                  <div class="doc-col">
+                    <div class="docpage">
+                      <div class="wchunk" data-at="13">
+                        <div class="dp-title">RĂSPUNS LA ÎNTÂMPINARE</div>
+                        <div class="dp-meta">Dosar nr. 1234/45/2024<br>Judecătoria Sector 3</div>
+                        <p>Domnule Președinte, Stimată instanță,</p>
+                        <p>Subscrisa, <strong>S.C. VEGA S.R.L.</strong>, în calitate de reclamantă în dosarul nr. 1234/45/2024, formulează prezentul <strong>răspuns la întâmpinare</strong>, prin care solicităm respingerea apărărilor invocate.</p>
+                      </div>
+                      <div class="wchunk" data-at="14">
+                        <div class="sect">I. CU PRIVIRE LA EXCEPȚIA NECOMPETENȚEI TERITORIALE</div>
+                        <p><strong>1.</strong> Sediul social al subscrisei, astfel cum este înregistrat la ONRC, este și rămâne în București, Sector 3, conform certificatului constatator depus în probațiune.</p>
+                        <p><strong>2.</strong> Hotărârea adunării asociaților invocată de pârâtă nu a fost înregistrată la ONRC și nu produce efecte față de terți, conform art. 7 alin. (1) din Legea nr. 26/1990.<sup>1</sup></p>
+                      </div>
+                      <div class="wchunk" data-at="15">
+                        <p><strong>3.</strong> În acest sens, ÎCCJ a stabilit prin Decizia nr. 23/2018 (RIL) că <em>„sediul opozabil terților este cel înregistrat la ONRC"</em>.<sup>2</sup><span class="fn-check" data-at="15"> ✓ verificată</span></p>
+                        <p><strong>4.</strong> Pentru aceste motive, solicităm respingerea excepției ca neîntemeiată.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="pane">
+                    <div class="pane-head"><span class="adot"><svg width="13" height="13" viewBox="0 0 64 64" aria-hidden="true"><path fill="#ffffff" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/></svg></span>Acta</div>
+                    <div class="pane-body">
+                      <div class="pstate" id="pForm">
+                        <div class="plabel">Dosar</div>
+                        <div class="pbox">
+                          Vega S.R.L. — Petrol Distribuție
+                          <div class="muted">Litigiu comercial. Vega contestă o factură de 156.000 EUR. Termen 22.05.2026.</div>
+                          <div class="srcs">23 surse disponibile</div>
+                        </div>
+                        <div class="plabel">Instrucțiuni</div>
+                        <div class="pbox">Răspunde la excepția de necompetență. Argumentează că sediul real e în București.</div>
+                        <div class="pbtn">Redactează</div>
+                      </div>
+                      <div class="pstate off" id="pStream">
+                        <div class="events">
+                          <div class="ev" data-at="13"><span class="ok">✓</span><span>Cerere analizată</span></div>
+                          <div class="ev" data-at="13"><span class="ok">✓</span><span>Caut: <span class="q">„necompetență teritorială"</span> — 12 rezultate</span></div>
+                          <div class="ev" data-at="14"><span class="ok">✓</span><span>Consultă <strong>C.proc.civ. art. 107</strong></span></div>
+                          <div class="ev" data-at="14"><span class="ok">✓</span><span>Consultă dosar Vega — 8 acte, 23 e-mailuri</span></div>
+                          <div class="ev" data-at="15"><span class="ok">✓</span><span>Consultă <strong>ICCJ Dec. 23/2018</strong> (RIL) — citare verificată</span></div>
+                          <div class="ev" data-at="15"><span class="ok">✓</span><span>Aplic <strong>stilul cabinetului</strong></span></div>
+                        </div>
+                      </div>
+                      <div class="pstate off" id="pDone">
+                        <div class="done-head"><span class="ck">✓</span>Document redactat</div>
+                        <div class="dstat"><span>Lungime</span><span>5 pagini · 1.247 cuvinte</span></div>
+                        <div class="dstat"><span>Surse consultate</span><span>12</span></div>
+                        <div class="dstat"><span>Citări inserate</span><span>2 note de subsol</span></div>
+                        <div class="dstat"><span>Șablon</span><span>stilul cabinetului</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- CODA -->
-  <div class="b-section coda">
-    <div class="chapter-head"><div class="roman">Coda</div><h2>Datele rămân la tine</h2></div>
-    <div class="chapter-grid">
-      <div class="chapter-text">
+  <div class="coda">
+    <div class="coda-grid">
+      <div>
+        <div class="ch-label">Coda</div>
+        <h2>Datele rămân la tine</h2>
         <p class="stand-first">Documentele, e-mailurile și dosarele rămân unde sunt: în Microsoft 365-ul cabinetului. Acta nu copiază nimic în depozite proprii.</p>
-        <p>Indexul de căutare și răspunsurile generate trec prin endpoint-ul european al furnizorului AI. Nu antrenăm modele pe datele cabinetului. Dacă reziliezi accesul, Acta nu mai poate citi nimic &mdash; nu există copii la noi.</p>
+        <p>Indexul de căutare și răspunsurile generate trec prin endpoint-ul european al furnizorului AI. Nu antrenăm modele pe datele cabinetului. Dacă reziliezi accesul, Acta nu mai poate citi nimic — nu există copii la noi.</p>
         <p>Pentru cabinete care lucrează cu clienți reglementați sau acte sensibile, această separare contează mai mult decât orice altă caracteristică.</p>
       </div>
-      <div class="demo demo-tenant">
-        <div class="tenant-box">
-          <div class="tenant-label">Microsoft 365 &middot; tenant-ul tău</div>
-          <div class="tenant-row">
-            <div class="tenant-pill">Outlook</div>
-            <div class="tenant-pill">OneDrive</div>
-            <div class="tenant-pill">SharePoint</div>
-          </div>
-          <div class="tenant-row">
-            <div class="tenant-pill">Word + Acta</div>
-          </div>
-          <div class="tenant-flow">
-            cerere <span class="arrow">→</span> EU AI endpoint <span class="arrow">→</span> răspuns
-          </div>
+      <div class="tenant-card">
+        <div class="tenant-frame">
+          <div class="tl">Microsoft 365 · tenant-ul tău</div>
+          <div class="pillrow"><span class="pill">Outlook</span><span class="pill">OneDrive</span><span class="pill">SharePoint</span></div>
+          <div class="pillrow"><span class="pill">Word + Acta</span></div>
+          <div class="flow">cerere <b>→</b> EU AI endpoint <b>→</b> răspuns</div>
         </div>
         <div class="tenant-note">Nimic nu se copiază în afara tenant-ului.<br>Acta vede, dar nu deține.</div>
       </div>
     </div>
   </div>
 
-  <!-- QUIET PROSE STRIP -->
-  <div class="b-section quiet">
+  <!-- QUIET + STEPS -->
+  <div class="after">
     <p class="quiet-more">Acta ține și calendarul termenelor, pontajul și facturarea cabinetului — dar despre ele îți povestim în produs.</p>
-    <p class="quiet-audience">Acta este construit pentru <strong>avocați</strong> — cabinete individuale, firme mici și mijlocii care lucrează în litigii, drept comercial și drept civil, pe Microsoft 365. Nu pentru notari, nu pentru in-house. Dacă cabinetul tău e pe Google Workspace, încă nu suntem pentru tine.</p>
-
+    <p class="aud">Acta este construit pentru <strong>avocați</strong> — cabinete individuale, firme mici și mijlocii care lucrează în litigii, drept comercial și drept civil, pe Microsoft 365. Nu pentru notari, nu pentru in-house. Dacă cabinetul tău e pe Google Workspace, încă nu suntem pentru tine.</p>
     <div class="steps-head"><h3>Cum începe</h3></div>
-    <div class="workflow-grid">
-      <div class="step">
-        <div class="step-num">i.</div>
-        <h3>Te invităm</h3>
-        <p>Locurile sunt limitate. Răspundem în cinci zile lucrătoare cu o ofertă și un termen.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">ii.</div>
-        <h3>Conectăm cabinetul</h3>
-        <p>Instalezi extensia în Word. Acta se conectează la Microsoft 365 și începe să citească dosarele.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">iii.</div>
-        <h3>Începi să lucrezi</h3>
-        <p>În câteva zile, Acta scrie în stilul cabinetului și răspunde despre dosare fără să încarci nimic.</p>
-      </div>
+    <div class="steps">
+      <div class="step"><div class="n">i.</div><h3>Te invităm</h3><p>Locurile sunt limitate. Răspundem în cinci zile lucrătoare cu o ofertă și un termen.</p></div>
+      <div class="step"><div class="n">ii.</div><h3>Conectăm cabinetul</h3><p>Instalezi extensia în Word. Acta se conectează la Microsoft 365 și începe să citească dosarele.</p></div>
+      <div class="step"><div class="n">iii.</div><h3>Începi să lucrezi</h3><p>În câteva zile, Acta scrie în stilul cabinetului și răspunde despre dosare fără să încarci nimic.</p></div>
     </div>
   </div>
-
-  <!-- FINAL CTA -->
-  <div class="b-section cta-final">
-    <h2>Cere acces în avans</h2>
-    <p class="lead">Locuri limitate pentru cabinete care vor să fie printre primele care lucrează cu un asistent juridic român.</p>
-    <form class="form-row" onsubmit="event.preventDefault()">
-      <input type="email" placeholder="email@cabinetul-meu.ro">
-      <button type="submit">Trimite</button>
-    </form>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="b-section footer">
-    <div class="footer-row">
-      <div>Acta &middot; Construit în România, pentru avocații români.</div>
-      <div class="links">
-        <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>
-        <a href="/privacy/">Confidențialitate</a>
-        <a href="/terms/">Termeni</a>
-        <a href="/INGESTION_POLICY.html">Politica de ingestie</a>
-      </div>
-    </div>
-  </div>
-
 </div>
+
+<!-- FINAL CTA -->
+<div class="cta" id="cere-acces">
+  <svg class="cta-mark" width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><path fill="#f5f0e6" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 21.2 a 3.4 3.4 0 1 0 0 6.8 a 3.4 3.4 0 1 0 0 -6.8 Z M30.6 30.5 L33.4 30.5 L33.4 46.5 L32 48.6 L30.6 46.5 Z"/></svg>
+  <h2>Cere acces în avans</h2>
+  <p class="lead">Locuri limitate pentru cabinete care vor să fie printre primele care lucrează cu un asistent juridic român.</p>
+  <form class="form-row" onsubmit="event.preventDefault()">
+    <input type="email" placeholder="email@cabinetul-meu.ro" aria-label="Email">
+    <button type="submit">Trimite</button>
+  </form>
+  <p class="cta-fine">Răspundem în 5 zile lucrătoare.</p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div><svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path fill="currentColor" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/></svg>Acta · Construit în România, pentru avocații români.</div>
+  <div>
+    <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>
+    <a href="/privacy/">Confidențialitate</a>
+    <a href="/terms/">Termeni</a>
+    <a href="/INGESTION_POLICY.html">Politica de ingestie</a>
+  </div>
+</div>
+
 <script>
-  (function () {
-    var stages = document.querySelectorAll(".stage");
-    if (!("IntersectionObserver" in window)) {
-      stages.forEach(function (s) { s.classList.add("playing"); });
-      return;
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var desktop = window.matchMedia("(min-width: 921px)");
+
+  /* quiet hero CTA scrolls to the form at the end of the story */
+  var quiet = document.querySelector(".cta-quiet");
+  quiet.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (window.actaTrack) window.actaTrack("hero-cta");
+    document.getElementById("cere-acces").scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+  });
+
+  /* hero: an email files itself in (one-shot, on load) */
+  var mail = document.getElementById("mail");
+  var mails = document.getElementById("mailCount");
+  var acteRow = document.getElementById("acteRow");
+  if (!reduced) {
+    setTimeout(function () { mail.classList.add("show"); }, 1400);
+    setTimeout(function () {
+      mail.classList.add("filed");
+      acteRow.classList.add("tick");
+      mails.textContent = "57";
+      setTimeout(function () { acteRow.classList.remove("tick"); }, 900);
+    }, 3800);
+  } else {
+    mails.textContent = "57";
+  }
+
+  /* ----- continuous demo (desktop only): scroll position is the timeline.
+     On mobile the stage is display:none and each chapter shows a static
+     finished frame instead — no scroll-driven animation on touch. ----- */
+  var demo = document.getElementById("demo");
+  var frame = document.getElementById("stageFrame");
+  var sceneDosar = document.getElementById("sceneDosar");
+  var sceneWord = document.getElementById("sceneWord");
+  var pForm = document.getElementById("pForm");
+  var pStream = document.getElementById("pStream");
+  var pDone = document.getElementById("pDone");
+  var stepped = Array.prototype.slice.call(demo.querySelectorAll(".stage-col [data-at]"));
+  var chapters = Array.prototype.slice.call(demo.querySelectorAll(".chapter"));
+  var lastStep = -1;
+
+  function apply(step, p) {
+    frame.style.setProperty("--p", p);
+    if (step === lastStep) return;
+    lastStep = step;
+
+    stepped.forEach(function (el) {
+      var at = parseInt(el.getAttribute("data-at"), 10);
+      var until = el.hasAttribute("data-until") ? parseInt(el.getAttribute("data-until"), 10) : Infinity;
+      el.classList.toggle("on", step >= at && step <= until);
+    });
+
+    var word = step >= 12;
+    sceneDosar.classList.toggle("off", word);
+    sceneWord.classList.toggle("off", !word);
+
+    pForm.classList.toggle("off", step >= 13);
+    pStream.classList.toggle("off", step < 13 || step >= 15);
+    pDone.classList.toggle("off", step < 15);
+
+    var ch = step <= 7 ? 1 : step <= 11 ? 2 : 3;
+    chapters.forEach(function (c) {
+      c.classList.toggle("active", parseInt(c.getAttribute("data-ch"), 10) === ch);
+    });
+  }
+
+  /* Each chapter drives its own slice of the timeline, so the stage state
+     always matches the text currently on screen — scrolling back rewinds. */
+  var slices = [ { from: 0, to: 7 }, { from: 8, to: 11 }, { from: 12, to: 15 } ];
+  function currentStep() {
+    var center = window.innerHeight * 0.5;
+    var step = 0;
+    for (var i = 0; i < chapters.length; i++) {
+      var r = chapters[i].getBoundingClientRect();
+      var s = slices[i];
+      if (center < r.top) break;
+      if (center >= r.bottom) { step = s.to; continue; }
+      var t = (center - r.top) / r.height;
+      step = s.from + Math.round(t * (s.to - s.from));
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        e.target.classList.toggle("playing", e.isIntersecting);
-      });
-    }, { threshold: 0.35 });
-    stages.forEach(function (s) { io.observe(s); });
-  })();
+    return step;
+  }
+
+  var ticking = false;
+  function onScroll() {
+    if (!desktop.matches) return;
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var rect = demo.getBoundingClientRect();
+      var total = demo.offsetHeight - window.innerHeight;
+      var p = total <= 0 ? 1 : Math.min(1, Math.max(0, -rect.top / total));
+      apply(currentStep(), p);
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+})();
 </script>
 <script>
   // Signup-funnel analytics. Every event goes through actaTrack, which is a
@@ -1024,11 +882,9 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    // "Reached the signup form": the final-CTA form entering the viewport.
-    // Reuses the IntersectionObserver pattern already used by .stage above.
-    var forms = document.querySelectorAll(".form-row");
-    var finalForm = forms[1]; // DOM order: [0] = hero, [1] = final CTA.
-    if (finalForm && "IntersectionObserver" in window) {
+    // "Reached the signup form": the single form (final CTA) entering the viewport.
+    var form = document.querySelector(".form-row");
+    if (form && "IntersectionObserver" in window) {
       var seen = false;
       var io = new IntersectionObserver(
         function (entries) {
@@ -1042,7 +898,7 @@
         },
         { threshold: 0.5 }
       );
-      io.observe(finalForm);
+      io.observe(form);
     }
   })();
 </script>
@@ -1050,14 +906,11 @@
   (function () {
     const ENDPOINT = "https://api.acta-legal.ro/public/waitlist";
 
-    const forms = document.querySelectorAll(".form-row");
-    forms.forEach((form, idx) => {
-      // First form in DOM order is the hero; the second is the final CTA.
-      // The spec mandates exactly two forms.
-      const source = idx === 0 ? "hero" : "final-cta";
-      form.dataset.source = source;
-      form.addEventListener("submit", onSubmit);
-    });
+    // Single signup form since the hero-form redesign (2026-07-17); the hero
+    // button scrolls here, so every signup is attributed to the final CTA.
+    const form = document.querySelector(".form-row");
+    form.dataset.source = "final-cta";
+    form.addEventListener("submit", onSubmit);
 
     async function onSubmit(event) {
       event.preventDefault();
@@ -1096,8 +949,9 @@
         : "Mulțumim. Revenim cu o invitație în maxim 5 zile lucrătoare.";
       const wrapper = document.createElement("div");
       wrapper.style.cssText =
-        "padding:14px 18px;border:1.5px solid #111;background:#fff;" +
-        "font-family:'EB Garamond',serif;font-size:17px;font-style:italic;color:#111;";
+        "padding:14px 18px;border:1.5px solid #f5f0e6;background:transparent;" +
+        "font-family:'EB Garamond',serif;font-size:17px;font-style:italic;color:#f5f0e6;" +
+        "max-width:520px;margin:0 auto;";
       wrapper.textContent = msg;
       form.replaceWith(wrapper);
     }
@@ -1113,13 +967,14 @@
       // Construct via DOM API (no innerHTML) so user input never reaches HTML parser.
       const wrapper = document.createElement("div");
       wrapper.style.cssText =
-        "padding:14px 18px;border:1.5px solid #6B0F1A;background:#fff;" +
-        "font-family:'EB Garamond',serif;font-size:16px;color:#111;";
+        "padding:14px 18px;border:1.5px solid #c97b7b;background:transparent;" +
+        "font-family:'EB Garamond',serif;font-size:16px;color:#f5f0e6;" +
+        "max-width:520px;margin:0 auto;";
 
       const prefix = document.createTextNode("Nu am putut trimite formularul. ");
       const link = document.createElement("a");
       link.href = mailto;
-      link.style.cssText = "color:#6B0F1A;font-weight:600;";
+      link.style.cssText = "color:#f5f0e6;font-weight:600;";
       link.textContent = "Trimite un email";
       const suffix = document.createTextNode(" și te adăugăm manual.");
 
