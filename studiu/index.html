@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script defer src="/js/a.js"
+        data-website-id="198f8cd9-6c70-42f2-9277-fb39db06a86d"></script>
 <style>
   :root {
     --ink: #16130f;
@@ -178,11 +180,18 @@
     save();
   }
 
+  function track(name) {
+    if (window.umami && typeof window.umami.track === "function") {
+      window.umami.track(name);
+    }
+  }
+
   document.addEventListener("click", function (event) {
     const action = event.target && event.target.dataset && event.target.dataset.action;
     if (!action) return;
 
     if (action === "start") {
+      track("studiu-start");
       current = 0;
       renderQuestion();
     } else if (action === "back") {
@@ -195,10 +204,12 @@
       if (current < QUESTIONS.length - 1) { current += 1; renderQuestion(); }
       else show("contact");
     } else if (action === "skip-contact") {
+      track("studiu-complete");
       post({ completed: true });
       show("done");
     } else if (action === "send-contact") {
       const contact = document.getElementById("contactField").value.trim();
+      track(contact ? "studiu-complete-contact" : "studiu-complete");
       post({ completed: true, contact: contact });
       show("done");
     }
