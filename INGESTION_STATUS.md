@@ -1,6 +1,6 @@
 # Ingestion Status
 
-_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-08-06 07:42:02Z._
+_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-08-07 06:10:23Z._
 
 ## Corpus totals
 
@@ -8,8 +8,8 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-08-06 07:42:02Z._
 |---|---|---|
 | Romanian legislation (acts) | 112,282 | clean: 92,084, partial: 236, failed: 944 |
 | Romanian legislation (articles) | 573,292 | |
-| ICCJ jurisprudence | 0 | |
-| CCR jurisprudence | 0 | |
+| ICCJ jurisprudence | 23,254 | |
+| CCR jurisprudence | 8,580 | |
 
 ## Backfill — Romanian legislation
 
