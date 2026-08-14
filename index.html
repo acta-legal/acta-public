@@ -247,6 +247,34 @@
   .doc-fn { margin: 8px 0 0; font-size: 11.5px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   .doc-fn .pill.ok { font-family: var(--sans); padding: 2px 9px; font-size: 10.5px; }
 
+  /* scene 3: the exchange — typographic, no chat UI */
+  .exch-label { margin: 0; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--a-label); }
+  .exch-q { margin: 7px 0 0; font-size: 17.5px; line-height: 1.5; font-weight: 500;
+    color: var(--ink); text-wrap: pretty; }
+  .exch-sheet { margin-top: 8px; font-family: var(--doc); background: #fff;
+    box-shadow: var(--sheet-shadow); padding: clamp(20px, 3vw, 34px) clamp(20px, 3vw, 36px);
+    font-size: 14px; line-height: 1.7; color: #26231c; }
+  .exch-sheet p { margin: 0; text-wrap: pretty; }
+  .exch-sheet p + p { margin-top: 11px; }
+  .exch-sheet .pill.ok { font-family: var(--sans); padding: 2px 9px; font-size: 10.5px; white-space: nowrap; }
+  .exch-contrast { margin: 18px 0 0; font-family: var(--serif); font-size: 17px;
+    line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+
+  /* scene 5: the firm work list */
+  .frow-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .frow { display: flex; gap: 10px; align-items: flex-start; border-top: 1px solid var(--card-line-in);
+    padding: 10px 0; }
+  .frow:first-of-type { margin-top: 10px; }
+  .frow:last-child { padding-bottom: 12px; }
+  .who-chip { flex: none; width: 22px; height: 22px; border-radius: 999px; background: rgba(35,79,59,0.1);
+    color: var(--green); font-size: 10.5px; font-weight: 600; display: inline-flex;
+    align-items: center; justify-content: center; }
+  .fbody { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .ftop { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .ftop .ft { font-weight: 500; }
+  .fsrc { font-size: 11.5px; color: var(--a-mut); }
+
   @keyframes fx-rise { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: none; } }
   @keyframes fx-pop { 0% { opacity: 0; transform: scale(0.85); } 70% { transform: scale(1.04); } 100% { opacity: 1; transform: none; } }
 
@@ -510,7 +538,7 @@
         <div class="door-facts">
           <p>Dosarul, citit și ținut la zi, cu sursele la vedere.</p>
           <p>Termenele devin sarcini, împărțite pe oameni.</p>
-          <p>Acte redactate cu citări verificate din legislația română.</p>
+          <p>Întrebați dosarul și primiți răspunsuri și acte cu citări verificate.</p>
           <p>Evidența orelor și facturarea.</p>
         </div>
         <div class="door-cta">
@@ -524,11 +552,11 @@
   </div>
 </section>
 
-<!-- PROOF: THREE SCENES -->
+<!-- PROOF: FIVE SCENES -->
 <section class="proof">
   <div class="shell">
     <p class="kicker">Concret</p>
-    <p class="proof-title" style="font-family:var(--serif)">Trei scene din viața unui dosar pe Acta.</p>
+    <p class="proof-title" style="font-family:var(--serif)">Cinci scene din viața unui dosar pe Acta.</p>
 
     <!-- SCENE 1 -->
     <div class="scene" data-scene>
@@ -576,7 +604,7 @@
       <div class="txt">
         <p class="scene-nr">02</p>
         <h2>Portalul devine lista de lucru.</h2>
-        <p class="stand" style="max-width:48ch">Peste noapte, Acta verifică portalul. Un termen nou devine sarcini datate, împărțite pe oamenii din cabinet.</p>
+        <p class="stand" style="max-width:48ch">Acta a verificat portalul azi-noapte, cât nimeni nu lucra. Dimineața, termenul nou e deja sarcini datate — și aflați înaintea clientului.</p>
       </div>
       <div class="vis work-card">
         <p class="wc-check" data-fx="fx-rise/0">azi, 06:00 · portal.just.ro — verificat</p>
@@ -604,12 +632,35 @@
       <p class="receipt" style="max-width:48ch">Verificat azi la 06:00. Un termen nou, două sarcini.</p>
     </div>
 
-    <!-- SCENE 3 -->
+    <!-- SCENE 3 — Întrebați dosarul: the exchange. Typographic, no chat UI.
+         Legal content (art. 485 / art. 181 C.proc.civ., 11.08 → 11.09.2026) is
+         verbatim from the handoff — do not paraphrase numbers, dates, articles. -->
     <div class="scene grid left" data-scene>
       <div class="txt">
         <p class="scene-nr">03</p>
+        <h2>Întrebați dosarul.</h2>
+        <p class="stand" style="max-width:48ch">Nu ați atașat nimic și nu ați explicat nimic: Acta a răspuns din interiorul dosarului, unde decizia, data comunicării și dovada erau deja la locul lor. Iar răspunsul nu este o opinie — fiecare citare este verificată în legislația în vigoare.</p>
+      </div>
+      <div class="vis" style="max-width:460px">
+        <p class="exch-label" data-fx="fx-rise/0">Dumneavoastră</p>
+        <p class="exch-q" data-fx="fx-rise/0.1">„Care e termenul de recurs în dosarul Marinescu?"</p>
+        <p class="exch-label" style="margin-top:20px" data-fx="fx-rise/0.25">Acta, din dosarul Marinescu</p>
+        <div class="exch-sheet" data-fx="fx-rise/0.35">
+          <p>Decizia Curții de Apel din 07.08.2026 v-a fost comunicată pe 11.08.2026 — e la acte, cu dovada de comunicare.</p>
+          <p>Termenul de recurs este de 30 de zile de la comunicare (art. 485 alin. (1) C.proc.civ. <span class="pill ok" data-fx="fx-pop/0.8">✓ verificată</span>). Calculat pe zile libere (art. 181 alin. (1) pct. 2 C.proc.civ.), termenul se împlinește <strong style="font-weight:700">vineri, 11.09.2026</strong>.</p>
+          <p>V-am pus termenul în calendar, cu o alertă cu o săptămână înainte.</p>
+        </div>
+        <p class="exch-contrast" data-fx="fx-rise/0.95">Un chat obișnuit începe de la zero, cu ce îi trimiteți. Acta începe din dosar.</p>
+      </div>
+      <p class="receipt" style="max-width:48ch">Nimic încărcat, nimic explicat — răspunsul s-a sprijinit doar pe actele aflate deja la dosar.</p>
+    </div>
+
+    <!-- SCENE 4 (was 3) -->
+    <div class="scene grid right" data-scene>
+      <div class="txt">
+        <p class="scene-nr">04</p>
         <h2>Actul se scrie cu citări verificate.</h2>
-        <p class="stand" style="max-width:48ch">Actul se redactează pe baza dosarului, iar fiecare citare este verificată în legislația română înainte să ajungă la dumneavoastră.</p>
+        <p class="stand" style="max-width:48ch">Un text care sună corect poate scrie oricine. Aici, fiecare citare este verificată în legislația română așa cum e azi — nu cum era acum un an.</p>
       </div>
       <div class="vis doc-sheet" style="max-width:460px">
         <p class="doc-nr" data-fx="fx-rise/0">Dosar nr. 3421/299/2026</p>
@@ -621,6 +672,52 @@
         <p class="doc-fn" data-fx="fx-rise/0.8"><span><sup>1</sup> Art. 201 alin. (2) C.proc.civ.</span><span class="pill ok" data-fx="fx-pop/1.1">✓ verificată</span></p>
       </div>
       <p class="receipt" style="max-width:48ch">Citările se verifică în corpusul legislativ român, cu actele normative în vigoare.</p>
+    </div>
+
+    <!-- SCENE 5 — Când nu sunteți singuri: colleagues, not hierarchy; hands into pricing. -->
+    <div class="scene grid left" data-scene>
+      <div class="txt">
+        <p class="scene-nr">05</p>
+        <h2>Când nu sunteți singuri.</h2>
+        <p class="stand" style="max-width:48ch">Când lucrați cu colegi, ce a făcut fiecare într-un dosar se vede într-un singur loc, fără să întrebați pe nimeni. Un termen devine o sarcină predată colaboratorului cu dosarul atașat — iar la sfârșitul lunii, orele sunt deja adunate în factură, nu reconstituite din memorie.</p>
+      </div>
+      <div class="vis a-card">
+        <div class="frow-head" data-fx="fx-rise/0">
+          <span class="a-label">LISTA DE LUCRU A CABINETULUI</span>
+          <span class="a-src" style="font-variant-numeric:tabular-nums">azi, 14.08.2026</span>
+        </div>
+        <div class="frow" data-fx="fx-rise/0.2">
+          <span class="who-chip">AD</span>
+          <div class="fbody">
+            <div class="ftop">
+              <span class="ft">Cerere de recurs — dosar Marinescu</span>
+              <span class="pill gray" style="padding:2px 9px;font-size:10.5px;font-variant-numeric:tabular-nums">termen 11.09.2026</span>
+            </div>
+            <span class="fsrc">preluat de A.D. · azi 09:14 · cu dosarul atașat</span>
+          </div>
+        </div>
+        <div class="frow" data-fx="fx-rise/0.35">
+          <span class="who-chip">RS</span>
+          <div class="fbody">
+            <div class="ftop">
+              <span class="ft">Întâmpinare — dosar Popa</span>
+              <span class="pill ok" style="padding:2px 9px;font-size:10.5px">depusă</span>
+            </div>
+            <span class="fsrc">depusă de R.S. · ieri 17:40 · vizibilă întregului cabinet</span>
+          </div>
+        </div>
+        <div class="frow" data-fx="fx-rise/0.5">
+          <span class="who-chip">MP</span>
+          <div class="fbody">
+            <div class="ftop">
+              <span class="ft">Consultanță — dosar Ionescu</span>
+              <span class="pill warn" style="padding:2px 9px;font-size:10.5px;font-variant-numeric:tabular-nums">factura din 31.08.2026</span>
+            </div>
+            <span class="fsrc">M.P. · 14,5 h în august · adunate automat</span>
+          </div>
+        </div>
+      </div>
+      <p class="receipt" style="max-width:48ch">Toți pe aceleași dosare; predările duc dosarul cu ele; orele ajung singure în factură.</p>
     </div>
 
   </div>
@@ -766,6 +863,7 @@
       <p>Documentele și dosarele rămân ale cabinetului — nu le copiem în depozite proprii.</p>
       <p>AI-ul rulează pe infrastructură europeană.</p>
       <p>Nu antrenăm modele pe datele dumneavoastră.</p>
+      <p>Întrebările despre dosare nu trec printr-un chat public: asistentul lucrează în cabinetul dumneavoastră, sub secretul profesional.</p>
       <p>Dacă plecați, nu mai putem citi nimic.</p>
     </div>
     <p class="trust-fine">Conform regulilor europene de protecție a datelor (GDPR).</p>
