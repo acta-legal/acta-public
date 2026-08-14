@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="ro">
+<!-- THE GATE: data-gate="closed" | "open" on <html> is the single launch flag.
+     Flipping it to "open" swaps every free-door copy variant at once (hero
+     receipt line, free door footer, bottom free-path note, final band
+     sub-line). No layout changes on flip. -->
+<html lang="ro" data-gate="closed">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,393 +11,373 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon-32.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="description" content="Îi dai actele și numărul de dosar. Restul vine singur: dosarul se construiește, se ține la zi și scrie cu tine în Word.">
+  <meta name="description" content="Acta construiește dosarul din actele dumneavoastră și din numărul de dosar, îl verifică în fiecare noapte pe portal.just.ro și transformă fiecare termen în sarcini pentru cabinet.">
   <meta property="og:title" content="Acta — Dosarul care se ține singur la zi">
-  <meta property="og:description" content="Îi dai actele și numărul de dosar. Restul vine singur.">
+  <meta property="og:description" content="Dosarele cabinetului, ținute la zi peste noapte. Monitorizare gratuită sau cabinetul întreg pe Acta, de la 49 €.">
   <meta property="og:url" content="https://acta-legal.ro/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ro_RO">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=Inter+Tight:wght@600&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
   <style>
   :root {
-    --ink: #16130f;
-    --ink-soft: #4a453d;
-    --paper: #f7f4ec;
-    --paper-deep: #efe9db;
-    --line: #d8d2c4;
-    --ox: #6B0F1A;
-    --ox-soft: rgba(107,15,26,0.07);
-    --ui-ink: #1a1a1a;
-    --ui-mut: #6b6b76;
-    --ui-line: #e3e0d8;
-    --word-blue: #2b579a;
+    --paper: #fafaf8;
+    --ink: #171511;
+    --ink-hover: #33302a;
+    --body: #4a463c;
+    --muted: #7a7566;
+    --faint: #8a8474;
+    --green: #234f3b;
+    --green-hover: #17352a;
+    --green-tint: rgba(35,79,59,0.055);
+    --green-line: rgba(35,79,59,0.2);
+    --line: #e6e2d6;
+    --line-in: #eeeae0;
+    --card-line: #e0dcd0;
+    --card-line-in: #ebe8df;
+    --input-line: #d8d4c8;
+    --a-ink: #15140f;
+    --a-label: #918d80;
+    --a-mut: #6b6759;
+    --a-pill: #e6e3d8;
+    --warn-bg: #f5e8c8;
+    --warn-tx: #6b5018;
+    --ok-bg: #d6e5d2;
+    --ok-tx: #3a5a2e;
+    --err: #7a1f0f;
+    --dark-sub: rgba(250,250,248,0.6);
     --serif: 'EB Garamond', Georgia, serif;
-    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --doc-serif: 'Source Serif 4', 'Times New Roman', serif;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
+    --a-sans: 'Inter', system-ui, sans-serif;
+    --doc: 'Tinos', Georgia, serif;
+    --card-shadow: 0 6px 22px rgba(21,20,15,0.07), 0 2px 6px rgba(21,20,15,0.04);
+    --sheet-shadow: 0 12px 34px rgba(21,20,15,0.1), 0 3px 8px rgba(21,20,15,0.05);
   }
-  html { scroll-behavior: auto; }
-  body { margin: 0; background: var(--paper); color: var(--ink);
-    font-family: var(--serif); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: var(--green); }
+  a:hover { color: var(--green-hover); }
 
-  .shell { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  /* the gate: default (closed) hides .g-open; data-gate="open" flips it */
+  html[data-gate="closed"] .g-open { display: none; }
+  html[data-gate="open"] .g-closed { display: none; }
+
+  .shell { max-width: 1200px; margin: 0 auto; padding-left: clamp(18px, 3.5vw, 48px);
+    padding-right: clamp(18px, 3.5vw, 48px); }
 
   /* ---------- masthead ---------- */
-  .masthead { display: flex; justify-content: space-between; align-items: baseline;
-    padding: 26px 0 14px; border-bottom: 2px solid var(--ink); }
-  .masthead .brand { font-size: 20px; font-weight: 700; letter-spacing: 0.05em;
-    text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-  .masthead .issue { font-size: 15px; font-style: italic; color: var(--ink-soft); }
+  .masthead { border-bottom: 1px solid var(--line); }
+  .masthead .shell { padding-top: clamp(16px, 1.8vw, 22px); padding-bottom: clamp(16px, 1.8vw, 22px);
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { display: inline-flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .brand-mark { display: inline-flex; align-items: baseline; gap: 8px; }
+  .brand-mark svg { align-self: center; flex: none; }
+  .brand-name { font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1; }
+  .brand-tag { font-size: 13px; color: var(--faint); }
+  .masthead nav { display: flex; gap: 24px; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; }
+  .masthead nav a { text-decoration: none; }
+  .masthead nav a:hover { text-decoration: underline; }
 
   /* ---------- hero ---------- */
-  .hero { position: relative; padding: 72px 0 130px; }
-  .hero-inner { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 54%); gap: 40px; align-items: start; }
-  .kicker { font-family: var(--sans); font-size: 12px; text-transform: uppercase;
-    letter-spacing: 0.16em; color: var(--ox); font-weight: 700; margin-bottom: 22px; }
-  h1 { font-size: clamp(40px, 4.6vw, 58px); line-height: 1.04; font-weight: 500;
-    letter-spacing: -0.015em; margin: 0 0 22px; text-wrap: balance; }
-  .lead { font-size: 22px; line-height: 1.5; font-style: italic; color: #26221c; margin: 0 0 38px; }
+  .hero { padding-top: clamp(44px, 6vw, 104px); padding-bottom: clamp(52px, 6.5vw, 110px); }
+  .hero-inner { display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 84px); align-items: flex-start; }
+  .hero-copy { flex: 1 1 400px; min-width: 0; }
+  h1 { margin: 0; font-family: var(--serif); font-size: clamp(38px, 5.5vw, 74px);
+    line-height: 1.03; font-weight: 500; letter-spacing: -0.02em; text-wrap: balance; }
+  .lead { margin: clamp(18px, 2vw, 28px) 0 0; font-size: clamp(16px, 1.4vw, 17.5px);
+    line-height: 1.6; color: var(--body); max-width: 54ch; text-wrap: pretty; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 18px; align-items: center;
+    margin-top: clamp(24px, 2.6vw, 36px); }
+  .btn { display: inline-block; background: var(--ink); color: var(--paper); text-decoration: none;
+    border: none; border-radius: 4px; padding: 14px 26px; font-family: var(--sans);
+    font-size: 15px; font-weight: 600; cursor: pointer; }
+  .btn:hover { background: var(--ink-hover); color: var(--paper); }
+  .link-cta { font-size: 15px; font-weight: 600; text-decoration: underline;
+    text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .hero-fine { margin: 16px 0 0; font-size: 13.5px; color: var(--muted); }
 
-  .hero-cta { border-top: 1px solid var(--line); padding-top: 26px; max-width: 480px;
-    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-  .cta-quiet { font-family: var(--sans); font-size: 13px; text-transform: uppercase;
-    letter-spacing: 0.11em; font-weight: 700; color: var(--ox); text-decoration: none;
-    border: 1.5px solid var(--ox); padding: 12px 20px; transition: background 0.15s, color 0.15s; }
-  .cta-quiet:hover, .cta-quiet:focus-visible { background: var(--ox); color: #fff; }
-  .cta-aside { font-size: 16px; font-style: italic; color: #726c60; }
+  /* ---------- dosar card (hero artifact) ---------- */
+  .dosar-card { flex: 1 1 330px; max-width: 470px; min-width: 0; font-family: var(--a-sans);
+    background: #fff; border: 1px solid var(--card-line); border-radius: 10px;
+    box-shadow: var(--card-shadow); padding: 18px 18px 8px; font-size: 13px; color: var(--a-ink); }
+  .dc-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .a-label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: var(--a-label); }
+  .dc-nr { font-family: 'Inter Tight', Inter, sans-serif; font-size: 15px; font-weight: 600;
+    font-variant-numeric: tabular-nums; }
+  .pill { border-radius: 999px; padding: 3px 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .pill.gray { background: var(--a-pill); color: var(--a-mut); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-tx); }
+  .pill.ok { background: var(--ok-bg); color: var(--ok-tx); }
+  .dc-sub { margin: 5px 0 0; font-size: 12px; color: var(--a-mut); }
+  .dc-rows { margin-top: 14px; display: grid; gap: 10px; }
+  .dc-row { border-top: 1px solid var(--card-line-in); padding-top: 9px; }
+  .dc-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .a-src { font-size: 10.5px; color: var(--a-label); }
+  .dc-row p { margin: 3px 0 0; }
+  .dc-row .strong { font-weight: 500; }
+  .dc-block { margin-top: 14px; border-top: 1px solid var(--card-line-in); padding-top: 10px; }
+  .dc-termen { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-top: 6px; }
+  .dc-termen .when { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .dc-note { margin: 4px 0 0; font-size: 11.5px; color: var(--a-mut); }
+  .dc-acte { display: grid; gap: 8px; margin-top: 7px; padding-bottom: 10px; }
+  .dc-act { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .dc-date { font-size: 11.5px; color: var(--a-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .dc-new { border: 1px solid var(--ok-bg); border-radius: 7px; padding: 8px 10px; margin: 2px -10px 0;
+    animation: acta-file-in 0.7s cubic-bezier(0.2,0,0,1) 1.4s both, acta-settle 2.8s ease 1.4s both; }
+  .dc-new .title { font-weight: 500; display: inline-flex; gap: 8px; align-items: baseline; }
+  .dc-new .pill.ok { padding: 2px 8px; font-size: 10.5px; }
+  .dc-src-line { margin: 2px 0 0; font-size: 10.5px; color: var(--a-label); }
+  @keyframes acta-file-in { 0% { opacity: 0; transform: translateY(-9px); } 100% { opacity: 1; transform: none; } }
+  @keyframes acta-settle { 0%, 55% { background-color: var(--warn-bg); } 100% { background-color: #fff; } }
 
-  .form-row { display: flex; border: 1.5px solid var(--ink); background: #fff; }
-  .form-row input { flex: 1; min-width: 0; padding: 13px 16px; font-size: 17px; border: none;
-    background: transparent; font-family: var(--serif); color: var(--ink); }
-  .form-row input:focus { outline: 2px solid var(--ox); outline-offset: -2px; }
-  .form-row button { padding: 13px 20px; font-size: 13px; font-weight: 700; background: var(--ox);
-    color: #fff; border: none; cursor: pointer; font-family: var(--sans);
-    text-transform: uppercase; letter-spacing: 0.09em; }
-
-  /* the paper world behind the live card */
-  .hero-stage { position: relative; min-height: 480px; }
-  .paper-sheet { position: absolute; background: #fdfcf8; border: 1px solid var(--line);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05); border-radius: 2px; }
-  .paper-sheet.p1 { width: 78%; height: 82%; top: 6%; left: 10%; transform: rotate(-2.4deg); }
-  .paper-sheet.p2 { width: 78%; height: 82%; top: 3%; left: 16%; transform: rotate(1.6deg); }
-  .paper-sheet .scribble { margin: 26px 22px; }
-  .paper-sheet .scribble div { height: 7px; background: var(--paper-deep); border-radius: 2px; margin-bottom: 10px; }
-  .paper-sheet .scribble div:nth-child(2) { width: 82%; }
-  .paper-sheet .scribble div:nth-child(3) { width: 64%; }
-  .paper-sheet .scribble div:nth-child(4) { width: 90%; }
-  .paper-sheet .scribble div:nth-child(5) { width: 46%; }
-
-  /* THE live card — crisp UI breaking the paper frame */
-  .live-card { position: relative; z-index: 3; background: #fff; border-radius: 10px;
-    border: 1px solid var(--ui-line);
-    box-shadow: 0 24px 70px rgba(22,19,15,0.20), 0 4px 14px rgba(22,19,15,0.08);
-    font-family: var(--sans); color: var(--ui-ink);
-    margin: 34px -30px 0 30px; overflow: hidden; }
-  .live-card .lc-head { display: flex; justify-content: space-between; align-items: center;
-    gap: 12px; padding: 16px 20px 12px; border-bottom: 1px solid var(--ui-line); }
-  .lc-title { font-size: 15px; font-weight: 600; }
-  .lc-sub { font-size: 12px; color: var(--ui-mut); margin-top: 2px; }
-  .lc-time { font-size: 11px; color: var(--ui-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-  .dline { display: flex; align-items: baseline; gap: 12px; padding: 10px 20px;
-    border-bottom: 1px solid #f1efe9; font-size: 13.5px; cursor: default;
-    transition: background 0.15s; }
-  .dline:hover { background: var(--ox-soft); }
-  .dline .k { flex: 0 0 84px; font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.06em; color: var(--ui-mut); font-weight: 600; padding-top: 2px; }
-  .dline .v { flex: 1; line-height: 1.45; }
-  .dline .src { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em;
-    color: var(--ox); white-space: nowrap; opacity: 0.45; transition: opacity 0.15s; font-weight: 600; }
-  .dline:hover .src { opacity: 1; }
-  .dline .src em { text-transform: none; letter-spacing: 0; font-style: italic; }
-  .hero-hint { padding: 10px 20px; font-size: 14px; color: #726c60; font-family: var(--serif);
-    font-style: italic; background: #fbfaf7; }
-
-  /* incoming mail that files itself */
-  .mail { position: absolute; z-index: 4; right: -8px; bottom: -34px; width: 320px;
-    background: #fff; border: 1px solid var(--ui-line); border-left: 3px solid var(--ox);
-    border-radius: 8px; box-shadow: 0 16px 44px rgba(22,19,15,0.22);
-    font-family: var(--sans); padding: 12px 14px;
-    opacity: 0; transform: translateY(26px);
-    transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2,0.8,0.2,1); }
-  .mail.show { opacity: 1; transform: translateY(0); }
-  .mail.filed { opacity: 0; transform: translate(-140px, -170px) scale(0.35); }
-  .mail .m-from { font-size: 11px; color: var(--ui-mut); margin-bottom: 3px; }
-  .mail .m-subj { font-size: 12.5px; font-weight: 600; color: var(--ui-ink); }
-  .mail .m-tag { margin-top: 7px; font-size: 10px; text-transform: uppercase;
-    letter-spacing: 0.07em; color: var(--ox); font-weight: 600; }
-  .count-flash { transition: background 0.3s; }
-  .count-flash.tick { background: var(--ox-soft); }
-
-  /* ---------- the continuous scroll demo (desktop) ---------- */
-  .demo { position: relative; }
-  .demo-grid { display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 62%); gap: 56px; }
-  .chapters { padding-bottom: 30vh; }
-  .chapter { min-height: 150vh; display: flex; flex-direction: column; justify-content: center;
-    opacity: 0.28; transition: opacity 0.4s; padding-right: 8px; }
-  .chapter.active { opacity: 1; }
-  .ch-label { font-family: var(--sans); font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.16em; color: var(--ox); font-weight: 700; margin-bottom: 14px; }
-  .chapter h2 { font-size: 34px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 18px; text-wrap: balance; }
-  .chapter .stand-first { font-size: 19px; line-height: 1.55; font-style: italic; color: #26221c; margin: 0 0 16px; }
-  .chapter p { font-size: 17px; line-height: 1.7; margin: 0 0 13px; color: #1f1b15; }
-
-  .stage-col { position: relative; }
-  .stage-sticky { position: sticky; top: 9vh; height: 82vh; display: flex; align-items: center; }
-  .stage-frame { position: relative; width: 100%; }
-
-  /* timeline rail — the visible sign that scroll = time */
-  .rail { position: absolute; left: -26px; top: 4%; bottom: 4%; width: 2px; background: var(--line); border-radius: 2px; }
-  .rail .fill { position: absolute; top: 0; left: 0; width: 100%; background: var(--ox);
-    height: calc(var(--p, 0) * 100%); border-radius: 2px; }
-
-  /* scenes hand off in place: the outgoing one eases away, the incoming one
-     arrives on a short delay with a gentle scale — no hard swap after the
-     card has been pinned on screen for two chapters */
-  .scene { transition: opacity 1s ease 0.35s, transform 1s ease 0.35s; }
-  .scene.off { opacity: 0; pointer-events: none; position: absolute; inset: 0;
-    transform: scale(0.965) translateY(12px); transition-delay: 0s, 0s; }
-
-  /* --- scene 1: the dosar assembling --- */
-  .file-strip { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; min-height: 66px; }
-  .file-pile { position: relative; flex: 1; height: 64px; }
-  .chip { position: absolute; background: #fff; border: 1px solid var(--ui-line); border-radius: 5px;
-    padding: 5px 10px; font-family: var(--sans); font-size: 11px; color: var(--ui-mut);
-    box-shadow: 0 2px 6px rgba(22,19,15,0.08); white-space: nowrap;
-    opacity: 0; transform: translateY(-12px);
-    transition: opacity 0.4s, transform 0.45s cubic-bezier(0.2,0.8,0.2,1); }
-  .chip.on { opacity: 1; transform: translateY(0) rotate(var(--r, 0deg)); }
-  .chip.c1 { top: 0; left: 0; --r: -2deg; }
-  .chip.c2 { top: 20px; left: 26%; --r: 1.5deg; }
-  .chip.c3 { top: 2px; left: 52%; --r: -1deg; }
-  .chip.c4 { top: 36px; left: 8%; --r: 2deg; }
-  .chip.c5 { top: 40px; left: 46%; --r: -2.5deg; }
-  .chip.c6 { top: 18px; left: 70%; --r: 0.5deg; }
-  .numfield { font-family: var(--sans); font-size: 13px; background: #fff;
-    border: 1.5px solid var(--ink); border-radius: 4px; padding: 9px 12px; min-width: 158px; z-index: 2; }
-  .numfield .typed { display: inline-block; overflow: hidden; white-space: nowrap;
-    vertical-align: bottom; width: 0; transition: width 0.7s steps(12, end); }
-  .numfield.on .typed { width: 12ch; }
-  .counter { font-family: var(--sans); font-size: 11px; color: var(--ox); font-weight: 600;
-    opacity: 0; transition: opacity 0.4s; }
-  .counter.on { opacity: 1; }
-
-  .sheet { background: #fff; border: 1px solid var(--ui-line); border-radius: 10px;
-    box-shadow: 0 24px 70px rgba(22,19,15,0.18), 0 4px 14px rgba(22,19,15,0.07);
-    font-family: var(--sans); color: var(--ui-ink); overflow: hidden; }
-  .sheet-head { padding: 15px 20px 11px; border-bottom: 1px solid var(--ui-line);
-    display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .sheet-head .t { font-size: 15px; font-weight: 600; }
-  .sheet-head .s { font-size: 12px; color: var(--ui-mut); margin-top: 2px; }
-  .ticker { font-size: 11px; color: var(--ui-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .ticker span { display: none; }
-  .ticker span.on { display: inline; }
-
-  .row { display: flex; align-items: baseline; gap: 12px; padding: 9px 20px;
-    border-bottom: 1px solid #f1efe9; font-size: 13.5px; }
-  .row .k { flex: 0 0 88px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
-    color: var(--ui-mut); font-weight: 600; }
-  .row .v { flex: 1; line-height: 1.45; }
-  .row .src { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ox);
-    white-space: nowrap; font-weight: 600; }
-  .row .src em { text-transform: none; letter-spacing: 0; font-style: italic; }
-  .row .filled { display: none; gap: 12px; flex: 1; align-items: baseline; }
-  @keyframes rowin { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
-  .row.on .filled { display: inline-flex; animation: rowin 0.45s ease both; }
-  .row .dash { color: #c9c2b2; flex: 1; }
-  .row.on .dash { display: none; }
-  .row.late { display: none; }
-  .row.late.on { display: flex; }
-  .row .v.missing { color: var(--ox); font-style: italic; }
-  .row.hl { transition: background 0.5s; }
-  .row.hl.on { background: var(--ox-soft); }
-
-  .tasks { padding: 6px 20px 6px 108px; display: none; flex-direction: column; gap: 7px; }
-  .tasks.on { display: flex; }
-  .task { display: flex; align-items: center; gap: 10px; background: #fbfaf7;
-    border: 1px solid var(--ui-line); border-radius: 6px; padding: 8px 12px;
-    font-size: 12px; opacity: 0; transform: translateY(-6px); transition: opacity 0.4s, transform 0.4s; }
-  .task.on { opacity: 1; transform: translateY(0); }
-  .task .box { width: 14px; height: 14px; border: 1.5px solid var(--ox); border-radius: 3px; flex: 0 0 14px; }
-  .task .who { margin-left: auto; width: 22px; height: 22px; border-radius: 50%;
-    background: var(--paper-deep); border: 1px solid var(--line); font-size: 9px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center; color: var(--ink-soft); }
-
-  .stamp-strip { padding: 12px 20px; background: #fbfaf7; font-size: 11px;
-    font-family: var(--sans); color: var(--ui-mut); display: flex; justify-content: space-between; }
-  .stamp { text-transform: uppercase; letter-spacing: 0.09em; color: var(--ox); font-weight: 700;
-    opacity: 0; transition: opacity 0.5s; }
-  .stamp.on { opacity: 1; }
-
-  /* --- scene 2: Word writes --- */
-  .word { border-radius: 10px; overflow: hidden; border: 1px solid var(--ui-line);
-    box-shadow: 0 24px 70px rgba(22,19,15,0.20), 0 4px 14px rgba(22,19,15,0.08);
-    background: #fff; font-family: var(--sans); }
-  .word-head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px;
-    background: #f6f5f2; border-bottom: 1px solid var(--ui-line); font-size: 12px; color: var(--ui-mut); }
-  .word-head .doc { font-weight: 600; color: var(--ui-ink); }
-  .word-head .app { color: var(--word-blue); font-weight: 600; }
-  .word-body { display: flex; height: 56vh; min-height: 380px; background: #edeae2; }
-  .doc-col { flex: 1; display: flex; justify-content: center; padding: 16px 10px; overflow: hidden; }
-  .docpage { background: #fff; width: min(400px, 100%); padding: 34px 40px;
-    font-family: var(--doc-serif); font-size: 10.5px; line-height: 1.55;
-    color: #1a1a1a; box-shadow: 0 1px 4px rgba(0,0,0,0.10); overflow: hidden; }
-  .docpage .dp-title { text-align: center; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.08em; margin-bottom: 4px; }
-  .docpage .dp-meta { text-align: right; font-size: 9px; color: #555; margin-bottom: 12px; }
-  .docpage p { margin: 0 0 8px; }
-  .docpage .sect { font-weight: 700; margin: 12px 0 7px; font-size: 11px; }
-  .docpage sup { color: var(--ox); font-weight: 700; }
-  .wchunk { opacity: 0; transform: translateY(5px); transition: opacity 0.5s, transform 0.5s; }
-  .wchunk.on { opacity: 1; transform: translateY(0); }
-  .fn-check { color: var(--ox); font-weight: 700; font-size: 9px;
-    opacity: 0; transition: opacity 0.4s; }
-  .fn-check.on { opacity: 1; }
-
-  .pane { flex: 0 0 290px; border-left: 1px solid var(--ui-line); background: #fbfaf7;
+  /* ---------- doors ---------- */
+  .doors-sect { border-top: 1px solid var(--line); }
+  .doors-sect .shell { padding-top: clamp(36px, 4.5vw, 64px); padding-bottom: clamp(56px, 6.5vw, 104px); }
+  .kicker { margin: 0; font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--faint); }
+  .doors { display: flex; flex-wrap: wrap; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); margin-top: clamp(20px, 2.6vw, 32px); }
+  .door { flex: 1 1 340px; min-width: 0; background: #fff; padding: clamp(24px, 2.8vw, 40px);
     display: flex; flex-direction: column; }
-  .pane-head { padding: 10px 14px; background: #fff; border-bottom: 1px solid var(--ui-line);
-    display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
-  .pane-head .adot { width: 18px; height: 18px; border-radius: 4px; background: var(--ox);
-    display: flex; align-items: center; justify-content: center; }
-  .pane-body { position: relative; flex: 1; padding: 14px; }
-  .pstate { position: absolute; inset: 14px; transition: opacity 0.4s; }
-  .pstate.off { opacity: 0; pointer-events: none; }
-  .plabel { font-size: 11px; font-weight: 600; color: var(--ui-mut); margin-bottom: 5px; }
-  .pbox { background: #fff; border: 1px solid var(--ui-line); border-radius: 5px;
-    padding: 8px 10px; font-size: 12px; margin-bottom: 12px; }
-  .pbox .muted { color: var(--ui-mut); font-size: 11px; line-height: 1.4; margin-top: 3px; }
-  .pbox .srcs { color: var(--ox); font-weight: 600; font-size: 11px; margin-top: 5px; }
-  .pbtn { height: 32px; background: var(--ox); color: #fff; border-radius: 5px;
-    font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-  .events { display: flex; flex-direction: column; gap: 6px; }
-  .ev { display: flex; gap: 8px; align-items: flex-start; padding: 6px 9px; background: #fff;
-    border: 1px solid var(--ui-line); border-radius: 4px; font-size: 11px; line-height: 1.35;
-    opacity: 0; transform: translateY(4px); transition: opacity 0.35s, transform 0.35s; }
-  .ev.on { opacity: 1; transform: translateY(0); }
-  .ev .ok { color: var(--ox); font-weight: 700; flex: 0 0 12px; font-size: 10px; }
-  .ev strong { font-weight: 600; }
-  .ev .q { color: var(--ox); font-style: italic; }
-  .done-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
-    color: var(--ox); padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--ui-line); }
-  .done-head .ck { width: 16px; height: 16px; border-radius: 50%; background: var(--ox); color: #fff;
-    display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
-  .dstat { font-size: 11px; color: var(--ui-mut); display: flex; justify-content: space-between; margin-bottom: 6px; }
-  .dstat span:last-child { color: var(--ui-ink); }
+  .door-kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  .door-kicker.free { color: var(--faint); }
+  .door-kicker.paid { color: var(--green); }
+  .door h2 { margin: 10px 0 0; font-family: var(--serif); font-size: clamp(26px, 2.4vw, 32px);
+    font-weight: 500; line-height: 1.12; }
+  .door-promise { margin: 8px 0 0; font-family: var(--serif); font-size: 19px; color: #3d3a32; }
+  .door-facts { margin-top: 20px; font-size: 15px; color: var(--body); line-height: 1.45; }
+  .door-facts p { margin: 0; border-top: 1px solid var(--line-in); padding: 11px 0; }
+  .door-cta { margin-top: auto; padding-top: 24px; }
+  .door-soon { margin: 0 0 12px; font-size: 15px; font-weight: 600; }
+  .wl-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .wl-row input { flex: 1 1 190px; min-width: 0; font: 400 16px var(--sans); color: var(--ink);
+    background: var(--paper); border: 1px solid var(--input-line); border-radius: 4px;
+    padding: 11px 13px; outline: none; }
+  .wl-row .btn { padding: 12px 20px; font-size: 14.5px; white-space: nowrap; }
+  .fine { margin: 11px 0 0; font-size: 13px; color: var(--faint); }
+  .fine + .fine { margin-top: 4px; }
+  .wl-done { margin: 0; font-size: 14.5px; font-weight: 600; color: var(--green); }
+  .wl-done small { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; color: var(--faint); }
+  .wl-err { margin: 11px 0 0; font-size: 13px; color: var(--err); }
+  .wl-err a { color: var(--err); font-weight: 600; }
 
-  /* mobile static figures — hidden on desktop */
-  .m-fig { display: none; }
+  /* ---------- proof ---------- */
+  .proof .shell { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(56px, 7vw, 110px); }
+  .proof-title { margin: 10px 0 0; font-family: var(--serif); font-size: clamp(26px, 2.6vw, 36px);
+    font-weight: 500; line-height: 1.15; max-width: 30ch; }
+  .scene { margin-top: clamp(52px, 6vw, 92px); }
+  .scene-nr { margin: 0; font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; color: var(--green); }
+  .scene h2 { margin: 8px 0 0; font-family: var(--serif); font-size: clamp(27px, 2.6vw, 34px);
+    font-weight: 500; line-height: 1.1; }
+  .scene .stand { margin: 12px 0 0; font-size: clamp(16px, 1.4vw, 17.5px); line-height: 1.6;
+    color: var(--body); max-width: 56ch; text-wrap: pretty; }
+  .receipt { margin: clamp(18px, 2vw, 26px) 0 0; padding-top: 12px; border-top: 1px solid var(--line);
+    font-size: 13.5px; color: var(--muted); max-width: 56ch; }
 
-  /* ---------- coda ---------- */
-  .coda { padding: 110px 0 90px; }
-  .coda-grid { display: grid; grid-template-columns: minmax(0, 52%) minmax(0, 48%); gap: 48px; align-items: center; }
-  .coda h2, .after h3.steps-title { font-size: 34px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 18px; }
-  .coda .stand-first { font-size: 19px; line-height: 1.55; font-style: italic; color: #26221c; margin: 0 0 16px; }
-  .coda p { font-size: 17px; line-height: 1.7; margin: 0 0 13px; }
-  .tenant-card { background: #fff; border: 1px solid var(--ui-line); border-radius: 10px;
-    box-shadow: 0 18px 50px rgba(22,19,15,0.14); padding: 28px 24px; font-family: var(--sans);
-    text-align: center; margin-right: -20px; }
-  .tenant-frame { border: 2px solid var(--ink); border-radius: 8px; padding: 22px 18px; position: relative; max-width: 330px; margin: 0 auto; }
-  .tenant-frame .tl { position: absolute; top: -10px; left: 16px; background: #fff; padding: 0 8px;
-    font-size: 10px; text-transform: uppercase; letter-spacing: 0.11em; font-weight: 700; }
-  .pillrow { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap; }
-  .pill { font-size: 12px; padding: 6px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; }
-  .flow { font-size: 12px; color: var(--ui-mut); margin-top: 16px; padding-top: 13px; border-top: 1px dashed var(--line); }
-  .flow b { color: var(--ox); font-weight: 700; margin: 0 8px; }
-  .tenant-note { font-size: 14px; color: #726c60; margin-top: 14px; font-style: italic; font-family: var(--serif); }
+  /* scene 1: files -> dosar */
+  .s1-flow { display: flex; flex-wrap: wrap; gap: clamp(18px, 2.4vw, 32px); align-items: center;
+    margin-top: clamp(22px, 2.6vw, 36px); }
+  .files { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 9px;
+    font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; color: var(--body); }
+  .fchip { display: inline-block; background: #fff; border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px 12px; box-shadow: 0 1px 2px rgba(21,20,15,0.04); }
+  .fchip.nr { background: var(--green-tint); border-color: var(--green-line); color: var(--green); font-weight: 600; }
+  .devine { flex: 0 0 auto; align-self: center; margin: 0 auto; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; color: var(--faint); padding: 6px 12px; border: 1px solid var(--line);
+    border-radius: 999px; background: #fff; }
+  .a-card { flex: 1 1 320px; min-width: 0; max-width: 480px; font-family: var(--a-sans); background: #fff;
+    border: 1px solid var(--card-line); border-radius: 10px; box-shadow: var(--card-shadow);
+    padding: 16px 16px 6px; font-size: 13px; color: var(--a-ink); }
+  .a-card .dc-nr { font-size: 14.5px; }
+  .a-row { border-top: 1px solid var(--card-line-in); margin-top: 0; padding: 8px 0; }
+  .a-row:first-of-type { margin-top: 10px; }
+  .a-row p { margin: 3px 0 0; }
+  .a-row .mut { font-size: 11.5px; color: var(--a-mut); }
 
-  /* ---------- how it starts ---------- */
-  .after { padding: 30px 0 90px; }
-  .after .quiet-more { font-size: 19px; line-height: 1.55; font-style: italic; max-width: 720px; margin: 0 0 18px; }
-  .after .aud { font-size: 17px; line-height: 1.7; max-width: 720px; margin: 0 0 52px; }
-  .after .aud strong { color: var(--ox); font-weight: 600; }
-  .steps-head { border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 36px; }
-  .steps-head h3 { font-size: 26px; font-weight: 500; margin: 0; letter-spacing: -0.01em; }
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
-  .step h3 { font-size: 20px; font-weight: 600; margin: 10px 0 8px; }
-  .step p { font-size: 16px; line-height: 1.6; margin: 0; color: #1f1b15; }
-  .step .n { font-size: 56px; line-height: 1; font-weight: 500; color: var(--ox); opacity: 0.4; }
+  /* scenes 2 & 3: text | visual grid */
+  .scene.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(20px, 3vw, 48px);
+    align-items: start; }
+  .scene.grid > .txt { min-width: 0; }
+  .scene.grid > .vis { min-width: 0; max-width: 480px; width: 100%; justify-self: start; }
+  .scene.grid > .receipt { margin: 0; }
+  @media (min-width: 800px) {
+    .scene.grid { grid-template-rows: auto 1fr; }
+    .scene.grid > .vis { grid-row: 1 / span 2; }
+    .scene.grid > .receipt { align-self: start; }
+    .scene.grid.right { grid-template-columns: minmax(0, 1fr) minmax(320px, 480px); }
+    .scene.grid.right > .vis { grid-column: 2; }
+    .scene.grid.right > .txt, .scene.grid.right > .receipt { grid-column: 1; }
+    .scene.grid.left { grid-template-columns: minmax(320px, 480px) minmax(0, 1fr); }
+    .scene.grid.left > .vis { grid-column: 1; }
+    .scene.grid.left > .txt, .scene.grid.left > .receipt { grid-column: 2; }
+  }
+  .work-card { font-family: var(--a-sans); background: #fff; border: 1px solid var(--card-line);
+    border-radius: 10px; box-shadow: var(--card-shadow); padding: 16px; font-size: 13px; color: var(--a-ink); }
+  .wc-check { margin: 0; font-size: 11.5px; color: var(--a-mut); }
+  .wc-termen { margin-top: 10px; background: var(--green-tint); border: 1px solid rgba(35,79,59,0.18);
+    border-radius: 8px; padding: 10px 12px; }
+  .wc-termen .top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .wc-termen .when { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .wc-label { margin: 14px 0 0; }
+  .task { display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--card-line-in); padding: 10px 0; }
+  .task:first-of-type { margin-top: 7px; }
+  .task:last-child { padding-bottom: 2px; }
+  .task .box { flex: none; width: 14px; height: 14px; border: 1.5px solid #c6c1b3; border-radius: 3px; }
+  .task .what { flex: 1; min-width: 0; }
+  .task .due { font-size: 11.5px; color: var(--a-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .task .who { flex: none; width: 22px; height: 22px; border-radius: 999px; background: rgba(35,79,59,0.1);
+    color: var(--green); font-size: 10.5px; font-weight: 600; display: inline-flex;
+    align-items: center; justify-content: center; }
 
-  /* ---------- final CTA ---------- */
-  .cta { background: var(--ink); color: #f5f0e6; text-align: center; padding: 88px 24px 100px; }
-  .cta-mark { display: block; margin: 0 auto 22px; }
-  .cta h2 { font-size: 42px; font-weight: 500; margin: 0 0 14px; letter-spacing: -0.01em; }
-  .cta .lead { font-size: 19px; color: #b9b1a0; font-style: italic; max-width: 520px; margin: 0 auto 34px; }
-  .cta .form-row { border-color: #f5f0e6; background: transparent; max-width: 520px; margin: 0 auto; }
-  .cta .form-row input { color: #f5f0e6; }
-  .cta .form-row input::placeholder { color: #877f6e; }
-  .cta .form-row button { background: #f5f0e6; color: var(--ink); }
-  .cta-fine { font-size: 14px; color: #877f6e; font-style: italic; margin-top: 14px; }
+  .doc-sheet { font-family: var(--doc); background: #fff; box-shadow: var(--sheet-shadow);
+    padding: clamp(24px, 3vw, 40px) clamp(22px, 3vw, 42px); font-size: 13px; line-height: 1.65; color: #26231c; }
+  .doc-nr { margin: 0; font-size: 11px; text-align: right; font-variant-numeric: tabular-nums; }
+  .doc-title { margin: 18px 0 0; text-align: center; font-weight: 700; letter-spacing: 0.08em; font-size: 13.5px; }
+  .doc-sheet .para { margin: 16px 0 0; text-wrap: pretty; }
+  .doc-sheet .para + .para { margin-top: 10px; }
+  .doc-skel { margin-top: 12px; }
+  .doc-skel span { display: block; height: 8px; background: #eceade; border-radius: 2px; }
+  .doc-skel span + span { margin-top: 7px; }
+  .doc-skel span:nth-child(2) { width: 94%; }
+  .doc-skel span:nth-child(3) { width: 72%; }
+  .doc-fnline { margin-top: 22px; border-top: 1px solid #c9c3b2; width: 44%; }
+  .doc-fn { margin: 8px 0 0; font-size: 11.5px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .doc-fn .pill.ok { font-family: var(--sans); padding: 2px 9px; font-size: 10.5px; }
 
-  .footer { background: #121110; color: #9b958a; font-family: var(--sans); font-size: 13px;
-    padding: 24px 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-  .footer a { color: #9b958a; text-decoration: none; margin-left: 16px; }
-  .footer a:hover { color: #fff; }
-  .footer a:first-child { margin-left: 0; }
+  @keyframes fx-rise { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: none; } }
+  @keyframes fx-pop { 0% { opacity: 0; transform: scale(0.85); } 70% { transform: scale(1.04); } 100% { opacity: 1; transform: none; } }
+
+  /* ---------- pricing ---------- */
+  .pricing { border-top: 1px solid var(--line); }
+  .pricing .shell { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(56px, 7vw, 104px); }
+  .pricing h2.big { margin: 10px 0 0; font-family: var(--serif); font-size: clamp(30px, 3.4vw, 46px);
+    font-weight: 500; line-height: 1.1; text-wrap: balance; }
+  .pricing .intro { margin: 14px 0 0; font-size: clamp(16px, 1.4vw, 17.5px); line-height: 1.6;
+    color: var(--body); max-width: 56ch; text-wrap: pretty; }
+  .price-cols { display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 64px); align-items: flex-start;
+    margin-top: clamp(28px, 3.4vw, 48px); }
+  .ladder { flex: 1 1 420px; min-width: 0; }
+  .lrow { border-top: 1px solid var(--line); padding: 16px 0; display: flex; flex-wrap: wrap;
+    justify-content: space-between; align-items: baseline; gap: 6px 18px; }
+  .lrow:last-of-type { border-bottom: 1px solid var(--line); }
+  .lrow .role { margin: 0; font-family: var(--serif); font-size: 21px; font-weight: 500; }
+  .lrow .cond { margin: 4px 0 0; font-size: 13.5px; color: var(--muted); }
+  .lrow .price { margin: 0; white-space: nowrap; }
+  .lrow .price b { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .lrow .price span { font-size: 13.5px; color: var(--muted); font-weight: 400; }
+  .price-note { margin: 14px 0 0; font-size: 13.5px; color: var(--muted); max-width: 56ch; }
+  .price-note + .price-note { margin-top: 8px; }
+  .included { margin-top: clamp(22px, 2.6vw, 34px); }
+  .included p { margin: 8px 0 0; font-size: 15.5px; line-height: 1.7; color: var(--body); max-width: 60ch; }
+
+  .calc { flex: 1 1 300px; min-width: 0; max-width: 420px; background: #fff;
+    border: 1px solid var(--card-line); border-radius: 10px; box-shadow: var(--card-shadow);
+    padding: clamp(18px, 2vw, 26px); }
+  .calc-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+  .calc-row + .calc-row { margin-top: 10px; }
+  .calc-row .lbl { font-size: 15.5px; }
+  .stepper { display: inline-flex; align-items: center; gap: 2px; }
+  .stepper button { width: 44px; height: 44px; border: 1px solid var(--input-line); background: var(--paper);
+    font-size: 20px; color: var(--ink); cursor: pointer; font-family: var(--sans); padding: 0; }
+  .stepper .dec { border-radius: 8px 0 0 8px; }
+  .stepper .inc { border-radius: 0 8px 8px 0; }
+  .stepper output { width: 44px; height: 44px; display: inline-flex; align-items: center;
+    justify-content: center; border-top: 1px solid var(--input-line); border-bottom: 1px solid var(--input-line);
+    font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .calc-result { margin-top: 18px; border-top: 1px solid var(--line-in); padding-top: 14px; }
+  .calc-kicker { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--faint); }
+  .calc-total { margin: 4px 0 0; }
+  .calc-total b { font-size: 30px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .calc-total span { font-size: 14px; color: var(--muted); font-weight: 400; }
+  .calc-list { margin: 6px 0 0; font-size: 13.5px; color: var(--muted); }
+  .calc-list b { font-weight: 400; font-variant-numeric: tabular-nums; }
+  .calc-dedicat p { margin: 0; font-size: 15.5px; line-height: 1.5; }
+  .calc-dedicat .sub { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); }
+
+  /* ---------- cum începe ---------- */
+  .start .shell { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(48px, 6vw, 88px); }
+  .start h2.big { margin: 10px 0 0; font-family: var(--serif); font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500; line-height: 1.1; text-wrap: balance; }
+  .steps { display: flex; flex-wrap: wrap; gap: clamp(28px, 3.5vw, 56px); align-items: flex-start;
+    margin-top: clamp(26px, 3vw, 44px); }
+  .step { flex: 1 1 260px; min-width: 0; }
+  .step.form-step { flex: 1.2 1 320px; }
+  .step-title { margin: 0; font-family: var(--serif); font-size: 24px; font-weight: 500; }
+  .step-title .n { color: var(--green); }
+  .step p.body { margin: 12px 0 0; font-size: 15.5px; line-height: 1.6; color: var(--body); text-wrap: pretty; }
+
+  .claim { margin-top: 14px; background: #fff; border: 1px solid var(--card-line); border-radius: 10px;
+    box-shadow: var(--card-shadow); padding: clamp(16px, 2vw, 24px); }
+  .claim label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--faint); }
+  .claim input[type=email] { margin-top: 6px; width: 100%; font: 400 16px var(--sans); color: var(--ink);
+    background: var(--paper); border: 1px solid var(--input-line); border-radius: 8px;
+    padding: 12px 13px; outline: none; }
+  .claim .calc-row { margin-top: 14px; }
+  .claim .calc-row + .calc-row { margin-top: 8px; }
+  .claim .calc-row .lbl { font-size: 15px; }
+  .claim-price { margin: 12px 0 0; font-size: 13.5px; color: var(--muted); }
+  .claim-price b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .claim-price span { font-variant-numeric: tabular-nums; }
+  .claim .btn { margin-top: 14px; width: 100%; border-radius: 8px; padding: 14px 22px; }
+  .claim-fine { margin: 10px 0 0; font-size: 13px; color: var(--faint); }
+  .claim-err { margin: 12px 0 0; font-size: 13.5px; color: var(--err); display: none; }
+  .claim-err a { color: var(--err); font-weight: 600; }
+  .claim.err .claim-err { display: block; }
+  .claim-done { margin-top: 14px; background: var(--green-tint); border: 1px solid var(--green-line);
+    border-radius: 10px; padding: clamp(16px, 2vw, 24px); }
+  .claim-done .t { margin: 0; font-size: 16px; font-weight: 600; color: var(--green); }
+  .claim-done .m { margin: 8px 0 0; font-size: 14.5px; color: var(--body); }
+  .claim-done .m b { font-weight: 600; }
+  .claim-done .echo { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); }
+
+  .free-note { margin: clamp(24px, 3vw, 40px) 0 0; padding-top: 14px; border-top: 1px solid var(--line);
+    font-size: 14px; color: var(--muted); max-width: 62ch; }
+
+  /* ---------- trust ---------- */
+  .trust { border-top: 1px solid var(--line); }
+  .trust .shell { padding-top: clamp(44px, 5.5vw, 80px); padding-bottom: clamp(48px, 6vw, 88px); }
+  .trust h2 { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500; line-height: 1.1; }
+  .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0 clamp(28px, 4vw, 64px); margin-top: clamp(18px, 2.2vw, 28px); font-size: 15.5px;
+    line-height: 1.55; color: var(--body); max-width: 980px; }
+  .trust-grid p { margin: 0; border-top: 1px solid var(--line); padding: 13px 0; text-wrap: pretty; }
+  .trust-fine { margin: 14px 0 0; font-size: 13.5px; color: var(--faint); }
+
+  /* ---------- final band ---------- */
+  .band { background: var(--ink); color: var(--paper); }
+  .band .shell { padding-top: clamp(48px, 6vw, 88px); padding-bottom: clamp(48px, 6vw, 88px); text-align: center; }
+  .band h2 { margin: 0 auto; font-family: var(--serif); font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 500; line-height: 1.15; max-width: 24ch; text-wrap: balance; }
+  .band-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 36px;
+    margin-top: clamp(26px, 3vw, 40px); }
+  .band-cta { display: flex; flex-direction: column; gap: 9px; align-items: center; }
+  .band-cta .sub { font-size: 13px; color: var(--dark-sub); }
+  .btn-light { display: inline-block; background: var(--paper); color: var(--ink); text-decoration: none;
+    padding: 14px 28px; border-radius: 6px; font-size: 15px; font-weight: 600; }
+  .btn-light:hover { background: #e8e6df; color: var(--ink); }
+  .btn-ghost { display: inline-block; background: transparent; color: var(--paper); text-decoration: none;
+    padding: 13px 26px; border-radius: 6px; border: 1px solid rgba(250,250,248,0.4);
+    font-size: 15px; font-weight: 600; }
+  .btn-ghost:hover { border-color: rgba(250,250,248,0.8); color: var(--paper); }
+
+  /* ---------- footer ---------- */
+  .footer { border-top: 1px solid var(--line); }
+  .footer .shell { padding-top: clamp(24px, 3vw, 40px); padding-bottom: clamp(24px, 3vw, 40px);
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 16px 32px; }
+  .footer .brand-name { font-size: 21px; }
+  .footer .brand-tag { font-size: 13.5px; margin-left: 6px; }
+  .footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13.5px; }
+  .footer nav a { text-decoration: none; }
+  .footer nav a:hover { text-decoration: underline; }
 
   @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
-
-  /* ---------- mobile: the story told in finished frames ---------- */
-  @media (max-width: 920px) {
-    .shell { padding: 0 20px; }
-    .masthead { padding-top: 18px; }
-    .masthead .issue { display: none; }
-    .hero { padding: 40px 0 72px; }
-    .hero-inner { grid-template-columns: 1fr; gap: 0; }
-    .lead { font-size: 19px; margin-bottom: 30px; }
-    .hero-cta { padding-top: 22px; }
-    .cta-aside { font-size: 15px; }
-    .hero-stage { min-height: 0; margin-top: 34px; }
-    .paper-sheet { display: none; }
-    .live-card { margin: 0; }
-    .dline { padding: 9px 14px; gap: 10px; }
-    .dline .k { flex-basis: 72px; }
-    .dline .src { display: none; }
-    .dline:hover { background: transparent; }
-    .hero-hint { display: none; }
-    .mail { position: static; width: auto; margin-top: 12px; }
-    .mail.filed { transform: translateY(-24px) scale(0.6); }
-
-    /* no scroll-driven demo on touch: hide the stage, show finished frames */
-    .stage-col { display: none; }
-    .demo-grid { display: block; }
-    .chapters { padding-bottom: 0; }
-    .chapter { min-height: 0; opacity: 1; justify-content: flex-start; padding: 44px 0 8px; }
-    .chapter h2 { font-size: 28px; }
-    .chapter .stand-first { font-size: 17px; }
-    .chapter p { font-size: 16px; }
-
-    .m-fig { display: block; margin-top: 20px; }
-    .m-fig .sheet { box-shadow: 0 10px 32px rgba(22,19,15,0.14); }
-    .m-fig .row { padding: 9px 14px; }
-    .m-fig .row .k { flex-basis: 76px; }
-    .m-fig .row .src { display: none; }
-    .m-fig .row .filled { display: inline-flex; animation: none; }
-    .m-fig .tasks { padding: 6px 14px; display: flex; }
-    .m-fig .task { opacity: 1; transform: none; }
-    .m-fig .stamp { opacity: 1; }
-    .m-fig .word-body { height: auto; min-height: 0; flex-direction: column; }
-    .m-fig .doc-col { padding: 12px; }
-    .m-fig .docpage { padding: 22px 24px; }
-    .m-fig .wchunk { opacity: 1; transform: none; }
-    .m-fig .fn-check { opacity: 1; }
-    .m-fig .pane { flex: none; border-left: none; border-top: 1px solid var(--ui-line); }
-    .m-fig .pane-body { padding: 14px; }
-    .m-fig .pstate { position: static; }
-
-    .coda { padding: 64px 0 48px; }
-    .coda-grid { grid-template-columns: 1fr; gap: 28px; }
-    .tenant-card { margin-right: 0; }
-    .after { padding: 10px 0 64px; }
-    .steps { grid-template-columns: 1fr; gap: 26px; }
-    .cta { padding: 64px 20px 72px; }
-    .cta h2 { font-size: 32px; }
-    .footer { padding: 22px 20px; }
-    .form-row input { font-size: 16px; }
+    * { animation: none !important; transition: none !important; }
   }
   </style>
   <!-- Umami: self-hosted, cookieless analytics. No consent banner required.
@@ -408,580 +392,605 @@
 </head>
 <body>
 
-<div class="shell">
-  <div class="masthead">
-    <div class="brand">
-      <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 19.5 a 4.6 4.6 0 1 0 0 9.2 a 4.6 4.6 0 1 0 0 -9.2 Z M29.6 31.5 L34.4 31.5 L34.4 44 L32 47.8 L29.6 44 Z"/></svg>
-      Acta
-    </div>
-    <div class="issue">Asistent de drept</div>
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="shell">
+    <span class="brand">
+      <span class="brand-mark">
+        <svg width="13" height="17" viewBox="0 0 18 22" aria-hidden="true"><path fill-rule="evenodd" d="M9 1 C13.2 3.2 15 6.3 15 9.6 C15 13.9 11.6 18.4 9 21 C6.4 18.4 3 13.9 3 9.6 C3 6.3 4.8 3.2 9 1 Z M9 7.4 A1.6 1.6 0 1 0 9 10.6 A1.6 1.6 0 1 0 9 7.4 Z M8.55 11.6 L9.45 11.6 L9.2 17.8 L8.8 17.8 Z" fill="#234f3b"/></svg>
+        <span class="brand-name">Acta</span>
+      </span>
+      <span class="brand-tag">Dosarele cabinetului, ținute la zi peste noapte</span>
+    </span>
+    <nav>
+      <a href="#preturi">Prețuri</a>
+      <a href="#incepeti">Începeți</a>
+    </nav>
   </div>
+</header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="kicker">Pentru cabinete pe Microsoft 365</div>
-        <h1>Dosarul care se ține singur la&nbsp;zi.</h1>
-        <p class="lead">Îi dai actele și numărul de dosar. Restul vine singur.</p>
-        <div class="hero-cta">
-          <a class="cta-quiet" href="#cere-acces">Cere acces în avans</a>
-          <span class="cta-aside">sau derulează — dosarul lucrează deja.</span>
+<!-- HERO -->
+<section class="hero">
+  <div class="shell hero-inner">
+    <div class="hero-copy">
+      <h1>Dosarul care se ține singur la&nbsp;zi.</h1>
+      <p class="lead">Acta construiește dosarul din actele dumneavoastră și din numărul de dosar, îl verifică în fiecare noapte pe portal.just.ro și transformă fiecare termen în sarcini pentru cabinet. Actele se redactează cu citări verificate din legislația română.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#incepeti" data-track="hero-cta-gratuit">Începeți gratuit</a>
+        <a class="link-cta" href="#preturi" data-track="hero-cta-preturi">Vedeți prețurile</a>
+      </div>
+      <p class="hero-fine g-closed">Contul gratuit se deschide pe rând, pe invitații — vă trecem pe lista de așteptare.</p>
+      <p class="hero-fine g-open">Fără card. Contul se creează în câteva minute.</p>
+    </div>
+
+    <div class="dosar-card" aria-label="Exemplu: un dosar ținut la zi de Acta">
+      <div class="dc-top">
+        <span style="display:inline-flex;align-items:baseline;gap:8px">
+          <span class="a-label">DOSAR</span>
+          <span class="dc-nr">3421/299/2026</span>
+        </span>
+        <span class="pill gray">verificat azi, 06:00</span>
+      </div>
+      <p class="dc-sub">Judecătoria Sectorului 1 — Secția civilă</p>
+      <div class="dc-rows">
+        <div class="dc-row">
+          <div class="dc-head"><span class="a-label">PĂRȚI</span><span class="a-src">portal.just.ro · azi 06:00</span></div>
+          <p class="strong">Popescu Maria c. Danubia Construct SRL</p>
+        </div>
+        <div class="dc-row">
+          <div class="dc-head"><span class="a-label">OBIECT</span><span class="a-src">portal.just.ro · azi 06:00</span></div>
+          <p>pretenții · 48.500 lei</p>
+        </div>
+        <div class="dc-row">
+          <div class="dc-head"><span class="a-label">STADIU</span><span class="a-src">portal.just.ro · azi 06:00</span></div>
+          <p>Fond — în probațiune</p>
         </div>
       </div>
-
-      <div class="hero-stage">
-        <div class="paper-sheet p1"><div class="scribble"><div></div><div></div><div></div><div></div><div></div></div></div>
-        <div class="paper-sheet p2"><div class="scribble"><div></div><div></div><div></div><div></div><div></div></div></div>
-
-        <div class="live-card">
-          <div class="lc-head">
-            <div>
-              <div class="lc-title">Vega S.R.L. — Petrol Distribuție</div>
-              <div class="lc-sub">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-            </div>
-            <div class="lc-time">actualizat azi · 06:00</div>
-          </div>
-          <div class="dline"><span class="k">Părți</span><span class="v">Vega S.R.L. (reclamantă) · Petrol Distribuție S.A. (pârâtă)</span><span class="src">act · OneDrive</span></div>
-          <div class="dline"><span class="k">Obiect</span><span class="v">pretenții — 156.000 EUR</span><span class="src">contract · <em>03.02.2023</em></span></div>
-          <div class="dline"><span class="k">Stadiu</span><span class="v">fond — răspuns la întâmpinare depus</span><span class="src">portal.just.ro · <em>azi 06:00</em></span></div>
-          <div class="dline"><span class="k">Termene</span><span class="v">22.05.2026 · 10.09.2026</span><span class="src">portal.just.ro · <em>azi 06:00</em></span></div>
-          <div class="dline count-flash" id="acteRow"><span class="k">Acte</span><span class="v"><span id="acteCount">41</span> acte · <span id="mailCount">56</span> e-mailuri</span><span class="src">e-mail · <em>intrat singur</em></span></div>
-          <div class="dline"><span class="k">De făcut</span><span class="v">note scrise până la 17.05.2026</span><span class="src">generat din termen</span></div>
-          <div class="hero-hint">Fiecare rând își știe sursa — treci peste el și o vezi.</div>
+      <div class="dc-block">
+        <span class="a-label">TERMENE</span>
+        <div class="dc-termen">
+          <span class="when">24.09.2026, 09:00 — Complet C7</span>
+          <span class="pill warn">în 42 de zile</span>
         </div>
-
-        <div class="mail" id="mail">
-          <div class="m-from">grefa@judecatoria-sector3.ro</div>
-          <div class="m-subj">Re: dosar 1234/45/2024 — poziția pârâtei</div>
-          <div class="m-tag">e-mail nou · se îndosariază singur</div>
+        <p class="dc-note">Invitație de calendar trimisă. · portal.just.ro, azi 06:00</p>
+      </div>
+      <div class="dc-block">
+        <span class="a-label">ACTE</span>
+        <div class="dc-acte">
+          <div class="dc-act"><span>Cerere de chemare în judecată</span><span class="dc-date">02.06.2026</span></div>
+          <div class="dc-act"><span>Întâmpinare</span><span class="dc-date">30.06.2026</span></div>
+          <div class="dc-new">
+            <div class="dc-act">
+              <span class="title">Raport de expertiză tehnică <span class="pill ok">nou</span></span>
+              <span class="dc-date">12.08.2026</span>
+            </div>
+            <p class="dc-note">Atașat la dosar. Sarcină creată: obiecțiuni până la 24.08.2026.</p>
+            <p class="dc-src-line">portal.just.ro · azi 06:00</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- CONTINUOUS DEMO -->
-  <div class="demo" id="demo">
-    <div class="demo-grid">
+<!-- THE TWO DOORS -->
+<section class="doors-sect" id="incepeti">
+  <div class="shell">
+    <p class="kicker">Cum începeți</p>
+    <div class="doors">
 
-      <div class="chapters">
-        <div class="chapter" data-ch="1">
-          <div class="ch-label">Capitolul I</div>
-          <h2>Se construiește singur</h2>
-          <p class="stand-first">Lipești tot ce ți-a trimis clientul. Peste o oră–două, dosarul e citit.</p>
-          <p>Două lucruri îi dai: actele și numărul de dosar. Acta citește fiecare act, fiecare e-mail, fiecare hotărâre — și așază totul la locul lui: părți, obiect, stadiu, termene.</p>
-          <p>Fiecare informație vine cu sursa ei. Vezi de unde știe.</p>
-          <p>Și îți spune ce lipsește din dosar — înainte să afli de la instanță.</p>
-
-          <div class="m-fig">
-            <div class="sheet">
-              <div class="sheet-head">
-                <div>
-                  <div class="t">Vega S.R.L. — Petrol Distribuție</div>
-                  <div class="s">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-                </div>
-              </div>
-              <div class="row on"><span class="k">Părți</span><span class="filled"><span class="v">Vega S.R.L. · Petrol Distribuție S.A.</span></span></div>
-              <div class="row on"><span class="k">Obiect</span><span class="filled"><span class="v">pretenții — 156.000 EUR</span></span></div>
-              <div class="row on"><span class="k">Stadiu</span><span class="filled"><span class="v">fond — întâmpinare depusă</span></span></div>
-              <div class="row on"><span class="k">Termene</span><span class="filled"><span class="v">22.05.2026</span></span></div>
-              <div class="row on"><span class="k">Ce lipsește</span><span class="filled"><span class="v missing">Împuternicire: lipsește</span></span></div>
-              <div class="stamp-strip"><span class="stamp">gata în ~1 oră · fără nicio intervenție</span></div>
-            </div>
-          </div>
+      <div class="door" id="gratuit">
+        <span class="door-kicker free">Gratuit</span>
+        <h2>Monitorizare dosare</h2>
+        <p class="door-promise">Nu mai ratați nicio comunicare.</p>
+        <div class="door-facts">
+          <p>Portalul, verificat în fiecare noapte.</p>
+          <p>Alerte pe e-mail; la termen nou, invitație de calendar.</p>
+          <p>Calculator de termene (Art. 181 C.proc.civ.).</p>
+          <p>Oricâte dosare. Fără card.</p>
         </div>
-
-        <div class="chapter" data-ch="2">
-          <div class="ch-label">Capitolul II</div>
-          <h2>Îți spune ce e de făcut</h2>
-          <p class="stand-first">Instanța anunță un termen. Dosarul îl transformă în sarcini.</p>
-          <p>Acta verifică portal.just.ro în fiecare dimineață. Un termen nou nu rămâne o dată pe o pagină de portal: devine sarcini cu scadențe, împărțite pe oameni.</p>
-          <p>Dosarul devine lista de lucru a cabinetului — fără ca cineva să o scrie.</p>
-
-          <div class="m-fig">
-            <div class="sheet">
-              <div class="sheet-head">
-                <div>
-                  <div class="t">Vega S.R.L. — Petrol Distribuție</div>
-                  <div class="s">miercuri 14.05 · portal verificat la 06:00</div>
-                </div>
-              </div>
-              <div class="row hl on"><span class="k">Termen nou</span><span class="filled"><span class="v">10.09.2026, ora 09:00 — fond</span></span></div>
-              <div class="tasks on">
-                <div class="task on"><span class="box"></span><span>Pregătește note scrise — scadență 05.09.2026</span><span class="who">M.S.</span></div>
-                <div class="task on"><span class="box"></span><span>Depune împuternicirea — scadență 01.09.2026</span><span class="who">A.P.</span></div>
-              </div>
-              <div class="row on"><span class="k">De făcut</span><span class="filled"><span class="v">2 sarcini · prima scadență 01.09.2026</span></span></div>
-              <div class="stamp-strip"><span class="stamp">dosarul devine lista ta de lucru</span></div>
-            </div>
-          </div>
+        <div class="door-cta g-closed">
+          <p class="door-soon">În curând — deschis pe rând, pe invitații.</p>
+          <form class="wl-row" id="freeWaitlist">
+            <input type="email" name="email" autocomplete="email" required placeholder="adresa dumneavoastră de e-mail" aria-label="E-mail">
+            <button type="submit" class="btn">Treceți pe listă</button>
+          </form>
+          <p class="fine" id="freeWaitlistFine">Vă anunțăm când se deschide.</p>
         </div>
-
-        <div class="chapter" data-ch="3">
-          <div class="ch-label">Capitolul III</div>
-          <h2>Scrie cu tine</h2>
-          <p class="stand-first">Redactează în Word, în stilul cabinetului, cu citări verificate.</p>
-          <p>Cereri, întâmpinări, răspunsuri — scrise direct în documentul deschis, cu antetul, numerotarea și formatul cabinetului. Nu într-un editor separat, nu prin copy-paste.</p>
-          <p>Fiecare citare — lege sau jurisprudență — vine din corpusul legislativ românesc și e verificată înainte să ajungă în notele de subsol.</p>
-
-          <div class="m-fig">
-            <div class="word">
-              <div class="word-head">
-                <span class="doc">Răspuns Vega.docx</span>
-                <span class="app">Word · Acta</span>
-              </div>
-              <div class="word-body">
-                <div class="doc-col">
-                  <div class="docpage">
-                    <div class="wchunk">
-                      <div class="dp-title">RĂSPUNS LA ÎNTÂMPINARE</div>
-                      <div class="dp-meta">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-                      <p><strong>1.</strong> Sediul social al subscrisei, astfel cum este înregistrat la ONRC, este și rămâne în București, Sector 3, conform certificatului constatator depus în probațiune.</p>
-                      <p><strong>2.</strong> În acest sens, ÎCCJ a stabilit prin Decizia nr. 23/2018 (RIL) că <em>„sediul opozabil terților este cel înregistrat la ONRC"</em>.<sup>2</sup><span class="fn-check"> ✓ verificată</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="pane">
-                  <div class="pane-head"><span class="adot"><svg width="13" height="13" viewBox="0 0 64 64" aria-hidden="true"><path fill="#ffffff" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/></svg></span>Acta</div>
-                  <div class="pane-body">
-                    <div class="pstate">
-                      <div class="done-head"><span class="ck">✓</span>Document redactat</div>
-                      <div class="dstat"><span>Lungime</span><span>5 pagini · 1.247 cuvinte</span></div>
-                      <div class="dstat"><span>Surse consultate</span><span>12</span></div>
-                      <div class="dstat"><span>Citări inserate</span><span>2 note de subsol</span></div>
-                      <div class="dstat"><span>Șablon</span><span>stilul cabinetului</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="door-cta g-open">
+          <a class="btn" href="https://app.acta-legal.ro">Creați contul</a>
+          <p class="fine">Fără card. Durează câteva minute.</p>
         </div>
       </div>
 
-      <div class="stage-col">
-        <div class="stage-sticky">
-          <div class="stage-frame" id="stageFrame">
-            <div class="rail"><div class="fill"></div></div>
-
-            <!-- SCENE 1: dosar -->
-            <div class="scene" id="sceneDosar">
-              <div class="file-strip">
-                <div class="file-pile">
-                  <div class="chip c1" data-at="1">contract scan 2.pdf</div>
-                  <div class="chip c2" data-at="1">FW: FW: raspuns.msg</div>
-                  <div class="chip c3" data-at="1">IMG_0347.jpeg</div>
-                  <div class="chip c4" data-at="2">intampinare_final_FINAL(2).docx</div>
-                  <div class="chip c5" data-at="2">aviz 14.pdf</div>
-                  <div class="chip c6" data-at="2">hotarare AGA.pdf</div>
-                </div>
-                <div class="numfield" data-at="2"><span class="typed">1234/45/2024</span></div>
-                <div class="counter" data-at="3">citite 34/41</div>
-              </div>
-
-              <div class="sheet">
-                <div class="sheet-head">
-                  <div>
-                    <div class="t">Vega S.R.L. — Petrol Distribuție</div>
-                    <div class="s">Dosar nr. 1234/45/2024 · Judecătoria Sector 3</div>
-                  </div>
-                  <div class="ticker">
-                    <span data-at="0" data-until="7">azi</span><span data-at="8" data-until="8">marți 13.05</span><span data-at="9">miercuri 14.05 · 06:00</span>
-                  </div>
-                </div>
-
-                <div class="row" data-at="3"><span class="k">Părți</span><span class="dash">—</span><span class="filled"><span class="v">Vega S.R.L. · Petrol Distribuție S.A.</span><span class="src">act · OneDrive</span></span></div>
-                <div class="row" data-at="3"><span class="k">Obiect</span><span class="dash">—</span><span class="filled"><span class="v">pretenții — 156.000 EUR</span><span class="src">contract · <em>03.02.2023</em></span></span></div>
-                <div class="row" data-at="4"><span class="k">Instanță</span><span class="dash">—</span><span class="filled"><span class="v">Judecătoria Sector 3</span><span class="src">portal.just.ro</span></span></div>
-                <div class="row" data-at="4"><span class="k">Stadiu</span><span class="dash">—</span><span class="filled"><span class="v">fond — întâmpinare depusă</span><span class="src">portal.just.ro</span></span></div>
-                <div class="row" data-at="5"><span class="k">Termene</span><span class="dash">—</span><span class="filled"><span class="v">22.05.2026</span><span class="src">e-mail · <em>19.06</em></span></span></div>
-                <div class="row" data-at="6"><span class="k">Ce lipsește</span><span class="dash">—</span><span class="filled"><span class="v missing">Împuternicire: lipsește</span><span class="src">verificat automat</span></span></div>
-
-                <div class="row hl late" data-at="8"><span class="k">Termen nou</span><span class="dash">—</span><span class="filled"><span class="v">10.09.2026, ora 09:00 — fond</span><span class="src">portal.just.ro · <em>06:00</em></span></span></div>
-
-                <div class="tasks" data-at="9">
-                  <div class="task" data-at="9"><span class="box"></span><span>Pregătește note scrise — scadență 05.09.2026</span><span class="who">M.S.</span></div>
-                  <div class="task" data-at="10"><span class="box"></span><span>Depune împuternicirea — scadență 01.09.2026</span><span class="who">A.P.</span></div>
-                </div>
-                <div class="row late" data-at="10"><span class="k">De făcut</span><span class="dash">—</span><span class="filled"><span class="v">2 sarcini · prima scadență 01.09.2026</span><span class="src">actualizat singur</span></span></div>
-
-                <div class="stamp-strip">
-                  <span class="stamp" data-at="7" data-until="7">gata în ~1 oră · fără nicio intervenție</span>
-                  <span class="stamp" data-at="10">dosarul devine lista ta de lucru</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- SCENE 2: Word -->
-            <div class="scene off" id="sceneWord">
-              <div class="word">
-                <div class="word-head">
-                  <span class="doc">Răspuns Vega.docx</span>
-                  <span class="app">Microsoft Word · panoul Acta</span>
-                </div>
-                <div class="word-body">
-                  <div class="doc-col">
-                    <div class="docpage">
-                      <div class="wchunk" data-at="13">
-                        <div class="dp-title">RĂSPUNS LA ÎNTÂMPINARE</div>
-                        <div class="dp-meta">Dosar nr. 1234/45/2024<br>Judecătoria Sector 3</div>
-                        <p>Domnule Președinte, Stimată instanță,</p>
-                        <p>Subscrisa, <strong>S.C. VEGA S.R.L.</strong>, în calitate de reclamantă în dosarul nr. 1234/45/2024, formulează prezentul <strong>răspuns la întâmpinare</strong>, prin care solicităm respingerea apărărilor invocate.</p>
-                      </div>
-                      <div class="wchunk" data-at="14">
-                        <div class="sect">I. CU PRIVIRE LA EXCEPȚIA NECOMPETENȚEI TERITORIALE</div>
-                        <p><strong>1.</strong> Sediul social al subscrisei, astfel cum este înregistrat la ONRC, este și rămâne în București, Sector 3, conform certificatului constatator depus în probațiune.</p>
-                        <p><strong>2.</strong> Hotărârea adunării asociaților invocată de pârâtă nu a fost înregistrată la ONRC și nu produce efecte față de terți, conform art. 7 alin. (1) din Legea nr. 26/1990.<sup>1</sup></p>
-                      </div>
-                      <div class="wchunk" data-at="15">
-                        <p><strong>3.</strong> În acest sens, ÎCCJ a stabilit prin Decizia nr. 23/2018 (RIL) că <em>„sediul opozabil terților este cel înregistrat la ONRC"</em>.<sup>2</sup><span class="fn-check" data-at="15"> ✓ verificată</span></p>
-                        <p><strong>4.</strong> Pentru aceste motive, solicităm respingerea excepției ca neîntemeiată.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="pane">
-                    <div class="pane-head"><span class="adot"><svg width="13" height="13" viewBox="0 0 64 64" aria-hidden="true"><path fill="#ffffff" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/></svg></span>Acta</div>
-                    <div class="pane-body">
-                      <div class="pstate" id="pForm">
-                        <div class="plabel">Dosar</div>
-                        <div class="pbox">
-                          Vega S.R.L. — Petrol Distribuție
-                          <div class="muted">Litigiu comercial. Vega contestă o factură de 156.000 EUR. Termen 22.05.2026.</div>
-                          <div class="srcs">23 surse disponibile</div>
-                        </div>
-                        <div class="plabel">Instrucțiuni</div>
-                        <div class="pbox">Răspunde la excepția de necompetență. Argumentează că sediul real e în București.</div>
-                        <div class="pbtn">Redactează</div>
-                      </div>
-                      <div class="pstate off" id="pStream">
-                        <div class="events">
-                          <div class="ev" data-at="13"><span class="ok">✓</span><span>Cerere analizată</span></div>
-                          <div class="ev" data-at="13"><span class="ok">✓</span><span>Caut: <span class="q">„necompetență teritorială"</span> — 12 rezultate</span></div>
-                          <div class="ev" data-at="14"><span class="ok">✓</span><span>Consultă <strong>C.proc.civ. art. 107</strong></span></div>
-                          <div class="ev" data-at="14"><span class="ok">✓</span><span>Consultă dosar Vega — 8 acte, 23 e-mailuri</span></div>
-                          <div class="ev" data-at="15"><span class="ok">✓</span><span>Consultă <strong>ICCJ Dec. 23/2018</strong> (RIL) — citare verificată</span></div>
-                          <div class="ev" data-at="15"><span class="ok">✓</span><span>Aplic <strong>stilul cabinetului</strong></span></div>
-                        </div>
-                      </div>
-                      <div class="pstate off" id="pDone">
-                        <div class="done-head"><span class="ck">✓</span>Document redactat</div>
-                        <div class="dstat"><span>Lungime</span><span>5 pagini · 1.247 cuvinte</span></div>
-                        <div class="dstat"><span>Surse consultate</span><span>12</span></div>
-                        <div class="dstat"><span>Citări inserate</span><span>2 note de subsol</span></div>
-                        <div class="dstat"><span>Șablon</span><span>stilul cabinetului</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
+      <div class="door">
+        <span class="door-kicker paid">De la 49 € / lună</span>
+        <h2>Cabinetul pe Acta</h2>
+        <p class="door-promise">Dosarul se construiește singur și lucrează pentru cabinet.</p>
+        <div class="door-facts">
+          <p>Dosarul, citit și ținut la zi, cu sursele la vedere.</p>
+          <p>Termenele devin sarcini, împărțite pe oameni.</p>
+          <p>Acte redactate cu citări verificate din legislația română.</p>
+          <p>Evidența orelor și facturarea.</p>
+        </div>
+        <div class="door-cta">
+          <a class="btn" href="#lansare" data-track="door-cta-paid">Rezervați un loc de lansare</a>
+          <p class="fine">Un om vă contactează în două zile lucrătoare. Fără plată acum.</p>
+          <p class="fine">Preț de lansare pentru primele 100 de cabinete.</p>
         </div>
       </div>
 
     </div>
   </div>
+</section>
 
-  <!-- CODA -->
-  <div class="coda">
-    <div class="coda-grid">
-      <div>
-        <div class="ch-label">Coda</div>
-        <h2>Datele rămân la tine</h2>
-        <p class="stand-first">Documentele, e-mailurile și dosarele rămân unde sunt: în Microsoft 365-ul cabinetului. Acta nu copiază nimic în depozite proprii.</p>
-        <p>Indexul de căutare și răspunsurile generate trec prin endpoint-ul european al furnizorului AI. Nu antrenăm modele pe datele cabinetului. Dacă reziliezi accesul, Acta nu mai poate citi nimic — nu există copii la noi.</p>
-        <p>Pentru cabinete care lucrează cu clienți reglementați sau acte sensibile, această separare contează mai mult decât orice altă caracteristică.</p>
-      </div>
-      <div class="tenant-card">
-        <div class="tenant-frame">
-          <div class="tl">Microsoft 365 · tenant-ul tău</div>
-          <div class="pillrow"><span class="pill">Outlook</span><span class="pill">OneDrive</span><span class="pill">SharePoint</span></div>
-          <div class="pillrow"><span class="pill">Word + Acta</span></div>
-          <div class="flow">cerere <b>→</b> EU AI endpoint <b>→</b> răspuns</div>
+<!-- PROOF: THREE SCENES -->
+<section class="proof">
+  <div class="shell">
+    <p class="kicker">Concret</p>
+    <p class="proof-title" style="font-family:var(--serif)">Trei scene din viața unui dosar pe Acta.</p>
+
+    <!-- SCENE 1 -->
+    <div class="scene" data-scene>
+      <p class="scene-nr">01</p>
+      <h2>Se construiește singur.</h2>
+      <p class="stand">Îi dați actele așa cum sunt și numărul de dosar. Acta le citește, construiește dosarul cu sursele la vedere — și vă spune ce lipsește.</p>
+      <div class="s1-flow">
+        <div class="files">
+          <div style="transform:rotate(-1.6deg)"><span class="fchip" data-fx="fx-rise/0">contract scan 2.pdf</span></div>
+          <div style="transform:rotate(1.1deg);margin-left:18px"><span class="fchip" data-fx="fx-rise/0.08">FW: FW: raspuns.msg</span></div>
+          <div style="transform:rotate(-0.8deg);margin-left:6px"><span class="fchip" data-fx="fx-rise/0.16">IMG_0347.jpeg</span></div>
+          <div style="transform:rotate(1.8deg);margin-left:26px"><span class="fchip" data-fx="fx-rise/0.24">chitanta taxa timbru.pdf</span></div>
+          <div style="transform:rotate(-1.2deg)"><span class="fchip" data-fx="fx-rise/0.32">+ 10 alte fișiere</span></div>
+          <div style="margin-left:12px"><span class="fchip nr" data-fx="fx-rise/0.4">nr. dosar: 3421/299/2026</span></div>
         </div>
-        <div class="tenant-note">Nimic nu se copiază în afara tenant-ului.<br>Acta vede, dar nu deține.</div>
+        <div class="devine" data-fx="fx-pop/0.5">DEVINE</div>
+        <div class="a-card">
+          <div style="display:flex;align-items:baseline;gap:8px">
+            <span class="a-label">DOSAR</span>
+            <span class="dc-nr">3421/299/2026</span>
+          </div>
+          <div class="a-row" data-fx="fx-rise/0.6">
+            <div class="dc-head"><span class="a-label">PĂRȚI</span><span class="a-src">din contract scan 2.pdf</span></div>
+            <p style="font-weight:500">Popescu Maria c. Danubia Construct SRL</p>
+          </div>
+          <div class="a-row" data-fx="fx-rise/0.72">
+            <div class="dc-head"><span class="a-label">OBIECT</span><span class="a-src">din FW: FW: raspuns.msg</span></div>
+            <p>pretenții · 48.500 lei</p>
+          </div>
+          <div class="a-row" data-fx="fx-rise/0.84">
+            <div class="dc-head"><span class="a-label">STADIU · TERMEN</span><span class="a-src">portal.just.ro · azi 06:00</span></div>
+            <p>Fond — în probațiune · <span style="font-variant-numeric:tabular-nums">24.09.2026, 09:00</span></p>
+          </div>
+          <div class="a-row" data-fx="fx-rise/1" style="padding-bottom:10px">
+            <div class="dc-head"><span class="a-label">ÎMPUTERNICIRE</span><span class="pill warn" style="padding:2px 9px;font-size:10.5px">lipsește</span></div>
+            <p class="mut">Nu se regăsește în cele 14 fișiere primite.</p>
+          </div>
+        </div>
       </div>
+      <p class="receipt">Dosar construit din 14 fișiere și numărul de dosar. Un act lipsă, semnalat.</p>
+    </div>
+
+    <!-- SCENE 2 -->
+    <div class="scene grid right" data-scene>
+      <div class="txt">
+        <p class="scene-nr">02</p>
+        <h2>Portalul devine lista de lucru.</h2>
+        <p class="stand" style="max-width:48ch">Peste noapte, Acta verifică portalul. Un termen nou devine sarcini datate, împărțite pe oamenii din cabinet.</p>
+      </div>
+      <div class="vis work-card">
+        <p class="wc-check" data-fx="fx-rise/0">azi, 06:00 · portal.just.ro — verificat</p>
+        <div class="wc-termen" data-fx="fx-rise/0.2">
+          <div class="top">
+            <span class="when">Termen: 24.09.2026, 09:00 — Complet C7</span>
+            <span class="pill ok" style="padding:2px 9px;font-size:10.5px">nou</span>
+          </div>
+          <p class="dc-note">Invitație de calendar trimisă.</p>
+        </div>
+        <p class="a-label wc-label" data-fx="fx-rise/0.45">SARCINI</p>
+        <div class="task" data-fx="fx-rise/0.6">
+          <span class="box"></span>
+          <span class="what">Pregătiți concluziile scrise</span>
+          <span class="due">până la 17.09.2026</span>
+          <span class="who">MP</span>
+        </div>
+        <div class="task" data-fx="fx-rise/0.75">
+          <span class="box"></span>
+          <span class="what">Depuneți lista de martori</span>
+          <span class="due">până la 10.09.2026</span>
+          <span class="who">AI</span>
+        </div>
+      </div>
+      <p class="receipt" style="max-width:48ch">Verificat azi la 06:00. Un termen nou, două sarcini.</p>
+    </div>
+
+    <!-- SCENE 3 -->
+    <div class="scene grid left" data-scene>
+      <div class="txt">
+        <p class="scene-nr">03</p>
+        <h2>Actul se scrie cu citări verificate.</h2>
+        <p class="stand" style="max-width:48ch">Actul se redactează pe baza dosarului, iar fiecare citare este verificată în legislația română înainte să ajungă la dumneavoastră.</p>
+      </div>
+      <div class="vis doc-sheet" style="max-width:460px">
+        <p class="doc-nr" data-fx="fx-rise/0">Dosar nr. 3421/299/2026</p>
+        <p class="doc-title" data-fx="fx-rise/0.12">RĂSPUNS LA ÎNTÂMPINARE</p>
+        <p class="para" data-fx="fx-rise/0.28">Subsemnata Popescu Maria, în calitate de reclamantă, în contradictoriu cu pârâta Danubia Construct SRL, formulez prezentul răspuns la întâmpinare, prin care solicit respingerea excepțiilor invocate, pentru următoarele motive:</p>
+      <p class="para" data-fx="fx-rise/0.44">Excepția tardivității nu poate fi primită, întrucât răspunsul la întâmpinare se depune în termen de 10 zile de la comunicarea întâmpinării<sup>1</sup>.</p>
+        <div class="doc-skel" data-fx="fx-rise/0.58"><span></span><span></span><span></span></div>
+        <div class="doc-fnline" data-fx="fx-rise/0.7"></div>
+        <p class="doc-fn" data-fx="fx-rise/0.8"><span><sup>1</sup> Art. 201 alin. (2) C.proc.civ.</span><span class="pill ok" data-fx="fx-pop/1.1">✓ verificată</span></p>
+      </div>
+      <p class="receipt" style="max-width:48ch">Citările se verifică în corpusul legislativ român, cu actele normative în vigoare.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="preturi">
+  <div class="shell">
+    <p class="kicker">Prețuri</p>
+    <h2 class="big">Plătiți parteneriatul, nu oamenii.</h2>
+    <p class="intro">Partenerii plătesc pentru cabinet; locurile de colaborator sunt aproape de cost, ca toată echipa să lucreze pe Acta.</p>
+
+    <div class="price-cols">
+      <div class="ladder">
+        <div class="lrow">
+          <div style="min-width:0">
+            <p class="role">Primul partener</p>
+            <p class="cond">la lansare, primele 100 de cabinete · preț de listă 69&nbsp;€</p>
+          </div>
+          <p class="price"><b>49&nbsp;€</b> <span>/ lună</span></p>
+        </div>
+        <div class="lrow">
+          <div style="min-width:0">
+            <p class="role">Fiecare partener în plus</p>
+            <p class="cond">la lansare, primele 25 de birouri · preț de listă 150&nbsp;€</p>
+          </div>
+          <p class="price"><b>99&nbsp;€</b> <span>/ lună</span></p>
+        </div>
+        <div class="lrow">
+          <div style="min-width:0">
+            <p class="role">Colaborator / stagiar</p>
+            <p class="cond">nediscountat</p>
+          </div>
+          <p class="price"><b>29&nbsp;€</b> <span>/ lună</span></p>
+        </div>
+        <div class="lrow">
+          <div style="min-width:0">
+            <p class="role">Peste 6 avocați</p>
+            <p class="cond">plan dedicat · <a href="#lansare" style="font-weight:600">Scrieți-ne.</a></p>
+          </div>
+          <p class="price"><span>de la</span> <b>900&nbsp;€</b> <span>/ lună</span></p>
+        </div>
+        <p class="price-note">Prețul de lansare e valabil 12 luni pentru cabinet; apoi trece la prețul de listă.</p>
+        <p class="price-note">Consumul AI e inclus. Vedeți oricând cât din el ați folosit — un contor procentual, cu notificare la 80%.</p>
+        <div class="included">
+          <p class="kicker">Ce e inclus, la orice loc</p>
+          <p>Toate dosarele · monitorizare portal · redactare cu citări verificate · sarcini · facturare</p>
+        </div>
+      </div>
+
+      <div class="calc" data-calc>
+        <p class="kicker">Cabinetul dumneavoastră</p>
+        <div class="calc-row">
+          <span class="lbl">Parteneri</span>
+          <span class="stepper">
+            <button type="button" class="dec" data-dec="p" aria-label="mai puțini parteneri">−</button>
+            <output data-out="p">2</output>
+            <button type="button" class="inc" data-inc="p" aria-label="mai mulți parteneri">+</button>
+          </span>
+        </div>
+        <div class="calc-row">
+          <span class="lbl">Colaboratori</span>
+          <span class="stepper">
+            <button type="button" class="dec" data-dec="c" aria-label="mai puțini colaboratori">−</button>
+            <output data-out="c">1</output>
+            <button type="button" class="inc" data-inc="c" aria-label="mai mulți colaboratori">+</button>
+          </span>
+        </div>
+        <div class="calc-result">
+          <div data-when="normal">
+            <p class="calc-kicker">La lansare</p>
+            <p class="calc-total"><b data-out="launch">177&nbsp;€</b> <span>/ lună</span></p>
+            <p class="calc-list">Preț de listă: <b data-out="list">248&nbsp;€</b> / lună — după 12 luni.</p>
+          </div>
+          <div class="calc-dedicat" data-when="dedicated" hidden>
+            <p>Peste 6 avocați — plan dedicat, <span style="font-weight:600;white-space:nowrap">de la 900&nbsp;€ / lună</span>.</p>
+            <p class="sub"><a href="#lansare" style="font-weight:600">Scrieți-ne</a> — vă răspundem în două zile lucrătoare.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <!-- QUIET + STEPS -->
-  <div class="after">
-    <p class="quiet-more">Acta ține și calendarul termenelor, pontajul și facturarea cabinetului — dar despre ele îți povestim în produs.</p>
-    <p class="aud">Acta este construit pentru <strong>avocați</strong> — cabinete individuale, firme mici și mijlocii care lucrează în litigii, drept comercial și drept civil, pe Microsoft 365. Nu pentru notari, nu pentru in-house. Dacă cabinetul tău e pe Google Workspace, încă nu suntem pentru tine.</p>
-    <div class="steps-head"><h3>Cum începe</h3></div>
+<!-- CUM ÎNCEPE -->
+<section class="start" id="lansare">
+  <div class="shell">
+    <p class="kicker">Cum începe</p>
+    <h2 class="big">Trei pași, dintre care doi sunt ai noștri.</h2>
     <div class="steps">
-      <div class="step"><div class="n">i.</div><h3>Te invităm</h3><p>Locurile sunt limitate. Răspundem în cinci zile lucrătoare cu o ofertă și un termen.</p></div>
-      <div class="step"><div class="n">ii.</div><h3>Conectăm cabinetul</h3><p>Instalezi extensia în Word. Acta se conectează la Microsoft 365 și începe să citească dosarele.</p></div>
-      <div class="step"><div class="n">iii.</div><h3>Începi să lucrezi</h3><p>În câteva zile, Acta scrie în stilul cabinetului și răspunde despre dosare fără să încarci nimic.</p></div>
+
+      <div class="step form-step">
+        <p class="step-title"><span class="n">1.</span> Rezervați locul</p>
+        <form class="claim" id="claimForm" data-calc>
+          <label for="claimEmail">E-mail</label>
+          <input type="email" id="claimEmail" name="email" autocomplete="email" required placeholder="adresa dumneavoastră de e-mail">
+          <div class="calc-row">
+            <span class="lbl">Parteneri</span>
+            <span class="stepper">
+              <button type="button" class="dec" data-dec="p" aria-label="mai puțini parteneri">−</button>
+              <output data-out="p">2</output>
+              <button type="button" class="inc" data-inc="p" aria-label="mai mulți parteneri">+</button>
+            </span>
+          </div>
+          <div class="calc-row">
+            <span class="lbl">Colaboratori</span>
+            <span class="stepper">
+              <button type="button" class="dec" data-dec="c" aria-label="mai puțini colaboratori">−</button>
+              <output data-out="c">1</output>
+              <button type="button" class="inc" data-inc="c" aria-label="mai mulți colaboratori">+</button>
+            </span>
+          </div>
+          <p class="claim-price" data-when="normal"><b data-out="launch">177&nbsp;€</b> / lună la lansare · <span data-out="list">248&nbsp;€</span> preț de listă</p>
+          <p class="claim-price" data-when="dedicated" hidden>Peste 6 avocați — plan dedicat, de la 900&nbsp;€ / lună.</p>
+          <button type="submit" class="btn">Rezervați un loc de lansare</button>
+          <p class="claim-err">Nu am putut trimite. Scrieți-ne direct la <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>.</p>
+          <p class="claim-fine">Fără plată acum.</p>
+        </form>
+      </div>
+
+      <div class="step">
+        <p class="step-title"><span class="n">2.</span> Vă contactăm în două zile lucrătoare</p>
+        <p class="body">Un om din echipă, nu un robot: oferta la prețul de lansare și programarea instalării, la telefon sau în scris.</p>
+      </div>
+
+      <div class="step">
+        <p class="step-title"><span class="n">3.</span> În câteva zile lucrați</p>
+        <p class="body">Dosarele citite, termenele urmărite, primul act redactat.</p>
+      </div>
+    </div>
+
+    <p class="free-note g-closed">Ușa gratuită se deschide pe rând, pe invitații — <a href="#gratuit">lista de așteptare e mai sus</a>. Vă anunțăm când se deschide.</p>
+    <p class="free-note g-open">Contul gratuit se face singur: e-mail, parolă, lipiți numerele de dosar.</p>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="shell">
+    <h2>Datele rămân ale dumneavoastră.</h2>
+    <div class="trust-grid">
+      <p>Documentele și dosarele rămân ale cabinetului — nu le copiem în depozite proprii.</p>
+      <p>AI-ul rulează pe infrastructură europeană.</p>
+      <p>Nu antrenăm modele pe datele dumneavoastră.</p>
+      <p>Dacă plecați, nu mai putem citi nimic.</p>
+    </div>
+    <p class="trust-fine">Conform regulilor europene de protecție a datelor (GDPR).</p>
+  </div>
+</section>
+
+<!-- FINAL BAND -->
+<section class="band">
+  <div class="shell">
+    <h2>Dosarul dumneavoastră se poate ține singur la zi.</h2>
+    <div class="band-ctas">
+      <div class="band-cta">
+        <a class="btn-light" href="#gratuit" data-track="band-cta-free">Începeți gratuit</a>
+        <span class="sub g-closed">pe invitații — vă trecem pe lista de așteptare</span>
+        <span class="sub g-open">gratuit, fără card</span>
+      </div>
+      <div class="band-cta">
+        <a class="btn-ghost" href="#lansare" data-track="band-cta-paid">Rezervați un loc de lansare</a>
+        <span class="sub">de la 49&nbsp;€, primele 100 de cabinete</span>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- FINAL CTA -->
-<div class="cta" id="cere-acces">
-  <svg class="cta-mark" width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><path fill="#f5f0e6" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 21.2 a 3.4 3.4 0 1 0 0 6.8 a 3.4 3.4 0 1 0 0 -6.8 Z M30.6 30.5 L33.4 30.5 L33.4 46.5 L32 48.6 L30.6 46.5 Z"/></svg>
-  <h2>Cere acces în avans</h2>
-  <p class="lead">Locuri limitate pentru cabinete care vor să fie printre primele care lucrează cu un asistent juridic român.</p>
-  <form class="form-row" onsubmit="event.preventDefault()">
-    <input type="email" placeholder="email@cabinetul-meu.ro" aria-label="Email">
-    <button type="submit">Trimite</button>
-  </form>
-  <p class="cta-fine">Răspundem în 5 zile lucrătoare.</p>
-</div>
+</section>
 
 <!-- FOOTER -->
-<div class="footer">
-  <div><svg width="14" height="14" viewBox="0 0 64 64" aria-hidden="true" style="vertical-align:-2px;margin-right:6px"><path fill="currentColor" fill-rule="evenodd" d="M32 9 C 41 17 46 26 46 35 L32 55 L18 35 C 18 26 23 17 32 9 Z M32 18.5 a 5.4 5.4 0 0 0 -5.4 5.4 a 5.4 5.4 0 0 0 2.4 4.5 L29 43.5 L32 48 L35 43.5 L35 28.4 a 5.4 5.4 0 0 0 2.4 -4.5 a 5.4 5.4 0 0 0 -5.4 -5.4 Z"/></svg>Acta · Construit în România, pentru avocații români.</div>
-  <div>
-    <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>
-    <a href="/privacy/">Confidențialitate</a>
-    <a href="/terms/">Termeni</a>
-    <a href="/INGESTION_POLICY.html">Politica de ingestie</a>
+<footer class="footer">
+  <div class="shell">
+    <span class="brand">
+      <span class="brand-mark">
+        <svg width="12" height="15" viewBox="0 0 18 22" aria-hidden="true"><path fill-rule="evenodd" d="M9 1 C13.2 3.2 15 6.3 15 9.6 C15 13.9 11.6 18.4 9 21 C6.4 18.4 3 13.9 3 9.6 C3 6.3 4.8 3.2 9 1 Z M9 7.4 A1.6 1.6 0 1 0 9 10.6 A1.6 1.6 0 1 0 9 7.4 Z M8.55 11.6 L9.45 11.6 L9.2 17.8 L8.8 17.8 Z" fill="#234f3b"/></svg>
+        <span class="brand-name">Acta</span>
+      </span>
+      <span class="brand-tag">Construit în România, pentru avocații români.</span>
+    </span>
+    <nav>
+      <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>
+      <a href="/privacy/">Confidențialitate</a>
+      <a href="/terms/">Termeni</a>
+      <a href="/INGESTION_POLICY.html">Politica de ingestie</a>
+    </nav>
   </div>
-</div>
+</footer>
 
 <script>
 (function () {
+  "use strict";
+  var ENDPOINT = "https://api.acta-legal.ro/public/waitlist";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var desktop = window.matchMedia("(min-width: 921px)");
 
-  /* quiet hero CTA scrolls to the form at the end of the story */
-  var quiet = document.querySelector(".cta-quiet");
-  quiet.addEventListener("click", function (e) {
-    e.preventDefault();
-    if (window.actaTrack) window.actaTrack("hero-cta");
-    document.getElementById("cere-acces").scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
-  });
-
-  /* hero: an email files itself in (one-shot, on load) */
-  var mail = document.getElementById("mail");
-  var mails = document.getElementById("mailCount");
-  var acteRow = document.getElementById("acteRow");
-  if (!reduced) {
-    setTimeout(function () { mail.classList.add("show"); }, 1400);
-    setTimeout(function () {
-      mail.classList.add("filed");
-      acteRow.classList.add("tick");
-      mails.textContent = "57";
-      setTimeout(function () { acteRow.classList.remove("tick"); }, 900);
-    }, 3800);
-  } else {
-    mails.textContent = "57";
-  }
-
-  /* ----- continuous demo (desktop only): scroll position is the timeline.
-     On mobile the stage is display:none and each chapter shows a static
-     finished frame instead — no scroll-driven animation on touch. ----- */
-  var demo = document.getElementById("demo");
-  var frame = document.getElementById("stageFrame");
-  var sceneDosar = document.getElementById("sceneDosar");
-  var sceneWord = document.getElementById("sceneWord");
-  var pForm = document.getElementById("pForm");
-  var pStream = document.getElementById("pStream");
-  var pDone = document.getElementById("pDone");
-  var stepped = Array.prototype.slice.call(demo.querySelectorAll(".stage-col [data-at]"));
-  var chapters = Array.prototype.slice.call(demo.querySelectorAll(".chapter"));
-  var lastStep = -1;
-
-  function apply(step, p) {
-    frame.style.setProperty("--p", p);
-    if (step === lastStep) return;
-    lastStep = step;
-
-    stepped.forEach(function (el) {
-      var at = parseInt(el.getAttribute("data-at"), 10);
-      var until = el.hasAttribute("data-until") ? parseInt(el.getAttribute("data-until"), 10) : Infinity;
-      el.classList.toggle("on", step >= at && step <= until);
-    });
-
-    var word = step >= 12;
-    sceneDosar.classList.toggle("off", word);
-    sceneWord.classList.toggle("off", !word);
-
-    pForm.classList.toggle("off", step >= 13);
-    pStream.classList.toggle("off", step < 13 || step >= 15);
-    pDone.classList.toggle("off", step < 15);
-
-    var ch = step <= 7 ? 1 : step <= 11 ? 2 : 3;
-    chapters.forEach(function (c) {
-      c.classList.toggle("active", parseInt(c.getAttribute("data-ch"), 10) === ch);
-    });
-  }
-
-  /* Each chapter drives its own slice of the timeline, so the stage state
-     always matches the text currently on screen — scrolling back rewinds. */
-  var slices = [ { from: 0, to: 7 }, { from: 8, to: 11 }, { from: 12, to: 15 } ];
-  function currentStep() {
-    var center = window.innerHeight * 0.5;
-    var step = 0;
-    for (var i = 0; i < chapters.length; i++) {
-      var r = chapters[i].getBoundingClientRect();
-      var s = slices[i];
-      if (center < r.top) break;
-      if (center >= r.bottom) { step = s.to; continue; }
-      var t = (center - r.top) / r.height;
-      step = s.from + Math.round(t * (s.to - s.from));
-    }
-    return step;
-  }
-
-  var ticking = false;
-  function onScroll() {
-    if (!desktop.matches) return;
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () {
-      ticking = false;
-      var rect = demo.getBoundingClientRect();
-      var total = demo.offsetHeight - window.innerHeight;
-      var p = total <= 0 ? 1 : Math.min(1, Math.max(0, -rect.top / total));
-      apply(currentStep(), p);
-    });
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-  onScroll();
-})();
-</script>
-<script>
-  // Signup-funnel analytics. Every event goes through actaTrack, which is a
-  // no-op when Umami is unavailable (ad-blocked, offline, still loading, or the
-  // visitor opted out via /exclude/), so tracking can never break the page or
-  // the signup form.
+  // Every event goes through actaTrack, a no-op when Umami is unavailable
+  // (ad-blocked, offline, still loading, or opted out via /exclude/).
   window.actaTrack = function (name, data) {
     if (window.umami && typeof window.umami.track === "function") {
       window.umami.track(name, data);
     }
   };
+  document.querySelectorAll("[data-track]").forEach(function (el) {
+    el.addEventListener("click", function () { window.actaTrack(el.getAttribute("data-track")); });
+  });
 
-  (function () {
-    // Scroll depth. The page has no section anchors, so depth is a percentage
-    // of document height. Each milestone fires at most once per pageview.
-    var milestones = [25, 50, 75, 100];
-    var fired = {};
+  /* ----- proof scenes: one-shot entrance per scene. The DOM's default state
+     is the finished frame, so JS-off and reduced-motion show everything. ----- */
+  if (!reduced && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.querySelectorAll("[data-fx]").forEach(function (n) {
+          var p = n.getAttribute("data-fx").split("/");
+          n.style.animation = p[0] + " 0.55s cubic-bezier(0.2,0,0,1) " + (p[1] || "0") + "s both";
+        });
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll("[data-scene]").forEach(function (el) { io.observe(el); });
+  }
 
-    function onScroll() {
-      var doc = document.documentElement;
-      var scrollable = doc.scrollHeight - window.innerHeight;
-      // A page shorter than the viewport is fully seen by definition.
-      var pct = scrollable <= 0 ? 100 : (window.scrollY / scrollable) * 100;
-      for (var i = 0; i < milestones.length; i++) {
-        var m = milestones[i];
-        if (!fired[m] && pct >= m) {
-          fired[m] = true;
-          window.actaTrack("scroll-" + m);
-        }
-      }
-      if (fired[100]) {
-        window.removeEventListener("scroll", onScroll);
+  /* ----- mini-calculator (two independent instances: pricing zone + form) -----
+     launch = 49 + (p-1)*99 + c*29 ; list = 69 + (p-1)*150 + c*29
+     p + c > 6 flips to the dedicated-plan line. */
+  function initCalc(root) {
+    var p = 2, c = 1;
+    var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    function render() {
+      var dedicated = p + c > 6;
+      root.querySelector("[data-out=p]").textContent = p;
+      root.querySelector("[data-out=c]").textContent = c;
+      root.querySelectorAll("[data-when=normal]").forEach(function (el) { el.hidden = dedicated; });
+      root.querySelectorAll("[data-when=dedicated]").forEach(function (el) { el.hidden = !dedicated; });
+      if (!dedicated) {
+        var launch = 49 + (p - 1) * 99 + c * 29;
+        var list = 69 + (p - 1) * 150 + c * 29;
+        root.querySelectorAll("[data-out=launch]").forEach(function (el) { el.textContent = launch + " €"; });
+        root.querySelectorAll("[data-out=list]").forEach(function (el) { el.textContent = list + " €"; });
       }
     }
+    root.querySelector("[data-dec=p]").addEventListener("click", function () { p = clamp(p - 1, 1, 6); render(); });
+    root.querySelector("[data-inc=p]").addEventListener("click", function () { p = clamp(p + 1, 1, 6); render(); });
+    root.querySelector("[data-dec=c]").addEventListener("click", function () { c = clamp(c - 1, 0, 10); render(); });
+    root.querySelector("[data-inc=c]").addEventListener("click", function () { c = clamp(c + 1, 0, 10); render(); });
+    render();
+    return { get: function () { return { p: p, c: c, dedicated: p + c > 6 }; } };
+  }
+  document.querySelectorAll(".calc[data-calc]").forEach(initCalc);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+  /* ----- claim-spot form (paid path) ----- */
+  var claim = document.getElementById("claimForm");
+  var claimCalc = initCalc(claim);
+  claim.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var input = document.getElementById("claimEmail");
+    var button = claim.querySelector("button[type=submit]");
+    var email = (input.value || "").trim();
+    if (!email) return;
+    var s = claimCalc.get();
+    var firmShape = s.dedicated ? "dedicat (" + s.p + "p+" + s.c + "c)" : s.p + "p+" + s.c + "c";
 
-    // "Reached the signup form": the single form (final CTA) entering the viewport.
-    var form = document.querySelector(".form-row");
-    if (form && "IntersectionObserver" in window) {
-      var seen = false;
-      var io = new IntersectionObserver(
-        function (entries) {
-          for (var i = 0; i < entries.length; i++) {
-            if (entries[i].isIntersecting && !seen) {
-              seen = true;
-              window.actaTrack("form-seen");
-              io.disconnect();
-            }
-          }
-        },
-        { threshold: 0.5 }
-      );
-      io.observe(form);
-    }
-  })();
-</script>
-<script>
-  (function () {
-    const ENDPOINT = "https://api.acta-legal.ro/public/waitlist";
+    claim.classList.remove("err");
+    button.disabled = true;
+    button.textContent = "Se trimite...";
 
-    // Single signup form since the hero-form redesign (2026-07-17); the hero
-    // button scrolls here, so every signup is attributed to the final CTA.
-    const form = document.querySelector(".form-row");
-    form.dataset.source = "final-cta";
-    form.addEventListener("submit", onSubmit);
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email: email, source: "claim-spot", firmShape: firmShape }),
+    }).then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    }).then(function (data) {
+      window.actaTrack("signup-submitted", {
+        source: "claim-spot", firmShape: firmShape, alreadyOnList: !!data.alreadyOnList,
+      });
+      var pL = s.p === 1 ? "1 partener" : s.p + " parteneri";
+      var cL = s.c === 1 ? "1 colaborator" : s.c + " colaboratori";
+      var shape = s.c === 0 ? pL : pL + ", " + cL;
+      var echo = s.dedicated
+        ? shape + " — plan dedicat."
+        : shape + " — " + (49 + (s.p - 1) * 99 + s.c * 29) + " € / lună la lansare.";
+      var done = document.createElement("div");
+      done.className = "claim-done";
+      var t = document.createElement("p"); t.className = "t"; t.textContent = "Locul e notat.";
+      var m = document.createElement("p"); m.className = "m";
+      m.append(document.createTextNode("Vă scriem de la "));
+      var b = document.createElement("b"); b.textContent = "contact@acta-legal.ro";
+      m.append(b, document.createTextNode("."));
+      var e2 = document.createElement("p"); e2.className = "echo"; e2.textContent = echo;
+      done.append(t, m, e2);
+      claim.replaceWith(done);
+    }).catch(function () {
+      claim.classList.add("err");
+      button.disabled = false;
+      button.textContent = "Rezervați un loc de lansare";
+    });
+  });
 
-    async function onSubmit(event) {
+  // "Reached the claim form": fires at most once per pageview.
+  if ("IntersectionObserver" in window) {
+    var seen = false;
+    var fio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !seen) { seen = true; window.actaTrack("form-seen"); fio.disconnect(); }
+      });
+    }, { threshold: 0.5 });
+    fio.observe(claim);
+  }
+
+  /* ----- free-door waitlist capture (gate closed) ----- */
+  var wl = document.getElementById("freeWaitlist");
+  if (wl) {
+    wl.addEventListener("submit", function (event) {
       event.preventDefault();
-      const form = event.currentTarget;
-      const input = form.querySelector("input[type=email]");
-      const button = form.querySelector("button");
-      const email = (input.value || "").trim();
+      var input = wl.querySelector("input[type=email]");
+      var button = wl.querySelector("button");
+      var email = (input.value || "").trim();
       if (!email) return;
-
       button.disabled = true;
       button.textContent = "Se trimite...";
-
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ email, source: form.dataset.source }),
-        });
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email: email, source: "free-door" }),
+      }).then(function (res) {
         if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-        // Success path only — a failed POST throws to catch and is correctly
-        // never counted as a conversion.
-        window.actaTrack("signup-submitted", {
-          source: form.dataset.source,
-          alreadyOnList: !!data.alreadyOnList,
-        });
-        showThankYou(form, !!data.alreadyOnList);
-      } catch (_err) {
-        showError(form, email);
-      }
-    }
+        return res.json();
+      }).then(function (data) {
+        window.actaTrack("signup-submitted", { source: "free-door", alreadyOnList: !!data.alreadyOnList });
+        var done = document.createElement("p");
+        done.className = "wl-done";
+        done.textContent = data.alreadyOnList ? "Sunteți deja pe listă." : "Sunteți pe listă.";
+        var small = document.createElement("small");
+        small.textContent = "Vă anunțăm când se deschide.";
+        done.appendChild(small);
+        document.getElementById("freeWaitlistFine").remove();
+        wl.replaceWith(done);
+      }).catch(function () {
+        button.disabled = false;
+        button.textContent = "Treceți pe listă";
+        if (!wl.querySelector(".wl-err")) {
+          var err = document.createElement("p");
+          err.className = "wl-err";
+          err.append(document.createTextNode("Nu am putut trimite. "));
+          var link = document.createElement("a");
+          link.href = "mailto:contact@acta-legal.ro?subject=" + encodeURIComponent("Lista de așteptare — cont gratuit");
+          link.textContent = "Scrieți-ne";
+          err.append(link, document.createTextNode(" și vă adăugăm manual."));
+          wl.after(err);
+        }
+      });
+    });
+  }
 
-    function showThankYou(form, alreadyOnList) {
-      const msg = alreadyOnList
-        ? "Ești deja pe listă. Revenim cu o invitație în maxim 5 zile lucrătoare."
-        : "Mulțumim. Revenim cu o invitație în maxim 5 zile lucrătoare.";
-      const wrapper = document.createElement("div");
-      wrapper.style.cssText =
-        "padding:14px 18px;border:1.5px solid #f5f0e6;background:transparent;" +
-        "font-family:'EB Garamond',serif;font-size:17px;font-style:italic;color:#f5f0e6;" +
-        "max-width:520px;margin:0 auto;";
-      wrapper.textContent = msg;
-      form.replaceWith(wrapper);
-    }
-
-    function showError(form, email) {
-      // Build the mailto URL safely with encodeURIComponent.
-      const mailto =
-        "mailto:contact@acta-legal.ro?subject=" +
-        encodeURIComponent("Acces în avans") +
-        "&body=" +
-        encodeURIComponent("Vreau acces în avans. Email: " + email);
-
-      // Construct via DOM API (no innerHTML) so user input never reaches HTML parser.
-      const wrapper = document.createElement("div");
-      wrapper.style.cssText =
-        "padding:14px 18px;border:1.5px solid #c97b7b;background:transparent;" +
-        "font-family:'EB Garamond',serif;font-size:16px;color:#f5f0e6;" +
-        "max-width:520px;margin:0 auto;";
-
-      const prefix = document.createTextNode("Nu am putut trimite formularul. ");
-      const link = document.createElement("a");
-      link.href = mailto;
-      link.style.cssText = "color:#f5f0e6;font-weight:600;";
-      link.textContent = "Trimite un email";
-      const suffix = document.createTextNode(" și te adăugăm manual.");
-
-      wrapper.append(prefix, link, suffix);
-      form.replaceWith(wrapper);
-    }
-  })();
+  /* ----- scroll depth: percentage milestones, each fired once per pageview ----- */
+  var milestones = [25, 50, 75, 100];
+  var fired = {};
+  function onScroll() {
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - window.innerHeight;
+    var pct = scrollable <= 0 ? 100 : (window.scrollY / scrollable) * 100;
+    milestones.forEach(function (m) {
+      if (!fired[m] && pct >= m) { fired[m] = true; window.actaTrack("scroll-" + m); }
+    });
+    if (fired[100]) window.removeEventListener("scroll", onScroll);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
 </script>
 </body>
 </html>
