@@ -285,6 +285,72 @@
   @keyframes fx-rise { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: none; } }
   @keyframes fx-pop { 0% { opacity: 0; transform: scale(0.85); } 70% { transform: scale(1.04); } 100% { opacity: 1; transform: none; } }
 
+  /* ---------- hero: the nib writes the underline under „singur" ----------
+     Two animations on one clock: the stroke draws itself while the mark rides
+     along it. Both start at 1.1s, run 1.6s, and play once (fill: both leaves
+     the finished frame in place, which is also what a JS-off reader gets —
+     the underline is inert markup until the animation runs, so the frame it
+     settles on has to be the correct one).
+
+     `ink-draw` works off pathLength=1: the dash array is one full unit long,
+     so animating the offset from 1 to its default 0 wipes the stroke on.
+
+     `nib-glide` is hand-tuned to THAT curve at 5% steps — the mark tracks the
+     underline's rise and fall, so the two are not independently editable. If
+     the underline path changes, these keyframes have to be re-derived. */
+  @keyframes ink-draw { from { stroke-dashoffset: 1; } }
+  @keyframes nib-glide {
+    0%   { left: -6.18%; bottom: -0.8833em; opacity: 0; }
+    5%   { left: -5.48%; bottom: -0.8816em; opacity: 0.7; }
+    10%  { left: -4.19%; bottom: -0.8785em; opacity: 1; }
+    15%  { left: -2.23%; bottom: -0.8740em; opacity: 1; }
+    20%  { left: 0.55%;  bottom: -0.8683em; opacity: 1; }
+    25%  { left: 4.32%;  bottom: -0.8614em; opacity: 1; }
+    30%  { left: 9.25%;  bottom: -0.8537em; opacity: 1; }
+    35%  { left: 15.57%; bottom: -0.8458em; opacity: 1; }
+    40%  { left: 23.39%; bottom: -0.8387em; opacity: 1; }
+    45%  { left: 32.65%; bottom: -0.8337em; opacity: 1; }
+    50%  { left: 42.82%; bottom: -0.8325em; opacity: 1; }
+    55%  { left: 52.99%; bottom: -0.8364em; opacity: 1; }
+    60%  { left: 62.25%; bottom: -0.8453em; opacity: 1; }
+    65%  { left: 70.07%; bottom: -0.8534em; opacity: 1; }
+    70%  { left: 76.39%; bottom: -0.8593em; opacity: 1; }
+    75%  { left: 81.32%; bottom: -0.8626em; opacity: 1; }
+    80%  { left: 85.09%; bottom: -0.8639em; opacity: 1; }
+    85%  { left: 87.87%; bottom: -0.8634em; opacity: 1; }
+    90%  { left: 89.83%; bottom: -0.8621em; opacity: 1; }
+    95%  { left: 91.12%; bottom: -0.8605em; opacity: 1; }
+    100% { left: 91.82%; bottom: -0.8593em; opacity: 0; }
+  }
+  .ink-word { position: relative; white-space: nowrap; }
+  .ink-rule {
+    position: absolute; left: -1%; bottom: -0.12em; width: 102%; height: 0.16em;
+    overflow: visible; pointer-events: none;
+  }
+  .ink-rule path {
+    stroke-dasharray: 1;
+    opacity: 0.85;
+    animation: ink-draw 1.6s cubic-bezier(0.55, 0.05, 0.45, 0.95) 1.1s both;
+  }
+  .ink-nib {
+    position: absolute; bottom: -0.83em; left: -6.18%;
+    width: 0.55em; height: auto; opacity: 0;
+    transform: rotate(152deg); transform-origin: 50% 50%;
+    filter: drop-shadow(0 2px 3px rgba(21, 20, 15, 0.25));
+    pointer-events: none;
+    /* Linear, so the mark stays on the stroke's leading edge rather than
+       drifting ahead of it — the easing lives in the keyframe spacing. */
+    animation: nib-glide 1.6s linear 1.1s both;
+  }
+  /* Reduced motion kills the animations globally (see the block near the end of
+     this stylesheet), which would strand the nib at opacity 0 mid-air and leave
+     the underline undrawn. Hide the nib outright and hand the rule its finished
+     frame instead. */
+  @media (prefers-reduced-motion: reduce) {
+    .ink-nib { display: none; }
+    .ink-rule path { stroke-dashoffset: 0; }
+  }
+
   /* ---------- pricing ---------- */
   .pricing { border-top: 1px solid var(--line); }
   .pricing .shell { padding-top: clamp(48px, 6vw, 96px); padding-bottom: clamp(56px, 7vw, 104px); }
@@ -432,7 +498,9 @@
   <div class="shell">
     <span class="brand">
       <span class="brand-mark">
-        <svg width="13" height="17" viewBox="0 0 18 22" aria-hidden="true"><path fill-rule="evenodd" d="M9 1 C13.2 3.2 15 6.3 15 9.6 C15 13.9 11.6 18.4 9 21 C6.4 18.4 3 13.9 3 9.6 C3 6.3 4.8 3.2 9 1 Z M9 7.4 A1.6 1.6 0 1 0 9 10.6 A1.6 1.6 0 1 0 9 7.4 Z M8.55 11.6 L9.45 11.6 L9.2 17.8 L8.8 17.8 Z" fill="#234f3b"/></svg>
+        <!-- Acta mark, brand v2 (MID cut, cropped viewBox). The mark is always
+             monochrome ink — evergreen belongs to the page, never to the mark. -->
+        <svg width="11" height="17" viewBox="16 6 32 51" aria-hidden="true"><path fill-rule="evenodd" d="M32 8.5 C 41 16.5 46 25.5 46 34 C 46 37.5 44.3 41 41.5 44.7 L32 55.5 L22.5 44.7 C 19.7 41 18 37.5 18 34 C 18 25.5 23 16.5 32 8.5 Z M30.5 27.5 A 4.3 4.3 0 1 1 33.5 27.5 L33.2 51.4 L32 54 L30.8 51.4 Z" fill="#17233B"/></svg>
         <span class="brand-name">Acta</span>
       </span>
       <span class="brand-tag">Dosarele cabinetului, ținute la zi peste noapte</span>
@@ -448,7 +516,7 @@
 <section class="hero">
   <div class="shell hero-inner">
     <div class="hero-copy">
-      <h1>Dosarul care se ține singur la&nbsp;zi.</h1>
+      <h1>Dosarul care se ține <span class="ink-word">singur<svg class="ink-rule" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 C 20 4.5 45 3.5 62 4.6 C 78 5.8 91 7.2 98 6.2" fill="none" stroke="#234f3b" stroke-width="5" stroke-linecap="round" pathLength="1"/></svg><svg class="ink-nib" viewBox="16 6 32 51" aria-hidden="true"><path fill-rule="evenodd" d="M32 8.5 C 41 16.5 46 25.5 46 34 C 46 37.5 44.3 41 41.5 44.7 L32 55.5 L22.5 44.7 C 19.7 41 18 37.5 18 34 C 18 25.5 23 16.5 32 8.5 Z M30.5 27.5 A 4.3 4.3 0 1 1 33.5 27.5 L33.2 51.4 L32 54 L30.8 51.4 Z" fill="#17233B"/></svg></span> la&nbsp;zi.</h1>
       <p class="lead">Acta construiește dosarul din actele dumneavoastră și din numărul de dosar, îl verifică în fiecare noapte pe portal.just.ro și transformă fiecare termen în sarcini pentru cabinet. Actele se redactează cu citări verificate din legislația română.</p>
       <div class="hero-ctas">
         <a class="btn" href="#incepeti" data-track="hero-cta-gratuit">Începeți gratuit</a>
@@ -900,7 +968,8 @@
   <div class="shell">
     <span class="brand">
       <span class="brand-mark">
-        <svg width="12" height="15" viewBox="0 0 18 22" aria-hidden="true"><path fill-rule="evenodd" d="M9 1 C13.2 3.2 15 6.3 15 9.6 C15 13.9 11.6 18.4 9 21 C6.4 18.4 3 13.9 3 9.6 C3 6.3 4.8 3.2 9 1 Z M9 7.4 A1.6 1.6 0 1 0 9 10.6 A1.6 1.6 0 1 0 9 7.4 Z M8.55 11.6 L9.45 11.6 L9.2 17.8 L8.8 17.8 Z" fill="#234f3b"/></svg>
+        <!-- Acta mark, brand v2 (MID cut, cropped viewBox) — see the masthead. -->
+        <svg width="10" height="15" viewBox="16 6 32 51" aria-hidden="true"><path fill-rule="evenodd" d="M32 8.5 C 41 16.5 46 25.5 46 34 C 46 37.5 44.3 41 41.5 44.7 L32 55.5 L22.5 44.7 C 19.7 41 18 37.5 18 34 C 18 25.5 23 16.5 32 8.5 Z M30.5 27.5 A 4.3 4.3 0 1 1 33.5 27.5 L33.2 51.4 L32 54 L30.8 51.4 Z" fill="#17233B"/></svg>
         <span class="brand-name">Acta</span>
       </span>
       <span class="brand-tag">Construit în România, pentru avocații români.</span>
