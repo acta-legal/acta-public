@@ -7,9 +7,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon-32.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="description" content="Prețuri Acta pentru cabinete: primul partener 49 € pe lună la lansare, colaboratori 29 €. Calculator pentru cabinetul dumneavoastră. Fără card la înscriere.">
+  <meta name="description" content="Prețuri Acta pentru cabinete: primii doi avocați 49 € pe lună fiecare la lansare, juriști în plus 29 €. Calculator pentru cabinetul dumneavoastră. Fără card la înscriere.">
   <meta property="og:title" content="Acta. Un preț pe măsura cabinetului.">
-  <meta property="og:description" content="Primul partener 49 € pe lună la lansare. Calculator pentru cabinetul dumneavoastră. Fără card la înscriere.">
+  <meta property="og:description" content="Primii doi avocați: 49 € pe lună fiecare, la lansare. Calculator pentru cabinetul dumneavoastră. Fără card la înscriere.">
   <meta property="og:url" content="https://acta-legal.ro/preturi/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ro_RO">
@@ -119,15 +119,15 @@
 
     <div class="ladder">
       <div class="row">
-        <div class="who">Primul partener<small>include cabinetul: dosare, clienți, asistent</small></div>
-        <div class="price"><b>49 €</b><s>69 €</s><small>pe lună</small></div>
+        <div class="who">Primii doi avocați<small>indiferent de rol · includ cabinetul: dosare, clienți, asistent</small></div>
+        <div class="price"><b>49 €</b><s>69 €</s><small>pe lună, fiecare</small></div>
       </div>
       <div class="row">
-        <div class="who">Fiecare partener în plus</div>
+        <div class="who">Fiecare partener în plus<small>de la al treilea avocat</small></div>
         <div class="price"><b>99 €</b><s>150 €</s><small>pe lună</small></div>
       </div>
       <div class="row">
-        <div class="who">Jurist sau colaborator<small>același asistent, aceleași dosare</small></div>
+        <div class="who">Jurist sau colaborator în plus<small>de la al treilea avocat · același asistent, aceleași dosare</small></div>
         <div class="price"><b>29 €</b><small>pe lună, preț unic</small></div>
       </div>
       <div class="row">
@@ -161,8 +161,8 @@
       </div>
       <div class="out">
         <div id="normal">
-          <div class="big"><span id="launch">177</span> € <small>pe lună, la lansare</small></div>
-          <div class="list"><span id="list">248</span> € pe lună după primele 12 luni</div>
+          <div class="big"><span id="launch">127</span> € <small>pe lună, la lansare</small></div>
+          <div class="list"><span id="list">167</span> € pe lună după primele 12 luni</div>
         </div>
         <div class="dedicat" id="dedicat">Peste 6 avocați: configurare dedicată, <b>de la 900 € pe lună</b>. Vorbim direct.</div>
         <div class="foot">Orientativ. Confirmăm împreună, înainte de orice plată.</div>
@@ -209,18 +209,25 @@
     el.addEventListener("click", function () { window.actaTrack(el.getAttribute("data-track")); });
   });
 
-  /* ----- calculator (rulings: 49/99/29 launch, 69/150/29 list, >6 dedicat) ----- */
+  /* ----- calculator (ruling 24.08.2026: first two lawyers role-blind 49/69 each;
+     from the 3rd lawyer partners 99/150, juniors 29; >6 dedicat) ----- */
   var p = 2, c = 1;
+  function quote(base, partnerExtra) {
+    var blind = Math.min(p + c, 2);
+    var extraP = Math.max(p - 2, 0);
+    var extraC = Math.max(c - Math.max(2 - p, 0), 0);
+    return blind * base + extraP * partnerExtra + extraC * 29;
+  }
   function render() {
     document.getElementById("pv").textContent = p;
     document.getElementById("cv").textContent = c;
     var dedicated = p + c > 6;
     document.getElementById("normal").style.display = dedicated ? "none" : "block";
     document.getElementById("dedicat").style.display = dedicated ? "block" : "none";
-    var launch = 49 + (p - 1) * 99 + c * 29;
+    var launch = quote(49, 99);
     if (!dedicated) {
       document.getElementById("launch").textContent = launch;
-      document.getElementById("list").textContent = 69 + (p - 1) * 150 + c * 29;
+      document.getElementById("list").textContent = quote(69, 150);
     }
     window.actaTrack("calc-changed", { p: p, c: c, launch: dedicated ? "dedicat" : launch });
   }
@@ -259,7 +266,7 @@
       m.append(bb, document.createTextNode(", \u00een dou\u0103 zile lucr\u0103toare."));
       var e2 = document.createElement("p"); e2.className = "echo";
       e2.textContent = dedicated ? "Plan dedicat, " + p + " parteneri \u0219i " + c + " colaboratori."
-        : (49 + (p - 1) * 99 + c * 29) + " \u20ac pe lun\u0103 la lansare, pentru " + p + " parteneri \u0219i " + c + " colaboratori.";
+        : quote(49, 99) + " \u20ac pe lun\u0103 la lansare, pentru " + p + " parteneri \u0219i " + c + " colaboratori.";
       done.append(t, m, e2);
       claim.replaceWith(done);
       claimMsg.remove();
