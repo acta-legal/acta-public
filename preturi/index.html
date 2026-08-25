@@ -7,9 +7,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon-32.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="description" content="Prețuri Acta: primele două persoane 49 € fiecare la lansare, apoi 99 € pentru fiecare avocat care conduce dosare, 29 € pentru restul echipei. Fără card.">
+  <meta name="description" content="Prețuri Acta: răspundeți la două întrebări și vedeți pe loc prețul pentru cabinetul dumneavoastră. Primele două persoane: 49 € fiecare la lansare. Fără card.">
   <meta property="og:title" content="Acta. Un preț pe măsura cabinetului.">
-  <meta property="og:description" content="Primele două persoane din cabinet: 49 € pe lună fiecare, la lansare. Calculator pentru cabinetul dumneavoastră. Fără card la înscriere.">
+  <meta property="og:description" content="Spuneți-ne câți lucrați pe dosare și vedeți prețul pe loc. Primele două persoane: 49 € pe lună fiecare, la lansare. Fără card la înscriere.">
   <meta property="og:url" content="https://acta-legal.ro/preturi/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ro_RO">
@@ -34,55 +34,59 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--paper);color:var(--ink);font-family:var(--ui);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .note{position:sticky;top:0;z-index:9;background:var(--ink);color:#cfcbc0;font-size:12px;letter-spacing:.04em;text-align:center;padding:6px 12px}
   .wrap{max-width:720px;margin:0 auto;padding:0 24px}
 
   header.site{display:flex;justify-content:space-between;align-items:baseline;padding:28px 0 0}
   .wordmark{font-family:var(--display);font-weight:600;font-size:22px;text-decoration:none;color:var(--ink)}
   .navlink{font-size:14px;color:var(--text-3);text-decoration:none;border-bottom:1px solid var(--rule)}
 
-  .head{padding:56px 0 40px;text-align:center}
+  .head{padding:56px 0 0;text-align:center}
   .head h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,4.6vw,40px)}
   .head .sub{font-size:16px;color:var(--text-3);margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto}
   .head .sub b{color:var(--ink);font-weight:500}
 
-  /* Ladder */
-  .ladder{margin:36px auto 0;max-width:560px;background:var(--surface);border:1px solid var(--rule);
-    box-shadow:0 1px 2px rgba(21,20,15,.05),0 10px 28px -14px rgba(21,20,15,.12)}
-  .ladder .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 22px;border-bottom:1px solid var(--rule)}
-  .ladder .row:last-child{border-bottom:none}
-  .ladder .grp{font-family:var(--artifact);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--text-3);background:var(--tinted);padding:9px 22px;border-bottom:1px solid var(--rule);text-align:left}
-  .ladder .who{font-size:15px;color:var(--ink);text-align:left}
-  .ladder .who small{display:block;font-size:12.5px;color:var(--text-4);margin-top:1px}
-  .ladder .price{font-family:var(--artifact);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
-  .ladder .price b{font-size:17px;font-weight:500;color:var(--accent)}
-  .ladder .price s{font-size:12.5px;color:var(--text-4);margin-left:7px}
-  .ladder .price small{display:block;font-size:11px;color:var(--text-4)}
+  /* Calculator — the conversation, primary object of the page */
+  .calc{margin:44px auto 0;max-width:560px;text-align:center}
+  .calc .calcsub{font-size:15px;color:var(--text-3);margin-top:8px}
+  .calc .box{margin-top:22px;background:var(--surface);border:1px solid var(--rule);
+    box-shadow:0 1px 2px rgba(21,20,15,.05),0 10px 28px -14px rgba(21,20,15,.12);
+    padding:8px 26px 24px;text-align:left}
+  .q{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 0;border-bottom:1px solid var(--rule)}
+  .q .qt{font-size:16px;color:var(--ink)}
+  .q .qt small{display:block;font-size:12.5px;color:var(--text-4);margin-top:2px}
+  .q.off{opacity:.4}
+  .stepper{display:flex;align-items:center;gap:14px;flex-shrink:0}
+  .stepper button{width:34px;height:34px;border:1px solid var(--rule-strong);background:var(--surface);border-radius:3px;font-size:18px;color:var(--ink);cursor:pointer;line-height:1}
+  .stepper button:hover:enabled{border-color:var(--accent);color:var(--accent)}
+  .stepper button:disabled{cursor:default;color:var(--text-4)}
+  .stepper .val{font-family:var(--artifact);font-size:20px;min-width:28px;text-align:center;font-variant-numeric:tabular-nums}
+  .calc .out{margin-top:4px;padding-top:22px;text-align:center}
+  .calc .out .big{font-family:var(--display);font-size:36px;font-weight:500;color:var(--accent)}
+  .calc .out .big small{font-size:16px;color:var(--text-3);font-family:var(--ui)}
+  .calc .out .list{font-size:13.5px;color:var(--text-3);margin-top:4px}
+  .calc .out .dedicat{font-size:15.5px;color:var(--text-2);display:none;padding:6px 0}
+  .calc .out .blind{font-size:13px;color:var(--text-3);display:none;margin-top:8px}
+  .calc .foot{font-size:12.5px;color:var(--text-4);margin-top:14px;text-align:center}
   a.talk{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
   a.talk:hover{border-bottom-color:var(--accent)}
+
+  /* Fine print: the ladder, demoted to "how it's computed" */
+  .how{margin:72px auto 0;max-width:560px;text-align:center}
+  .how h2{font-family:var(--display);font-weight:500;font-size:22px;color:var(--text-2)}
+  .ladder{margin:18px auto 0;background:var(--surface);border:1px solid var(--rule)}
+  .ladder .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 20px;border-bottom:1px solid var(--rule)}
+  .ladder .row:last-child{border-bottom:none}
+  .ladder .grp{font-family:var(--artifact);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--text-3);background:var(--tinted);padding:8px 20px;border-bottom:1px solid var(--rule);text-align:left}
+  .ladder .who{font-size:14px;color:var(--text-2);text-align:left}
+  .ladder .who small{display:block;font-size:12px;color:var(--text-4);margin-top:1px}
+  .ladder .price{font-family:var(--artifact);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  .ladder .price b{font-size:15px;font-weight:500;color:var(--accent)}
+  .ladder .price s{font-size:12px;color:var(--text-4);margin-left:7px}
+  .ladder .price small{display:block;font-size:10.5px;color:var(--text-4)}
   .lnote{max-width:560px;margin:14px auto 0;font-size:13px;color:var(--text-3);text-align:center}
   .lnote.lead{font-size:14px;color:var(--text-2);margin-top:18px}
   .lnote + .lnote:not(.lead){margin-top:8px}
-
-  /* Calculator */
-  .calc{margin:64px auto 0;max-width:560px;text-align:center}
-  .calc h2{font-family:var(--display);font-weight:500;font-size:26px}
-  .calc .box{margin-top:22px;background:var(--tinted);border:1px solid var(--rule);padding:24px 26px}
-  .calc .controls{display:flex;justify-content:center;gap:36px;flex-wrap:wrap}
-  .ctrl{text-align:center}
-  .ctrl .lbl{font-family:var(--artifact);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3)}
-  .stepper{display:flex;align-items:center;gap:14px;margin-top:8px;justify-content:center}
-  .stepper button{width:34px;height:34px;border:1px solid var(--rule-strong);background:var(--surface);border-radius:3px;font-size:18px;color:var(--ink);cursor:pointer;line-height:1}
-  .stepper button:hover{border-color:var(--accent);color:var(--accent)}
-  .stepper .val{font-family:var(--artifact);font-size:20px;min-width:28px;font-variant-numeric:tabular-nums}
-  .calc .out{margin-top:22px;padding-top:20px;border-top:1px solid var(--rule-strong)}
-  .calc .out .big{font-family:var(--display);font-size:34px;font-weight:500;color:var(--accent)}
-  .calc .out .big small{font-size:16px;color:var(--text-3);font-family:var(--ui)}
-  .calc .out .list{font-size:13.5px;color:var(--text-3);margin-top:4px}
-  .calc .out .dedicat{font-size:15.5px;color:var(--text-2);display:none;margin-top:6px}
-  .calc .out .blind{font-size:13px;color:var(--text-3);display:none;margin-top:6px}
-  .calc .foot{font-size:12.5px;color:var(--text-4);margin-top:14px}
 
   /* Free */
   .free{margin:72px 0 0;background:var(--tinted);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:44px 0;text-align:center}
@@ -109,7 +113,10 @@
   .signup-claim .btn{margin-top:0;padding:13px 26px;flex-shrink:0}
   .claim-done .t{font-family:var(--display);font-size:22px;margin-top:26px}
   .claim-done .m,.claim-done .echo{font-size:14.5px;color:var(--text-3);margin-top:8px}
-  @media (max-width:560px){ .signup-claim{flex-direction:column} .signup-claim .btn{width:100%} }
+  @media (max-width:560px){
+    .signup-claim{flex-direction:column} .signup-claim .btn{width:100%}
+    .q{flex-direction:column;align-items:flex-start;gap:10px}
+  }
 </style>
 </head>
 <body>
@@ -122,8 +129,46 @@
 
   <section class="head">
     <h1>Un preț pe măsura cabinetului.</h1>
-    <p class="sub">Prețul de lansare e valabil <b>12 luni</b> de la abonare, apoi trece la prețul de listă. Fără card la înscriere: locurile de lansare se rezervă prin conversație, nu prin casă de plată.</p>
+    <p class="sub">Prețul de lansare e valabil <b>12 luni</b> de la abonare, apoi trece la prețul de listă. Fără card la înscriere: locurile de lansare se rezervă printr-o conversație, nu printr-o plată online.</p>
+  </section>
 
+  <section class="calc">
+    <p class="calcsub">Două întrebări — aceleași pe care vi le-am pune și în persoană.</p>
+    <div class="box">
+      <div class="q">
+        <div class="qt">Câți lucrați pe dosare?<small>avocați, juriști, stagiari — fără secretariat</small></div>
+        <div class="stepper">
+          <button id="tminus" onclick="chg('t',-1)" aria-label="scade numărul de persoane pe dosare">−</button>
+          <span class="val" id="tv">3</span>
+          <button id="tplus" onclick="chg('t',1)" aria-label="crește numărul de persoane pe dosare">+</button>
+        </div>
+      </div>
+      <div class="q" id="qlead">
+        <div class="qt">Câți dintre ei sunt titulari sau parteneri?<small>cei care aduc clienți, semnează facturile, repartizează dosarele</small></div>
+        <div class="stepper">
+          <button id="lminus" onclick="chg('l',-1)" aria-label="scade numărul de titulari sau parteneri">−</button>
+          <span class="val" id="lv">2</span>
+          <button id="lplus" onclick="chg('l',1)" aria-label="crește numărul de titulari sau parteneri">+</button>
+        </div>
+      </div>
+      <div class="out" aria-live="polite">
+        <div id="normal">
+          <!-- 127/167 are the no-JS fallback for the default answers (3 pe dosare, 2 conduc,
+               i.e. quote(2, 1, ·)). paint() overwrites them on load, so a browser can never
+               catch drift here: they must equal quote(2, 1, LAUNCH) and quote(2, 1, LIST).
+               Update them with any rate change. -->
+          <div class="big"><span id="launch">127</span> € <small>pe lună, la lansare</small></div>
+          <div class="list"><span id="list">167</span> € pe lună după primele 12 luni</div>
+          <div class="blind" id="blindnote">Primele două persoane sunt 49 € fiecare, indiferent de rol — abia de la a treia contează cine e titular sau partener.</div>
+        </div>
+        <div class="dedicat" id="dedicat">Peste 6 persoane: <b>configurație dedicată</b>. O construim împreună — <a class="talk" href="#claim" data-track="preturi-dedicat-calc">vorbim direct</a>.</div>
+        <div class="foot">Orientativ. Confirmăm împreună, înainte de orice plată.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <h2>Cum se calculează</h2>
     <div class="ladder">
       <div class="grp">Cabinet</div>
       <div class="row">
@@ -132,7 +177,7 @@
       </div>
       <div class="grp">Birou · de la a treia persoană</div>
       <div class="row">
-        <div class="who">Fiecare avocat care conduce dosare<small>de la a treia persoană · deschide și finalizează dosare, repartizează, clienți, facturare</small></div>
+        <div class="who">Fiecare titular sau partener<small>de la a treia persoană · aduce clienți, semnează facturile, repartizează dosarele</small></div>
         <div class="price"><b>99 €</b><s>150 €</s><small>pe lună</small></div>
       </div>
       <div class="row">
@@ -147,42 +192,6 @@
     </div>
     <p class="lnote lead">Primele două locuri sunt prețul unui cabinet individual, de două ori. De la al treilea, biroul are ce coordona — repartizare, finalizare, facturare — și asta se vede în preț.</p>
     <p class="lnote">Prețul tăiat e prețul de listă, după primele 12 luni.</p>
-  </section>
-
-  <section class="calc">
-    <h2>Cât ar costa pentru cabinetul dumneavoastră?</h2>
-    <div class="box">
-      <div class="controls">
-        <div class="ctrl">
-          <div class="lbl">Avocați care conduc dosare</div>
-          <div class="stepper">
-            <button onclick="chg('p',-1)">−</button>
-            <span class="val" id="pv">2</span>
-            <button onclick="chg('p',1)">+</button>
-          </div>
-        </div>
-        <div class="ctrl">
-          <div class="lbl">Restul echipei</div>
-          <div class="stepper">
-            <button onclick="chg('c',-1)">−</button>
-            <span class="val" id="cv">1</span>
-            <button onclick="chg('c',1)">+</button>
-          </div>
-        </div>
-      </div>
-      <div class="out">
-        <div id="normal">
-          <!-- 127/167 are the no-JS fallback for the p=2,c=1 default. paint() overwrites
-               them on load, so a browser can never catch drift here: they must equal
-               quote(2, 1, LAUNCH) and quote(2, 1, LIST). Update them with any rate change. -->
-          <div class="big"><span id="launch">127</span> € <small>pe lună, la lansare</small></div>
-          <div class="list"><span id="list">167</span> € pe lună după primele 12 luni</div>
-          <div class="blind" id="blindnote">Primele două persoane sunt 49 € fiecare, indiferent de rol — abia de la a treia contează cine conduce dosare.</div>
-        </div>
-        <div class="dedicat" id="dedicat">Peste 6 persoane: <b>configurație dedicată</b>. O construim împreună — <a class="talk" href="#claim" data-track="preturi-dedicat-calc">vorbim direct</a>.</div>
-        <div class="foot">Orientativ. Confirmăm împreună, înainte de orice plată.</div>
-      </div>
-    </div>
   </section>
 </div>
 
@@ -226,22 +235,33 @@
 
   /* ----- calculator (ruling 24.08.2026: first two SEATS role-blind 49/69 each;
      from the 3rd seat 99/150 for a lawyer who runs dosare, 29 for someone who works
-     on assigned ones; >6 people total = dedicat, no published anchor). Maths unchanged
-     by the 24.08 wording pass -- rows are named for what a seat does, not for a title. ----- */
+     on assigned ones; >6 people total = dedicat, no published anchor). The 25.08
+     redesign changed only the INPUTS: the page now asks the buyer's two questions --
+     total people on dosare (t), and how many of them lead (l) -- and derives the old
+     parameters as p = l, c = t - l. quote() and every rate are untouched. ----- */
   // Total headcount, not lawyer count -- owner ruling 24.08.2026: above 6 people is a
   // market category whatever the composition. Live parameter; the two copy strings that
-  // say "Peste 6 persoane" (ladder band + #dedicat) must move with it.
+  // say "Peste 6 persoane" (ladder band + #dedicat) must move with it. Since 25.08 the
+  // gate fires on question 1 alone: t >= DEDICAT_MIN disables question 2.
   var DEDICAT_MIN = 7;
   // The first two seats are role-blind (24.08: at 1+1 a role label attaches to nothing).
-  // Six copy strings depend on this number -- the two ladder band headings, the two
-  // "de la a treia persoana" sublines, the lead note and #blindnote.
+  // Eight copy strings depend on this number -- both meta descriptions in <head>, the
+  // "Primele doua persoane" ladder row, the "de la a treia persoana" band heading and
+  // the two identical sublines, the lead note, and #blindnote.
   var BLIND_SEATS = 2;
   // Every rate on this page lives here. Nothing else may hold one -- the pre-24.08 page
   // kept a second copy in the claim-form echo and shipped a stale price from it.
   var LAUNCH = { base: 49, lead: 99 };
   var LIST = { base: 69, lead: 150 };
   var TEAM_RATE = 29;   // undiscounted: same at launch and at list, by the 13.08 ruling
-  var p = 2, c = 1;
+  // t = answer to "Cati lucrati pe dosare?", l = answer to "Cati dintre ei conduc?".
+  // Invariant: 1 <= l <= t <= 12. The old parameters p (the 99/150 seat) and c (the 29
+  // seat) are DERIVED as p = l, c = t - l -- tracking payloads and the waitlist
+  // firmShape contract still speak p/c, unchanged.
+  var T_MAX = 12;
+  var t = 3, l = 2;
+  function pOf() { return l; }
+  function cOf() { return t - l; }
   function isDedicated(a, b) { return a + b >= DEDICAT_MIN; }
   // Takes the rate table, not loose numbers: a stale two-argument call from before the
   // 24.08 rewrite now throws on `rate.base` instead of quietly returning NaN.
@@ -252,23 +272,34 @@
     return blind * rate.base + extraLead * rate.lead + extraTeam * TEAM_RATE;
   }
   function shapeText(a, b) {
-    var lead = a === 1 ? "un avocat care conduce dosare" : a + " avoca\u021bi care conduc dosare";
+    var lead = a === 1 ? "un titular sau partener" : a + " titulari sau parteneri";
     if (b === 0) return lead;
-    return lead + (b === 1 ? " \u0219i \u00eenc\u0103 o persoan\u0103 \u00een echip\u0103"
-                           : " \u0219i \u00eenc\u0103 " + b + " persoane \u00een echip\u0103");
+    return lead + (b === 1 ? " și încă o persoană în echipă"
+                           : " și încă " + b + " persoane în echipă");
   }
-  // True only when someone from "restul echipei" is sitting in a role-blind seat, i.e.
-  // the one case where the ladder's 29 EUR row does NOT describe what that person costs
-  // (1A+1J pays 98, not 78). At p >= BLIND_SEATS the blind band makes the firm CHEAPER
-  // than the ladder read literally, and the ladder already predicts the figure exactly,
-  // so explaining it there would be noise.
+  // True only when someone who does NOT lead sits in a role-blind seat -- in the new
+  // vocabulary: fewer leads than blind seats, and more people than leads (l < 2 && t > l).
+  // That is the one shape where the ladder's 29 EUR row does not describe what that
+  // person costs (1 conduce + 1 in echipa pays 98, not 78). At l >= BLIND_SEATS the
+  // blind band makes the firm CHEAPER than the ladder read literally, and the ladder
+  // already predicts the figure exactly, so the note would be noise there.
   function teamInBlindBand(a, b) { return Math.min(BLIND_SEATS - a, b) > 0; }
   // Painting is separate from tracking so it can run at load without emitting a phantom
   // calc-changed on every page view. Returns the launch price, or null when dedicated.
   function paint() {
-    document.getElementById("pv").textContent = p;
-    document.getElementById("cv").textContent = c;
+    var p = pOf(), c = cOf();
+    document.getElementById("tv").textContent = t;
+    document.getElementById("lv").textContent = l;
     var dedicated = isDedicated(p, c);
+    // Question 2 goes dormant once question 1 alone settles the answer ("suntem opt"
+    // is dedicat whatever the split) -- same order the conversation has in the room.
+    document.getElementById("qlead").className = dedicated ? "q off" : "q";
+    // A clamp-dead button is disabled, not merely inert: an enabled + that repaints
+    // nothing reads as a broken calculator, or as "a third lead costs the same".
+    document.getElementById("tminus").disabled = t <= 1;
+    document.getElementById("tplus").disabled = t >= T_MAX;
+    document.getElementById("lminus").disabled = dedicated || l <= 1;
+    document.getElementById("lplus").disabled = dedicated || l >= t;
     document.getElementById("normal").style.display = dedicated ? "none" : "block";
     document.getElementById("dedicat").style.display = dedicated ? "block" : "none";
     document.getElementById("blindnote").style.display =
@@ -280,14 +311,24 @@
     return launch;
   }
   window.chg = function (k, d) {
-    var before = p + ":" + c;
-    if (k === "p") { p = Math.min(12, Math.max(1, p + d)); } else { c = Math.min(12, Math.max(0, c + d)); }
-    if (p + ":" + c === before) return;   // clamped click: nothing moved, so no event
+    var before = t + ":" + l;
+    if (k === "t") {
+      t = Math.min(T_MAX, Math.max(1, t + d));
+      if (l > t) l = t;             // fewer people than leads is not a firm
+    } else {
+      l = Math.min(t, Math.max(1, l + d));
+    }
+    if (t + ":" + l === before) return;   // clamped click: nothing moved, so no event
     var launch = paint();
-    // launch stays a number so Umami keeps it in one column; the dedicated case is its
-    // own boolean rather than the string "dedicat" in a numeric field.
-    var data = { p: p, c: c, dedicat: launch === null };
-    if (launch !== null) { data.launch = launch; }
+    // v:2 marks the two-question instrument (25.08): p/c are now derived (p+c capped at
+    // 12, l <= t coupling), so pre-redesign calc-changed rows are a different series --
+    // do not read shape shifts across the deploy as market signal. While dedicated the
+    // split question is disabled and l is frozen, so p/c would be fabricated: send the
+    // total only. launch stays a number so Umami keeps it in one column; the dedicated
+    // case is its own boolean rather than the string "dedicat" in a numeric field.
+    var data = launch === null
+      ? { v: 2, t: t, dedicat: true }
+      : { v: 2, p: pOf(), c: cOf(), dedicat: false, launch: launch };
     window.actaTrack("calc-changed", data);
   };
   paint();
@@ -301,12 +342,15 @@
     var button = claim.querySelector("button[type=submit]");
     if (!email) { claimMsg.textContent = "Scrieți adresa de email."; return; }
     // Snapshot the shape: the steppers stay enabled while the request is in flight, so
-    // reading p/c again in .then() can echo a different firm than the one submitted.
-    var snapP = p, snapC = c;
+    // reading t/l again in .then() can echo a different firm than the one submitted.
+    var snapT = t, snapP = pOf(), snapC = cOf();
     var dedicated = isDedicated(snapP, snapC);
-    // "p"/"c" kept deliberately -- the concierge's historical waitlist rows use this
-    // format; p = the 99/150 seat, c = the 29 seat, unchanged by the 24.08 renaming.
-    var firmShape = dedicated ? "dedicat (" + snapP + "p+" + snapC + "c)" : snapP + "p+" + snapC + "c";
+    // "p"/"c" kept deliberately -- the gateway waitlist route and the concierge's
+    // historical rows use this format; p = the 99/150 seat, c = the 29 seat, unchanged
+    // by the 24.08 renaming and by the 25.08 two-question redesign. The dedicated case
+    // sends the TOTAL only: question 2 is disabled at t >= 7, so its frozen value would
+    // fabricate a split the buyer never stated.
+    var firmShape = dedicated ? "dedicat (" + snapT + " persoane)" : snapP + "p+" + snapC + "c";
     button.disabled = true;
     button.textContent = "Se trimite...";
     fetch(ENDPOINT, {
@@ -314,27 +358,35 @@
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email: email, source: "claim-spot", firmShape: firmShape })
     }).then(function (res) {
-      if (!res.ok) throw new Error("HTTP " + res.status);
+      if (!res.ok) {
+        var httpErr = new Error("HTTP " + res.status);
+        httpErr.status = res.status;
+        throw httpErr;
+      }
       return res.json();
     }).then(function (data) {
       window.actaTrack("signup-submitted", { source: "claim-spot", firmShape: firmShape, alreadyOnList: !!data.alreadyOnList });
       var done = document.createElement("div");
       done.className = "claim-done";
-      var t = document.createElement("p"); t.className = "t"; t.textContent = "Locul e notat.";
+      var tEl = document.createElement("p"); tEl.className = "t"; tEl.textContent = "Locul e notat.";
       var m = document.createElement("p"); m.className = "m";
-      m.append(document.createTextNode("V\u0103 scriem de la "));
+      m.append(document.createTextNode("Vă scriem de la "));
       var bb = document.createElement("b"); bb.textContent = "contact@acta-legal.ro";
-      m.append(bb, document.createTextNode(", \u00een dou\u0103 zile lucr\u0103toare."));
+      m.append(bb, document.createTextNode(", în două zile lucrătoare."));
       var e2 = document.createElement("p"); e2.className = "echo";
-      e2.textContent = dedicated ? "Configura\u021bie dedicat\u0103, pentru " + shapeText(snapP, snapC) + "."
-        : quote(snapP, snapC, LAUNCH) + " \u20ac pe lun\u0103 la lansare, pentru " + shapeText(snapP, snapC) + ".";
-      done.append(t, m, e2);
+      e2.textContent = dedicated ? "Configurație dedicată, pentru un birou de " + snapT + " persoane."
+        : quote(snapP, snapC, LAUNCH) + " € pe lună la lansare, pentru " + shapeText(snapP, snapC) + ".";
+      done.append(tEl, m, e2);
       claim.replaceWith(done);
       claimMsg.remove();
-    }).catch(function () {
+    }).catch(function (err) {
       button.disabled = false;
-      button.textContent = "Revendica\u021bi locul";
-      claimMsg.textContent = "Nu s-a trimis. \u00cencerca\u021bi din nou sau scrie\u021bi-ne la contact@acta-legal.ro.";
+      button.textContent = "Revendicați locul";
+      // The gateway 400s an address that fails its email check; telling that visitor to
+      // "try again" retries the same bad input against the rate limit.
+      claimMsg.textContent = (err && err.status === 400)
+        ? "Adresa de email nu pare completă. Verificați-o și trimiteți din nou."
+        : "Nu s-a trimis. Încercați din nou sau scrieți-ne la contact@acta-legal.ro.";
     });
   });
 
