@@ -1,13 +1,13 @@
 # Ingestion Status
 
-_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-09-22 09:42:27Z._
+_Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-09-23 09:48:52Z._
 
 ## Corpus totals
 
 | Source | Items | Details |
 |---|---|---|
-| Romanian legislation (acts) | 179,289 | clean: 146,212, partial: 440, failed: 1,348 |
-| Romanian legislation (articles) | 1,045,052 | |
+| Romanian legislation (acts) | 182,572 | clean: 148,042, partial: 445, failed: 1,363 |
+| Romanian legislation (articles) | 1,084,627 | |
 | ICCJ jurisprudence | 23,255 | |
 | CCR jurisprudence | 8,584 | |
 
@@ -15,12 +15,12 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-09-22 09:42:27Z._
 
 | Metric | Value |
 |---|---|
-| Pending (queue) | 3 |
-| Ingested | 181,458 |
+| Pending (queue) | 6 |
+| Ingested | 184,744 |
 | Failed | 9 |
-| Skipped (non-legislation content) | 2,666 |
-| Last activity | 2026-09-22 09:41:15Z |
-| 7-day avg items ingested/day | 1,985 |
+| Skipped (non-legislation content) | 2,679 |
+| Last activity | 2026-09-23 09:46:35Z |
+| 7-day avg items ingested/day | 1,914 |
 
 ## Rate policy
 
@@ -32,7 +32,7 @@ _Auto-regenerated daily at 05:00 UTC. Last refresh: 2026-09-22 09:42:27Z._
 
 | Source | Last successful request |
 |---|---|
-| `legislatie.just.ro` — legislation | 2026-09-22 09:41:15Z |
+| `legislatie.just.ro` — legislation | 2026-09-23 09:46:35Z |
 
 ## Known issues
 
