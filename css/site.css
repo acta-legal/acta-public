@@ -264,11 +264,10 @@ section { scroll-margin-top: 88px; }
 .plans {
   margin-top: 48px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  max-width: 880px;
 }
-@media (max-width: 720px) { .plans { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) { .plans { grid-template-columns: minmax(0, 1fr); max-width: 560px; } }
 .plan { padding: 36px 36px 32px; }
 .plan .name { font-family: var(--display); font-size: 22px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
 .plan .price { margin-top: 20px; display: flex; align-items: baseline; gap: 10px; }
