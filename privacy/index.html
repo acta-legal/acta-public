@@ -100,6 +100,10 @@
         <li><b>AI.</b> Întrebările, documentele și textele din dosar sunt prelucrate cu modelele Claude ale
         Anthropic. Acta nu antrenează modele pe datele cabinetelor. Conform termenilor comerciali ai Anthropic,
         datele primite prin API nu sunt folosite pentru antrenarea modelelor.</li>
+        <li><b>Dictarea vocală.</b> Când un avocat dictează o întrebare, înregistrarea trece prin serverele
+        noastre doar cât durează transcrierea și este transcrisă de Microsoft (Azure Speech, în Irlanda). Nici noi,
+        nici Microsoft nu păstrăm înregistrarea sau textul transcris; textul apare doar în bara de chat, iar
+        avocatul decide dacă îl trimite.</li>
         <li><b>Surse publice.</b> Asociem dosarelor date publice de pe portalul instanțelor (termene, părți,
         soluții), din legislația publicată și din registrul comerțului.</li>
         <li><b>Planul gratuit.</b> Pentru fiecare dosar adăugat, preluăm de pe portalul instanțelor datele publice
@@ -121,7 +125,8 @@
         <li>Cloudflare (SUA): DNS, protecția traficului și rutarea e-mailurilor primite.</li>
         <li>Un releu tehnic în România, pentru interogările către portalul instanțelor și legislație.</li>
         <li>Microsoft: autentificarea cu cont Microsoft; pentru cabinetele care își conectează Microsoft 365,
-        accesul la documente; și citirea documentelor scanate (Azure Document Intelligence, UE).</li>
+        accesul la documente; citirea documentelor scanate (Azure Document Intelligence, UE); și transcrierea
+        dictării vocale (Azure Speech, Irlanda).</li>
         <li>Stripe (SUA): plățile cu cardul.</li>
         <li>Oblio (România): emiterea facturilor noastre; și facturarea cabinetului, dacă acesta își conectează propriul cont Oblio.</li>
         <li>Discord (SUA): notificări interne despre formularele trimise de pe site.</li>
