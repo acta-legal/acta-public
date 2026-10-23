@@ -16,6 +16,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/site.css">
   <script defer src="/js/site.js"></script>
+  <style>
+    .draft-note { border: 1px solid var(--rule2); border-radius: 10px; padding: 12px 16px; margin-bottom: 28px; font-size: 15px; color: var(--t3); }
+    .brief { margin: 8px 0; border-top: 1px solid var(--rule2); }
+    .qa { padding: 22px 0 6px; border-bottom: 1px solid var(--rule); }
+    .doc .qa h2 { margin: 0 0 10px; font-size: 19px; }
+    .aside { font-size: 15px; color: var(--t3); }
+  </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -44,20 +51,68 @@
 <main class="doc">
   <div class="wrap">
     <div class="col">
-      <p class="label">Versiunea 1 · Ultima actualizare: 18.10.2026</p>
+      <p class="label">Versiunea 2 · Ciornă · Ultima actualizare: 23.10.2026</p>
       <h1>Politica de confidențialitate</h1>
+      <p class="draft-note">Aceasta este o ciornă, în curs de revizuire juridică. Textul final poate fi
+      formulat diferit; orice modificare o publicăm aici, cu data actualizării.</p>
 
       <p>Acta este o platformă de lucru pentru cabinete de avocatură din România, operată de
       <b>Rubrica S.R.L.</b> („Acta”, „noi”). Această politică explică ce date personale prelucrăm, de ce,
       cu cine le împărțim și ce drepturi aveți. Pentru orice întrebare despre date, scrieți-ne la
       <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>. Răspundem în cel mult 5 zile lucrătoare.</p>
 
+      <div class="brief">
+        <section class="qa">
+          <h2>Cine din echipa Acta vede documentele cabinetului?</h2>
+          <p>Nimeni. Nu deschidem dosarele, documentele sau conversațiile unui cabinet. Vedem doar cifre:
+          câte documente au fost procesate, câte întrebări s-au pus și cât a costat AI-ul. Singura excepție este
+          o problemă pe care cabinetul ne-o raportează: atunci ne uităm numai la ce privește acea problemă.</p>
+        </section>
+
+        <section class="qa">
+          <h2>În ce condiții păstrați datele în perioada de probă?</h2>
+          <p>În aceleași condiții ca pentru un abonament, din prima zi: se aplică acordul de prelucrare a
+          datelor. Cabinetul rămâne operatorul datelor din platformă, iar Acta le prelucrează numai pentru a
+          furniza serviciul.</p>
+        </section>
+
+        <section class="qa">
+          <h2>Ce se întâmplă la finalul perioadei de probă?</h2>
+          <ul>
+            <li>Perioada de probă durează <b>14 zile</b> de la crearea contului cabinetului. Dacă suma pentru AI
+            inclusă în perioada de probă se consumă mai devreme, AI-ul se oprește, iar perioada de probă continuă
+            până la data ei.</li>
+            <li>La final, AI-ul se oprește. Timp de <b>30 de zile</b>, cabinetul folosește în continuare restul
+            aplicației, ca până atunci. Un partener poate porni oricând abonamentul din Setări → Consum AI; din
+            acel moment, nimic nu se mai șterge.</li>
+            <li>Fiecare partener primește pe email un link către o <b>copie completă</b> a datelor cabinetului:
+            dosare, documente, rezumate, clienți, sarcini, facturi și conversații. Primul link vine în ziua în care
+            se încheie perioada de probă, al doilea cu 7 zile înainte de ștergere. Linkurile funcționează până la
+            ștergere. Ce se modifică după al doilea email nu mai intră în copie.</li>
+            <li>În ziua 30, dacă nu a pornit un abonament, <b>ștergem toate datele cabinetului</b>, inclusiv
+            versiunile anterioare ale fișierelor stocate. Copiile de rezervă expiră automat. Fiecare partener
+            primește apoi o confirmare scrisă a ștergerii.</li>
+          </ul>
+          <p class="aside">Aceste reguli se aplică din ziua în care se deschide plata cu cardul în Acta; până atunci,
+          perioada de probă nu are dată de încheiere. Cabinetele care în acea zi au trecut deja de 14 zile primesc
+          atunci emailul de încheiere și copia, apoi au cele 30 de zile.</p>
+        </section>
+
+        <section class="qa">
+          <h2>Unde sunt datele și cum folosim AI-ul?</h2>
+          <p>Dacă cabinetul își conectează Microsoft 365, originalele rămân în Microsoft 365-ul cabinetului.
+          Dacă alege stocarea Acta, ele sunt pe serverele noastre din Germania. AI-ul este furnizat de Anthropic
+          (modelele Claude), care nu folosește pentru antrenare datele primite prin API. Nici Acta nu antrenează
+          modele pe datele cabinetelor.</p>
+        </section>
+      </div>
+
       <h2>1. Două roluri diferite</h2>
       <p><b>Operator.</b> Pentru site-ul acta-legal.ro, formularele de pe site și relația comercială cu
       cabinetele (contract, facturare, plăți), Acta stabilește scopul prelucrării și este operator de date.</p>
       <p><b>Persoană împuternicită.</b> Pentru datele din platformă — dosarele, documentele, clienții și
       activitatea unui cabinet — operatorul este cabinetul. Acta le prelucrează numai pentru a furniza
-      serviciul și numai la instrucțiunile cabinetului (art. 28 GDPR). Pentru abonamente, condițiile sunt
+      serviciul și numai la instrucțiunile cabinetului (art. 28 GDPR). Pentru perioada de probă și pentru abonamente, condițiile sunt
       cele din acordul de prelucrare a datelor încheiat cu fiecare cabinet; pentru planul gratuit, cele din
       <a href="/terms/">Termeni</a>. Dacă sunteți clientul unui cabinet care folosește Acta, adresați-vă
       cabinetului pentru drepturile dumneavoastră; orice cerere primită de noi o transmitem cabinetului.</p>
@@ -121,7 +176,7 @@
         <li>Anthropic (SUA): modelele AI.</li>
         <li>Voyage AI (SUA): indexarea întrebărilor de cercetare juridică.</li>
         <li>Brave (SUA): căutări pe internet, când cercetarea juridică o cere.</li>
-        <li>Resend (SUA): trimiterea e-mailurilor (coduri de acces, alerte, invitații, facturi).</li>
+        <li>Resend (SUA): trimiterea e-mailurilor (coduri de acces, alerte, invitații, facturi, copiile de la finalul perioadei de probă).</li>
         <li>Cloudflare (SUA): DNS, protecția traficului și rutarea e-mailurilor primite.</li>
         <li>Un releu tehnic în România, pentru interogările către portalul instanțelor și legislație.</li>
         <li>Microsoft: autentificarea cu cont Microsoft; pentru cabinetele care își conectează Microsoft 365,
@@ -139,10 +194,11 @@
 
       <h2>5. Cât păstrăm</h2>
       <ul>
-        <li><b>Datele din platformă:</b> cât timp cabinetul are cont activ. La încetare, cabinetul poate cere
+        <li><b>Datele din platformă:</b> cât timp cabinetul are cont activ. În perioada de probă, până la 30 de
+        zile după încheierea ei, dacă nu pornește un abonament (vedeți mai sus). La încetare, cabinetul poate cere
         exportul datelor și ștergerea lor. Ștergem întâi datele din platformă, apoi copiile tehnice care nu
-        sunt accesibile în platformă (versiuni anterioare ale fișierelor stocate, copii de rezervă); vă
-        confirmăm în scris când ștergerea s-a încheiat.</li>
+        sunt accesibile în platformă (toate versiunile anterioare ale fișierelor stocate; copiile de rezervă
+        expiră automat); vă confirmăm în scris când ștergerea s-a încheiat.</li>
         <li><b>Planul gratuit:</b> cât timp contul este activ. Dacă ne cereți închiderea contului, ștergem
         contul și dosarele urmărite.</li>
         <li><b>Formularul de discuție:</b> cât timp discuția este activă și cel mult 24 de luni de la ultimul
@@ -161,7 +217,7 @@
       <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>.</p>
 
       <h2>7. Modificări</h2>
-      <p>Publicăm aici orice modificare, cu data actualizării. Cabinetele cu abonament sunt anunțate direct
+      <p>Publicăm aici orice modificare, cu data actualizării. Cabinetele cu abonament sau în perioada de probă sunt anunțate direct
       despre modificările importante.</p>
     </div>
   </div>
