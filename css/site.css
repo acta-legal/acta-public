@@ -361,7 +361,7 @@ section { scroll-margin-top: 88px; }
 @media (max-width: 600px) { .site-foot .sign { margin-left: 0; flex-basis: 100%; } }
 .site-foot a:hover { color: var(--ink); }
 
-/* ---------- document pages (privacy, terms, studiu) ---------- */
+/* ---------- document pages (privacy, terms) ---------- */
 .doc { padding: 88px 0 96px; }
 .doc .label { margin-bottom: 16px; }
 .doc h1 { font-size: clamp(32px, 4.4vw, 44px); margin-bottom: 28px; }
