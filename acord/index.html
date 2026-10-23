@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acordul de prelucrare a datelor — Acta</title>
+  <meta name="description" content="Acordul de prelucrare a datelor Acta (art. 28 GDPR): cum prelucrează Acta datele cabinetului, subprocesatori, securitate și ștergere.">
+  <script>(function(d){d.classList.add("js");try{var t=localStorage.getItem("acta-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t)}catch(e){}setTimeout(function(){if(!window.actaSite)d.classList.remove("js")},2500)})(document.documentElement)</script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon-32.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#edeff2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0c0e" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
+  <script defer src="/js/site.js"></script>
+  <style>
+    .draft-note { border: 1px solid var(--rule2); border-radius: 10px; padding: 12px 16px; margin-bottom: 28px; font-size: 15px; color: var(--t3); }
+    .brief { margin: 8px 0; border-top: 1px solid var(--rule2); }
+    .qa { padding: 22px 0 6px; border-bottom: 1px solid var(--rule); }
+    .doc .qa h2 { margin: 0 0 10px; font-size: 19px; }
+    .aside { font-size: 15px; color: var(--t3); }
+    .doc ol.alpha { list-style: lower-alpha; margin: 0 0 16px; padding-left: 20px; max-width: 680px; }
+    .doc ol.alpha li { margin-bottom: 10px; }
+    .tbl { overflow-x: auto; margin: 0 0 20px; max-width: 720px; }
+    .tbl table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; line-height: 1.45; }
+    .tbl th { text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); padding: 0 12px 10px 0; border-bottom: 1px solid var(--rule2); }
+    .tbl td { vertical-align: top; padding: 12px 12px 12px 0; border-bottom: 1px solid var(--rule); }
+    .tbl td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+    .parties { display: grid; gap: 14px; margin: 0 0 20px; }
+    .doc .parties p { margin: 0; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="nib-mid" viewBox="16 6 32 51">
+      <path fill="currentColor" fill-rule="evenodd" d="M32 8.5 C 41 16.5 46 25.5 46 34 C 46 37.5 44.3 41 41.5 44.7 L32 55.5 L22.5 44.7 C 19.7 41 18 37.5 18 34 C 18 25.5 23 16.5 32 8.5 Z M30.5 27.5 A 4.3 4.3 0 1 1 33.5 27.5 L33.2 51.4 L32 54 L30.8 51.4 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Acta, pagina principală"><svg aria-hidden="true"><use href="#nib-mid"/></svg>Acta</a>
+    <nav class="nav">
+      <a class="quiet" href="/#preturi">Prețuri</a>
+      <a class="quiet" href="https://app.acta-legal.ro">Intrați în cont</a>
+      <button class="theme-toggle" type="button" aria-label="Schimbați tema">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.6 6.6 0 0 0 10.7 10.7z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+      </button>
+      <a class="btn pill" href="/#discutie">Programați o discuție</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="wrap">
+    <div class="col">
+      <p class="label">Versiunea 1 · Ciornă · Ultima actualizare: 23.10.2026</p>
+      <h1>Acordul de prelucrare a datelor</h1>
+      <p class="draft-note">Aceasta este o ciornă, în curs de revizuire juridică. Textul final poate fi
+      formulat diferit; orice modificare o publicăm aici, cu data actualizării.</p>
+
+      <p>Acest acord stabilește condițiile în care Acta prelucrează datele cu caracter personal din platformă în
+      numele cabinetului, conform art. 28 din Regulamentul (UE) 2016/679 („GDPR”).</p>
+
+      <div class="parties">
+        <p><b>Cabinetul</b>, adică organizația creată în Acta de cabinetul de avocatură care folosește platforma,
+        în calitate de <b>operator</b>; și</p>
+        <p><b>Rubrica S.R.L.</b> („Acta”), în calitate de <b>persoană împuternicită</b>.</p>
+      </div>
+
+      <h2>1. Încheiere, obiect și durată</h2>
+      <p>1.1. Acordul se încheie prin acceptarea lui în aplicație de către un partener al cabinetului și se aplică
+      tuturor datelor cabinetului din platformă, <b>din prima zi a perioadei de probă</b>, pe toată durata unui
+      abonament și până la ștergerea datelor conform art. 9. Pentru cabinetele care foloseau deja Acta la data publicării, acordul
+      se aplică de la prima lor autentificare după publicare.</p>
+      <p>1.2. Acta furnizează cabinetului platforma Acta (aplicația web, aplicația desktop, add-in-ul Microsoft
+      Word și aplicația de telefon) pentru dosare, documente, cercetare și redactare asistate de AI, urmărirea
+      portalului instanțelor, agendă, sarcini și facturare („Serviciile”), în condițiile din
+      <a href="/terms/">Termeni</a>.</p>
+      <p>1.3. Planul gratuit de urmărire a dosarelor nu intră sub acest acord; pentru el se aplică
+      <a href="/terms/">Termenii</a> și <a href="/privacy/">Politica de confidențialitate</a>.</p>
+
+      <h2>2. Natura și scopul prelucrării</h2>
+      <p>2.1. Acta prelucrează datele cabinetului <b>numai pentru a furniza Serviciile</b>: preluarea și
+      organizarea documentelor, extragerea textului (inclusiv citirea documentelor scanate), rezumate și context
+      generate de AI pentru fiecare dosar, răspunsurile asistentului, redactarea și cercetarea, dictarea vocală,
+      sincronizarea termenelor de pe portalul instanțelor, sarcinile, agenda și facturarea. Acta nu folosește
+      datele cabinetului în alt scop, nu le vinde și nu le transmite altor persoane decât subprocesatorilor din
+      Anexa 2.</p>
+      <p>2.2. Angajamentele de mai jos fac parte din instrucțiunile documentate ale cabinetului:</p>
+      <ul>
+        <li><b>Unde sunt documentele.</b> Cabinetul alege. Cu Microsoft 365, originalele rămân în Microsoft 365-ul
+        cabinetului, iar Acta le accesează prin permisiunile acordate de administratorul cabinetului, revocabile
+        oricând din Microsoft Entra. Cu stocarea Acta, originalele sunt păstrate pe serverele Acta din Germania.
+        În ambele cazuri, Acta păstrează copiile de lucru necesare Serviciilor: textul extras, rezumatele și
+        contextul generate de AI, conversațiile cu asistentul și metadatele dosarelor.</li>
+        <li><b>E-mailul.</b> Acta nu citește căsuța de e-mail a cabinetului. Acta trimite un e-mail din căsuța
+        Microsoft a unui avocat numai la comanda acestuia (de exemplu, o factură).</li>
+        <li><b>Accesul echipei Acta.</b> Echipa Acta nu deschide dosarele, documentele sau conversațiile
+        cabinetului. Pentru a opera și factura Serviciile, Acta vede cifre de utilizare și de cost (de exemplu,
+        câte documente au fost procesate, câte întrebări s-au pus și cât a costat AI-ul). Singura excepție este
+        o problemă raportată de cabinet: atunci Acta se uită numai la ceea ce privește acea problemă.</li>
+        <li><b>AI.</b> Nici Acta, nici subprocesatorii săi nu antrenează modele AI pe datele cabinetului.</li>
+      </ul>
+
+      <h2>3. Categoriile de date și de persoane vizate</h2>
+      <p>3.1. Conform <b>Anexei 1</b>.</p>
+      <p>3.2. Prin natura activității de avocatură, cabinetul poate încărca în dosare și categorii speciale de date
+      (art. 9 GDPR) sau date privind condamnări penale și infracțiuni (art. 10 GDPR). Acta le prelucrează numai ca
+      parte a conținutului dosarelor, fără a le viza în mod specific. Cabinetul răspunde de existența unui temei
+      legal pentru datele pe care le încarcă.</p>
+
+      <h2>4. Obligațiile Acta</h2>
+      <p>Acta:</p>
+      <ol class="alpha">
+        <li>prelucrează datele numai pe baza instrucțiunilor documentate ale cabinetului (folosirea platformei
+        conform funcțiilor ei și setărilor alese de cabinet constituie instrucțiune documentată) și informează
+        cabinetul dacă, în opinia sa, o instrucțiune încalcă GDPR;</li>
+        <li>se asigură că persoanele autorizate să prelucreze datele s-au angajat să respecte confidențialitatea;</li>
+        <li>aplică măsurile tehnice și organizatorice din <b>Anexa 3</b>;</li>
+        <li>respectă condițiile de la art. 5 privind subprocesatorii;</li>
+        <li>asistă cabinetul, ținând seama de natura prelucrării, să răspundă cererilor persoanelor vizate
+        (acces, rectificare, ștergere, restricționare, portabilitate, opoziție); o cerere primită direct de Acta
+        este transmisă cabinetului în cel mult 5 zile lucrătoare;</li>
+        <li>asistă cabinetul să respecte art. 32–36 GDPR (securitate, notificarea încălcărilor, evaluări de
+        impact), ținând seama de informațiile pe care le are;</li>
+        <li>la încetare, predă și șterge datele conform art. 9;</li>
+        <li>pune la dispoziția cabinetului informațiile necesare pentru a demonstra respectarea art. 28 GDPR și
+        permite auditurile prevăzute la art. 8.</li>
+      </ol>
+
+      <h2>5. Subprocesatori</h2>
+      <p>5.1. Cabinetul autorizează în mod general subprocesatorii din <b>Anexa 2</b>. Acta anunță partenerii
+      cabinetului prin e-mail și publică lista actualizată pe această pagină cu cel puțin <b>15 zile</b> înainte
+      de a adăuga sau înlocui un subprocesator. Cabinetul poate formula obiecții în acest termen; dacă nu se
+      găsește o soluție, cabinetul poate înceta abonamentul fără penalități.</p>
+      <p>5.2. Acta impune fiecărui subprocesator, prin contract, obligații de protecție a datelor cel puțin
+      echivalente cu cele din acest acord și răspunde față de cabinet pentru respectarea lor.</p>
+      <p>5.3. Microsoft 365-ul cabinetului și, dacă este cazul, contul Oblio al cabinetului nu sunt subprocesatori
+      ai Acta: sunt furnizorii proprii ai cabinetului, în baza contractelor directe ale cabinetului cu aceștia.
+      Acta doar accesează, respectiv transmite date către aceste servicii, la instrucțiunea cabinetului.</p>
+
+      <h2>6. Transferuri în afara Spațiului Economic European</h2>
+      <p>6.1. Platforma, baza de date și fișierele sunt găzduite în Germania, iar copiile de rezervă în Finlanda.</p>
+      <p>6.2. Unii subprocesatori din Anexa 2 au sediul în SUA. Transferul către ei are loc numai cu garanțiile
+      prevăzute de capitolul V GDPR: decizia de adecvare privind cadrul UE–SUA de protecție a datelor, pentru
+      furnizorii certificați, sau clauzele contractuale standard adoptate de Comisia Europeană.</p>
+
+      <h2>7. Încălcări ale securității datelor</h2>
+      <p>Acta notifică cabinetul <b>fără întârzieri nejustificate</b> după ce ia cunoștință de o încălcare a
+      securității datelor care privește datele cabinetului, transmite informațiile prevăzute la art. 33
+      alin. (3) GDPR pe măsură ce le are și cooperează la investigare și remediere. Notificarea Autorității
+      Naționale de Supraveghere și, dacă este cazul, a persoanelor vizate rămâne obligația cabinetului, cu
+      asistența Acta.</p>
+
+      <h2>8. Audit</h2>
+      <p>La cererea rezonabilă a cabinetului, cel mult o dată pe an și cu o notificare de 15 zile lucrătoare,
+      Acta pune la dispoziție documentația privind măsurile de securitate și permite un audit efectuat de cabinet
+      sau de un auditor mandatat de acesta, care nu este concurent al Acta. Auditul are loc în timpul
+      programului de lucru, fără acces la datele altor cabinete, pe cheltuiala cabinetului.</p>
+
+      <h2>9. Predarea și ștergerea datelor</h2>
+      <p>9.1. <b>La încetarea abonamentului</b>, cabinetul poate cere o copie completă a datelor sale, într-un
+      format uzual (dosare, documente stocate în Acta, rezumate, clienți, sarcini, facturi, conversații), și
+      ștergerea lor. Acta șterge datele în cel mult <b>30 de zile</b> de la cerere.</p>
+      <p>9.2. <b>La încheierea perioadei de probă</b> fără abonament, se aplică regulile din
+      <a href="/privacy/">Politica de confidențialitate</a>: fiecare partener primește un link către o copie completă, iar
+      în ziua 30 după încheiere Acta șterge datele, dacă nu a pornit un abonament.</p>
+      <p>9.3. Ștergerea cuprinde baza de date, fișierele stocate și <b>toate versiunile lor anterioare</b>. Copiile
+      de rezervă expiră automat. Acta confirmă ștergerea în scris fiecărui partener al cabinetului.</p>
+      <p>9.4. Documentele din Microsoft 365-ul cabinetului nu sunt afectate. Acta indică pașii pentru revocarea
+      permisiunilor aplicației din Microsoft Entra.</p>
+      <p>9.5. Fac excepție datele pe care Acta trebuie să le păstreze prin lege, cum sunt documentele contabile
+      privind facturarea Serviciilor către cabinet. Acestea rămân confidențiale și se șterg la expirarea
+      termenelor legale.</p>
+
+      <h2>10. Dispoziții finale</h2>
+      <p>10.1. Contact pentru protecția datelor: <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>.
+      Răspundem în cel mult 5 zile lucrătoare.</p>
+      <p>10.2. În materia protecției datelor, acest acord prevalează asupra <a href="/terms/">Termenilor</a>. Răspunderea
+      părților, legea aplicabilă și instanța competentă sunt cele din Termeni.</p>
+      <p>10.3. Acta poate actualiza acest acord. Publicăm aici fiecare versiune, cu data ei, și anunțăm direct
+      partenerii cabinetelor despre modificările importante. Nicio modificare nu reduce protecția datelor deja
+      prelucrate fără acordul cabinetului.</p>
+
+      <h2>Anexa 1. Categorii de date și persoane vizate</h2>
+      <p><b>Persoane vizate:</b> avocații și personalul cabinetului (utilizatorii); clienții cabinetului și
+      reprezentanții lor; părțile adverse, martorii, experții și alte persoane menționate în dosarele și
+      documentele cabinetului.</p>
+      <p><b>Categorii de date:</b></p>
+      <ul>
+        <li><b>Conturile utilizatorilor:</b> nume, adresă de e-mail profesională, rol în cabinet, identificatori
+        Microsoft (dacă se autentifică astfel), jurnale tehnice de utilizare.</li>
+        <li><b>Dosare și clienți:</b> denumiri și numere de dosar, instanțe, părți, termene, sarcini, evenimente din
+        agendă, note.</li>
+        <li><b>Documente și conținut de lucru:</b> documentele stocate în Acta (pentru cabinetele care aleg stocarea
+        Acta) cu versiunile lor, textul extras din documente, rezumatele și contextul generate de AI, conversațiile
+        cu asistentul, actele redactate.</li>
+        <li><b>Dictare vocală:</b> înregistrarea, numai cât durează transcrierea; nici înregistrarea, nici textul
+        transcris nu sunt păstrate.</li>
+        <li><b>Facturarea cabinetului:</b> clienții cabinetului și datele lor fiscale, contractele, pontajul,
+        facturile.</li>
+        <li><b>Surse publice asociate dosarelor:</b> date de pe portalul instanțelor (termene, părți, soluții), din
+        legislația publicată și din registrul comerțului.</li>
+      </ul>
+
+      <h2>Anexa 2. Subprocesatori</h2>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Subprocesator</th><th>Unde</th><th>Pentru ce</th></tr></thead>
+          <tbody>
+            <tr><td>Hetzner Online GmbH</td><td>Germania; copii de rezervă în Finlanda</td><td>servere, baza de date, stocarea fișierelor, copii de rezervă</td></tr>
+            <tr><td>Anthropic</td><td>SUA</td><td>modelele AI (Claude): rezumate, context, asistent, redactare, cercetare</td></tr>
+            <tr><td>Microsoft</td><td>UE (Azure Document Intelligence); Irlanda (Azure Speech)</td><td>autentificarea cu cont Microsoft; citirea documentelor scanate; transcrierea dictării vocale</td></tr>
+            <tr><td>Voyage AI</td><td>SUA</td><td>indexarea întrebărilor de cercetare juridică</td></tr>
+            <tr><td>Brave</td><td>SUA</td><td>căutări pe internet, când cercetarea juridică o cere (se trimite doar textul căutării)</td></tr>
+            <tr><td>Resend</td><td>SUA</td><td>trimiterea e-mailurilor platformei (coduri de acces, alerte, invitații, copiile de la încheierea perioadei de probă, confirmări)</td></tr>
+            <tr><td>Cloudflare</td><td>global</td><td>DNS, protecția traficului</td></tr>
+            <tr><td>Releu tehnic</td><td>România</td><td>interogările către portalul instanțelor și legislație (se trimit doar numere de dosar și termeni de căutare, niciodată documente sau date de cont)</td></tr>
+            <tr><td>Google</td><td>SUA</td><td>fonturile aplicației (adresa IP a utilizatorului, la încărcare)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="aside">Microsoft 365-ul cabinetului și contul Oblio al cabinetului nu apar aici (art. 5.3). Plățile cu
+      cardul (Stripe) și facturarea Acta către cabinet (Oblio) privesc relația comercială, în care Acta este operator,
+      și sunt descrise în <a href="/privacy/">Politica de confidențialitate</a>.</p>
+
+      <h2>Anexa 3. Măsuri tehnice și organizatorice</h2>
+      <ul>
+        <li>Criptare în tranzit (TLS) pentru toate conexiunile; secretele și tokenurile de acces sunt stocate criptat.</li>
+        <li>Separarea datelor fiecărui cabinet: toate datele sunt legate de organizația cabinetului, iar accesul este
+        limitat la acea organizație.</li>
+        <li>Autentificare cu contul Microsoft de lucru sau cu cod de unică folosință trimis prin e-mail; Acta nu
+        stochează parole. Roluri în cadrul cabinetului (partener, avocat, colaborator).</li>
+        <li>Acces administrativ la infrastructură restrâns la echipa Acta, pe bază de chei; operațiunile
+        administrative sunt jurnalizate. Rapoartele interne ale echipei folosesc doar cifre, nu conținut.</li>
+        <li>Permisiunile Microsoft sunt limitate la documente, acordate și revocabile de administratorul cabinetului;
+        Acta nu are acces de citire la e-mail.</li>
+        <li>Copii de rezervă ale bazei de date și proceduri de restaurare.</li>
+        <li>Ștergere completă la încetare, inclusiv a versiunilor anterioare ale fișierelor, cu confirmare scrisă (art. 9).</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap"><div class="row">
+    <a href="mailto:contact@acta-legal.ro">contact@acta-legal.ro</a>
+    <a href="https://app.acta-legal.ro">Intrați în cont</a>
+    <a href="/privacy/">Confidențialitate</a>
+    <a href="/terms/">Termeni</a>
+    <a href="/acord/">Acordul de prelucrare a datelor</a>
+    <span class="sign">Construit în România, pentru avocații români.</span>
+  </div></div>
+</footer>
+</body>
+</html>
