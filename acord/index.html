@@ -60,7 +60,7 @@
 <main class="doc">
   <div class="wrap">
     <div class="col">
-      <p class="label">Versiunea 1 · Ciornă · Ultima actualizare: 27.10.2026</p>
+      <p class="label">Versiunea 1 · Ciornă · Ultima actualizare: 30.10.2026</p>
       <h1>Acordul de prelucrare a datelor</h1>
       <p class="draft-note">Aceasta este o ciornă, în curs de revizuire juridică. Textul final poate fi
       formulat diferit; orice modificare o publicăm aici, cu data actualizării.</p>
@@ -91,8 +91,12 @@
       organizarea documentelor, extragerea textului (inclusiv citirea documentelor scanate), rezumate și context
       generate de AI pentru fiecare dosar, răspunsurile asistentului, redactarea și cercetarea, dictarea vocală,
       sincronizarea termenelor de pe portalul instanțelor, sarcinile, agenda și facturarea, precum și
-      verificarea automată a calității răspunsurilor asistentului, fără acces uman la conținut; rezultatul conține
-      doar categorii și numere, păstrate 12 luni. Acta nu folosește
+      găsirea și corectarea greșelilor asistentului: același serviciu de inteligență artificială care formulează
+      răspunsurile elimină automat din conversații numele, numerele de identificare, adresele și datele de contact,
+      iar echipa Acta analizează doar aceste copii fără date de identificare, cu ajutorul unui instrument de
+      inteligență artificială, numai în acest scop; copiile se păstrează cel mult 30 de zile. Separat, citările din
+      răspunsuri sunt verificate automat, fără inteligență artificială, iar Acta vede din aceste verificări doar
+      categorii și numere. Acta nu folosește
       datele cabinetului în alt scop, nu le vinde și nu le transmite altor persoane decât subprocesatorilor din
       Anexa 2.</p>
       <p>2.2. Angajamentele de mai jos fac parte din instrucțiunile documentate ale cabinetului:</p>
@@ -104,10 +108,14 @@
         contextul generate de AI, conversațiile cu asistentul și metadatele dosarelor.</li>
         <li><b>E-mailul.</b> Acta nu citește căsuța de e-mail a cabinetului. Acta trimite un e-mail din căsuța
         Microsoft a unui avocat numai la comanda acestuia (de exemplu, o factură).</li>
-        <li><b>Accesul echipei Acta.</b> Echipa Acta nu deschide dosarele, documentele sau conversațiile
-        cabinetului. Pentru a opera și factura Serviciile, Acta vede cifre de utilizare și de cost (de exemplu,
-        câte documente au fost procesate, câte întrebări s-au pus și cât a costat AI-ul). Singura excepție este
-        o problemă raportată de cabinet: atunci Acta se uită numai la ceea ce privește acea problemă.</li>
+        <li><b>Accesul echipei Acta.</b> Echipa Acta nu deschide dosarele sau documentele cabinetului și nu
+        citește conversațiile în forma lor originală. Pentru a opera și factura Serviciile, Acta vede cifre de
+        utilizare și de cost (de exemplu, câte documente au fost procesate, câte întrebări s-au pus și cât a costat
+        AI-ul) și, în scopul de la 2.1, copiile conversațiilor, inclusiv fragmentele de documente citate în ele,
+        din care datele de identificare au fost eliminate automat. O excepție este o problemă raportată de cabinet: atunci Acta se uită numai la ceea ce privește acea problemă.
+        A doua excepție privește doar cabinetele al căror acord de pilot permite testarea: Acta poate citi conversațiile
+        lor originale numai pentru a testa și a îmbunătăți eliminarea datelor de identificare de la 2.1, iar exemplarele
+        originale folosite le șterge după test.</li>
         <li><b>AI.</b> Nici Acta, nici subprocesatorii săi nu antrenează modele AI pe datele cabinetului.</li>
       </ul>
 
@@ -218,7 +226,7 @@
           <thead><tr><th>Subprocesator</th><th>Unde</th><th>Pentru ce</th></tr></thead>
           <tbody>
             <tr><td>Hetzner Online GmbH</td><td>Germania; copii de rezervă în Finlanda</td><td>servere, baza de date, stocarea fișierelor, copii de rezervă</td></tr>
-            <tr><td>Anthropic</td><td>SUA</td><td>modelele AI (Claude): rezumate, context, asistent, redactare, cercetare</td></tr>
+            <tr><td>Anthropic</td><td>SUA</td><td>modelele AI (Claude): rezumate, context, asistent, redactare, cercetare, eliminarea automată a datelor de identificare din conversații, analiza copiilor fără date de identificare și testarea acestei eliminări</td></tr>
             <tr><td>Microsoft</td><td>UE (Azure Document Intelligence); Irlanda (Azure Speech)</td><td>autentificarea cu cont Microsoft; citirea documentelor scanate; transcrierea dictării vocale</td></tr>
             <tr><td>Voyage AI</td><td>SUA</td><td>indexarea întrebărilor de cercetare juridică</td></tr>
             <tr><td>Brave</td><td>SUA</td><td>căutări pe internet, când cercetarea juridică o cere (se trimite doar textul căutării)</td></tr>
